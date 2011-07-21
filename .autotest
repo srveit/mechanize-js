@@ -1,0 +1,139 @@
+# -*- ruby -*-
+
+require 'autotest/bundler'
+require 'autotest/timestamp'
+require 'pp'
+
+def command_line_options(options)
+  args = []
+  [[:no_full_after_start, "--fast-start"],
+   [:no_full_after_failed, "--no-full-after-failed"],
+   [:verbose, "--verbose"],
+   [:quiet, "--quite"]].each do |option, arg|
+    args << arg if options[option]
+  end
+  if options[:rc]
+    args << "--rc"
+    args << options[:rc]
+  end
+  non_default_styles =
+    options[:style] ? (options[:style] - ['autodiscover']) : []
+  if !non_default_styles.empty?
+    args << "--style"
+    args << non_default_styles.first
+  end
+  args
+end
+
+Autotest.add_hook :updated do |at, *args|
+  restart = false
+  %w(
+    .autotest
+    autotest/node_rspec.rb
+    discover/node_rspec.rb
+  ).each do |file|
+    if args.flatten.include? file then
+      warn "Detected change to #{file}, restarting"
+      restart = true
+    end
+  end
+
+  args[0].collect do |arg|
+    arg[0]
+  end.each do |file|
+    if ! at.known_files[file]
+      warn "Detected new file #{file}, restarting"
+      restart = true
+    end
+  end
+  
+  if restart
+    cmd = %w(autotest) + command_line_options(Autotest.options)
+    warn cmd.join(' ')
+    exec(*cmd)
+  end
+end
+
+Autotest.add_hook :initialize do |at|
+  %w(
+    .log
+    .gitignore
+    .gitkeep
+    .rspec
+    README
+    doc/
+    public/fonts
+    public/images
+    public/prompts
+    public/favicon.ico
+    public/robots.txt
+    script
+    config.ru
+    Gemfile.lock
+    Rakefile
+    public/500.html
+    public/422.html
+    public/404.html
+    db/seeds.rb
+    lib/tasks/
+    tmp/restart.txt
+  ).each do |exception|
+    at.add_exception(exception)
+  end
+  
+  at.add_mapping(%r%^spec/.*_spec\.js$%) { |filename, _|
+    filename
+  }
+  at.add_mapping(%r%^lib/(.*)\.js$%) { |_, m|
+    base = File.basename(m[1])
+    ["spec/spec.#{base}.js"]
+  }
+  at.add_mapping(%r%^spec/(node|spec_helper|shared/.*)\.js$%) {
+    at.files_matching %r%^spec/spec.*\.js$%
+  }
+
+  at.add_mapping(%r%^Gemfile|.autotest$%) do |_, m|
+    at.files_matching(%r%^spec/.*/.*_spec.rb$%)
+  end
+  at.add_mapping(%r%^config/(.*)$%) do |_, m|
+    at.files_matching(%r%^spec/.*/.*_spec.rb$%)
+  end
+  at.add_mapping(%r%^app/controllers/application_controller.rb$%) do |_, m|
+    at.files_matching(%r%^spec/controllers/.*_spec.rb$%)
+  end
+  at.add_mapping(%r%app/views/layouts/application.html.*$%) do |_, m|
+    at.files_matching(%r%^spec/views/.*/.*_spec.rb$%)
+  end
+  at.add_mapping(%r%^app/helpers/application_helper.rb$%) do |_, m|
+    at.files_matching(%r%^spec/controllers/.*_spec.rb$%) +
+    at.files_matching(%r%^spec/views/.*/.*_spec.rb$%)
+  end
+  at.add_mapping(%r%^spec/fixtures/(.*_mailer)/.*$%) do |_, m|
+    ["spec/mailers/#{m[1]}_spec.rb"]
+  end
+  at.add_mapping(%r%^spec/fixtures/(.*)$%) do |_, m|
+    at.files_matching(%r%^spec/models/.*_spec.rb$%) +
+    at.files_matching(%r%^spec/controllers/.*_controller_spec.rb$%)
+  end
+  at.add_mapping(%r%^app/mailers/(.*).rb$%) do |_, m|
+    ["spec/mailers/#{m[1]}_spec.rb"]
+  end
+  at.add_mapping(%r%^app/models/(.*).rb$%) do |_, m|
+    ["spec/models/#{m[1]}_spec.rb",
+     "spec/controllers/#{m[1]}s_controller_spec.rb"]
+  end
+  at.add_mapping(%r%^app/controllers/(.*).rb$%) do |_, m|
+    ["spec/controllers/#{m[1]}_spec.rb"]
+  end
+  at.add_mapping(%r%^app/views/(.*_mailer)/(.*)\.(erb|haml)$%) do |_, m|
+    ["spec/mailers/#{m[1]}_spec.rb"]
+  end
+  at.add_mapping(%r%^app/views/(.*)/(.*)\.haml$%) do |_, m|
+    tests = at.files_matching(%r%^spec/views/#{m[1]}/#{m[2]}.haml_spec.rb$%)
+    if tests.length > 0
+      tests
+    else
+      at.files_matching(%r%^spec/views/#{m[1]}/.*.haml_spec.rb$%)
+    end
+  end
+end

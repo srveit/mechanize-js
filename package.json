@@ -1,0 +1,45 @@
+{
+    "name": "mechanize",
+    "version": "0.0.2",
+    "description": "A javascript implementation of Mechanize",
+    "keywords": [
+        "dom",
+        "scraper",
+        "javascript"
+    ],
+    "homepage": "http://github.com/srveit/mechanize/wiki",
+    "author": {
+       "name": "Stephen R. Veit",
+       "email": "srveit@gmail.com",
+       "url": "http://stephenveit.com"
+    },
+    "contributors": [
+    ],
+    "bugs": {
+        "mail": "srveit@gmail.com",
+        "web": "http://github.com/srveit/mechanize/issues"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://github.com/srveit/mechanize/raw/master/LICENSE.txt"
+        }
+    ],
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/srveit/mechanize.git"
+    },
+    "dependencies": {
+       "libxmljs": ">=0.4.2",
+       "request": ">=1.9.8"
+    },
+    "devDependencies" : {
+      "jasmine-node": ">= 1.0.6",
+      "should": ">=0.2.1"
+    },
+    "engines" : { "node" : ">= 0.3.6" },
+    "directories": {
+        "lib": "./lib/mechanize"
+    },
+    "main": "./lib/mechanize"
+}
