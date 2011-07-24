@@ -1,41 +1,13 @@
 --abcdefghjiklmnopqrst
-Content-Disposition: form-data; name="__EVENTTARGET"
-
-btnValidateSignon
---abcdefghjiklmnopqrst
-Content-Disposition: form-data; name="__VIEWSTATE"
-
-h85Q5jdm
---abcdefghjiklmnopqrst
-Content-Disposition: form-data; name="txtUserID"
+Content-Disposition: form-data; name="userID"
 
 
 --abcdefghjiklmnopqrst
-Content-Disposition: form-data; name="fp_browser"
+Content-Disposition: form-data; name="name"
 
 
 --abcdefghjiklmnopqrst
-Content-Disposition: form-data; name="fp_screen"
+Content-Disposition: form-data; name="street"
 
-
---abcdefghjiklmnopqrst
-Content-Disposition: form-data; name="fp_software"
-
-
---abcdefghjiklmnopqrst
-Content-Disposition: form-data; name="fp_timezone"
-
-
---abcdefghjiklmnopqrst
-Content-Disposition: form-data; name="fp_language"
-
-
---abcdefghjiklmnopqrst
-Content-Disposition: form-data; name="pm_fp"
-
-
---abcdefghjiklmnopqrst
-Content-Disposition: form-data; name="TestJavaScript"
-
-
+Main
 --abcdefghjiklmnopqrst--

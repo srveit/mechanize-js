@@ -1,1 +1,1 @@
-__EVENTTARGET=btnValidateSignon&__VIEWSTATE=h85Q5jdm&txtUserID=&fp_browser=&fp_screen=&fp_software=&fp_timezone=&fp_language=&pm_fp=&TestJavaScript=
+userID=&name=&street=Main

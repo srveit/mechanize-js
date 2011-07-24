@@ -1,6 +1,6 @@
 var formModule = require('../lib/mechanize/form'),
 Page = require('../lib/mechanize/page'),
-should = require('../../should/lib/should');
+should = require('should');
 
 
 describe("Mechanize/Form", function () {
@@ -55,7 +55,7 @@ describe("Mechanize/Form", function () {
     });
 
     it("should have fields", function () {
-      form.fields.length.should.equal(10);
+      form.fields.length.should.equal(3);
     });
 
     it("should have buttons", function () {
@@ -63,9 +63,9 @@ describe("Mechanize/Form", function () {
     });
 
     it("should have field", function () {
-      var field = form.field('__EVENTTARGET');
+      var field = form.field('street');
       field.should.exist;
-      field.value.should.equal('btnValidateSignon');
+      field.value.should.equal('Main');
     });
 
     it("should set field value", function () {
@@ -73,10 +73,12 @@ describe("Mechanize/Form", function () {
       form.field('__EVENTTARGET').value.should.equal("new value");
     });
 
-    it("should have requestData", function () {
-      var requestData = fixture('multipart_body.txt');
-      form.enctype = "multipart/form-data";
-      form.requestData().should.equal(requestData);
+    context("multipart/form-data encoded", function () {
+      it("should have requestData", function () {
+        var requestData = fixture('multipart_body.txt');
+        form.enctype = "multipart/form-data";
+        form.requestData().should.equal(requestData);
+      });
     });
 
     it("should have requestData", function () {
@@ -106,7 +108,7 @@ describe("Mechanize/Form", function () {
     });
 
     it("should have buildQuery", function () {
-      form.buildQuery().should.eql([ [ '__EVENTTARGET', 'btnValidateSignon' ], [ '__VIEWSTATE', 'h85Q5jdm' ], [ 'txtUserID', '' ], [ 'fp_browser', '' ], [ 'fp_screen', '' ], [ 'fp_software', '' ], [ 'fp_timezone', '' ], [ 'fp_language', '' ], [ 'pm_fp', '' ], [ 'TestJavaScript', '' ] ]);
+      form.buildQuery().should.eql([ [ 'userID', '' ], [ 'name', '' ], [ 'street', 'Main' ] ]);
     });
   });
 });

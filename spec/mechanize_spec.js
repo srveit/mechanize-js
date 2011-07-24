@@ -1,4 +1,4 @@
-var mechanize = require('mechanize');
+var mechanize = require('../lib/mechanize');
 
 describe('Mechanize', function () {
   var agent;
