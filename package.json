@@ -10,13 +10,13 @@
     "homepage": "https://github.com/srveit/mechanize-js/wiki",
     "author": {
        "name": "Stephen R. Veit",
-       "email": "srveit@gmail.com",
+       "email": "srveit@veitconsulting.com",
        "url": "http://stephenveit.com"
     },
     "contributors": [
     ],
     "bugs": {
-        "mail": "srveit@gmail.com",
+        "mail": "srveit@veitconsulting.com",
         "web": "http://github.com/srveit/mechanize-js/issues"
     },
     "licenses": [
