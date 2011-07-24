@@ -3,14 +3,31 @@ require 'autotest'
 class RspecCommandError < StandardError; end
 
 class Autotest::NodeRspec < Autotest
-  
-  NODELINT = File.expand_path('../../../.bin/nodelint', __FILE__)
-  JASMINE = File.expand_path('../../../.bin/jasmine-node', __FILE__)
+
+  NODE_MODULES = File.expand_path('../../node_modules', __FILE__)
+  NODELINT = File.join(NODE_MODULES, '.bin/nodelint')
+  JASMINE = File.join(NODE_MODULES, '.bin/jasmine-node')
 
   def initialize
     super
     self.failed_results_re = /^\d+\)\n(?:\e\[\d*m)?(?:.*?in )?'([^\n]*)'(?: FAILED)?(?:\e\[\d*m)?\n\n?(.*?(\n\n\(.*?)?)\n\n/m
     self.completed_re = /\n(?:\e\[\d*m)?\d* examples?/m
+    patch_jslint
+  end
+
+  # Patches jslint to allow "foo.should.exist;"
+  def patch_jslint
+    patch_file = File.expand_path('../jslint.js.patch', __FILE__)
+    Dir.chdir(File.join(NODE_MODULES, 'nodelint/jslint')) do
+      if File.read('jslint.js') !~ /shouldMethods/
+        cmd = "patch < #{patch_file}"
+        if system(cmd)
+          puts "patched jslint.js"
+        else
+          $stderr.puts "#{cmd} failed"
+        end
+      end
+    end
   end
 
   def consolidate_failures(failed)
