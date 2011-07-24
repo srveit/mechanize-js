@@ -8,6 +8,12 @@ visited as a history.
 
 ## Dependencies
 
-request 1.0.0
-libxmljs 0.4.1
+    libxmljs >= 0.4.2
+    request >= 1.9.8
+    mime >= 1.2.2
+    vargs >= 0.1.0
 
+## Credits
+
+This borrows heavily from Aaron Patterson's
+[mechanize](http://mechanize.rubyforge.org/) Ruby gem.
