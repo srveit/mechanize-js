@@ -8,7 +8,11 @@ describe('Mechanize/Page', function () {
     agent = {};
     uri = null;
     code = null;
-    response = {};
+    response = {
+      headers: {
+        'content-type': 'text/html; charset=ISO-8859-1'
+      }
+    };
     userAgentVersion = '5.0 (Macintosh; Intel Mac OS X 10_6_7) AppleWebKit/' +
       '534.30 (KHTML, like Gecko) Chrome/12.0.742.77 Safari/534.30';
     userAgent = 'Mozilla/' + userAgentVersion;
@@ -19,7 +23,7 @@ describe('Mechanize/Page', function () {
   context("with form", function () {
     beforeEach(function () {
       body = fixture('login.html');
-      page = new Page(agent, uri, response, body, code);
+      page = new Page(uri, response, body, code, agent);
     });
 
     it("should exist", function () {
@@ -34,12 +38,20 @@ describe('Mechanize/Page', function () {
     it("should return user agent", function () {
       page.userAgent.should.eql(userAgent);
     });
+
+    it("should have a title", function () {
+      page.title.should.eql("Welcome");
+    });
+
+    it("should have responseHeaderCharset", function () {
+      page.responseHeaderCharset.should.eql(["ISO-8859-1"]);
+    });
   });
 
   context("with links", function () {
     beforeEach(function () {
       body = fixture('links.html');
-      page = new Page(agent, uri, response, body, code);
+      page = new Page(uri, response, body, code, agent);
     });
 
     it("should return links", function () {

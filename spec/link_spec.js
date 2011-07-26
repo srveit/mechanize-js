@@ -15,7 +15,7 @@ describe('Mechanize/Page/Link', function () {
       '<img src="picture.png" alt="picture"/></a>' +
       '</body></html>',
     code = null;
-    page = new Page(agent, url, response, body, code);
+    page = new Page(url, response, body, code, agent);
 
   });
 

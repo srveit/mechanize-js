@@ -20,7 +20,7 @@ describe("Mechanize/Form", function () {
       response = {},
       body = fixture('login_no_action.html'),
       code = null,
-      page = new Page(agent, url, response, body, code);
+      page = new Page(url, response, body, code, agent);
 
       form = page.form('login');
       formSubmitted = false;
@@ -48,7 +48,7 @@ describe("Mechanize/Form", function () {
       response = {},
       body = fixture('login.html'),
       code = null,
-      page = new Page(agent, url, response, body, code);
+      page = new Page(url, response, body, code, agent);
 
       form = page.form('MAINFORM');
       formSubmitted = false;
