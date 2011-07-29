@@ -42,7 +42,7 @@ class Autotest::NodeRspec < Autotest
 
   def make_test_cmd(files_to_test)
     files_to_test.empty? ? '' :
-      "#{NODELINT} *.js lib/*.js lib/mechanize/*.js spec/*.js --config nodelint_config.js && " +
+      "#{NODELINT} *.js lib/*.js lib/*/*.js lib/*/*/*.js spec/*.js --config nodelint_config.js && " +
       "#{JASMINE} --noColor spec " +
       add_options_if_present + redirect
   end
@@ -61,4 +61,7 @@ class Autotest::NodeRspec < Autotest
   def add_options_if_present # :nodoc:
     File.exist?("spec/spec.opts") ? "-O #{File.join('spec','spec.opts')} " : ""
   end
+end
+
+class Autotest::Node < Autotest::NodeRspec
 end
