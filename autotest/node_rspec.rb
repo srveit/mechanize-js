@@ -42,12 +42,8 @@ class Autotest::NodeRspec < Autotest
 
   def make_test_cmd(files_to_test)
     files_to_test.empty? ? '' :
-<<<<<<< HEAD
       "#{NODELINT} *.js lib/*.js lib/mechanize/*.js spec/*.js " +
       "--config nodelint_config.js && " +
-=======
-      "#{NODELINT} *.js lib/*.js lib/*/*.js lib/*/*/*.js spec/*.js --config nodelint_config.js && " +
->>>>>>> ffb2806a836b58120c244a3edeee2aab6930f37d
       "#{JASMINE} --noColor spec " +
       add_options_if_present + redirect
   end
