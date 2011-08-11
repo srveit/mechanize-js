@@ -20,6 +20,16 @@ describe('Mechanize/Page', function () {
     agent.userAgent = userAgent;
   });
 
+  context("with no body", function () {
+    beforeEach(function () {
+      page = new Page(null, {'content-type': 'text/html'}, null, null, agent);
+    });
+    
+    it("should be created", function () {
+      page.should.exist;
+    });
+  });
+
   context("with form", function () {
     beforeEach(function () {
       body = fixture('login.html');

@@ -11,6 +11,30 @@ describe("Mechanize/Agent", function () {
     };
   });
 
+  context("submitting form", function () {
+    var form, submitErr, submitPage;
+
+    beforeEach(function () {
+      form = {
+        action: 'http://example.com/login',
+        requestData: function () {
+          return "";
+        },
+        addButtonToQuery: function () {}
+      };
+    });
+
+    context("with POST method", function () {
+      beforeEach(function () {
+        form.method = 'POST';
+        agent.submit(form, function (err, page) {
+          submitErr = err;
+          submitPage = page;
+        });
+      });
+
+      it("should post form", function () {
+      });
 // Accept:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
 // Accept-Charset:ISO-8859-1,utf-8;q=0.7,*;q=0.3
 // Accept-Encoding:gzip,deflate,sdch
@@ -24,5 +48,6 @@ describe("Mechanize/Agent", function () {
 // Origin:https://banking.commercebank.com
 // Referer:https://banking.commercebank.com/cbi/login.aspx
 // User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_7) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.77 Safari/534.30
-
+    });
+  });
 });
