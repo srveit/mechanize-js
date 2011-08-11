@@ -3,3 +3,4 @@ notifications:
     - srveit@gmail.com
 
 before_script: "npm update --dev"
+script: "npm test"
