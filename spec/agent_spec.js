@@ -6,6 +6,9 @@ describe("Mechanize/Agent", function () {
 
   beforeEach(function () {
     agent = new Agent();
+    agent.request = function (options, fn) {
+      
+    };
     options = {
       uri: 'http://example.com/'
     };
