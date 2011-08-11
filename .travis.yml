@@ -1,0 +1,5 @@
+notifications:
+  recipients:
+    - srveit@gmail.com
+
+before_script: "npm update --dev"
