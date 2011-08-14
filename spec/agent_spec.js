@@ -33,12 +33,13 @@ describe("Mechanize/Agent", function () {
   });
 
   context("submitting form", function () {
-    var form, submitErr, submitPage, referer, contentType;
+    var form, submitErr, submitPage, referer, contentType, requestData;
 
     beforeEach(function () {
+      requestData = 'userID=&name=&street=Main';
       form = {
         requestData: function () {
-          return "";
+          return requestData;
         },
         addButtonToQuery: function () {}
       };
@@ -83,7 +84,11 @@ describe("Mechanize/Agent", function () {
         });
 
         it("should have content length", function () {
-          requestOptions.headers['Content-Length'].should.eql('0');
+          requestOptions.headers['Content-Length'].should.eql('25');
+        });
+
+        it("should have body", function () {
+          requestOptions.body.should.eql(requestData);
         });
 
       });
@@ -109,6 +114,10 @@ describe("Mechanize/Agent", function () {
 
         it("should post form", function () {
           requestOptions.method.should.eql('POST');
+        });
+
+        it("should post form fileds in body", function () {
+          requestOptions.body.should.eql(requestData);
         });
 
         // Accept:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
