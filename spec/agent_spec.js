@@ -30,15 +30,10 @@ describe("Mechanize/Agent", function () {
       });
     });
 
-    it("should have referer", function () {
-      console.log("requestOptions: " + require('sys').inspect(requestOptions));
-//      requestOptions.headers.Host.should.eql('example.com');
-    });
-
   });
 
   context("submitting form", function () {
-    var form, submitErr, submitPage, referrer, contentType;
+    var form, submitErr, submitPage, referer, contentType;
 
     beforeEach(function () {
       form = {
@@ -51,9 +46,9 @@ describe("Mechanize/Agent", function () {
 
     context("with partial URL", function () {
       beforeEach(function () {
-        referrer = "http://example.com/page";
+        referer = "http://example.com/page";
         form.action = 'login';
-        form.page = {uri: referrer};
+        form.page = {uri: referer};
       });
 
       context("with POST method", function () {
@@ -72,7 +67,7 @@ describe("Mechanize/Agent", function () {
         });
 
         it("should have referer", function () {
-          requestOptions.headers.Referer.should.eql(referrer);
+          requestOptions.headers.Referer.should.eql(referer);
         });
 
         it("should have origin", function () {
