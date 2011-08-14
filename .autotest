@@ -77,6 +77,7 @@ Autotest.add_hook :initialize do |at|
     db/seeds.rb
     lib/tasks/
     tmp/restart.txt
+    .git/
   ).each do |exception|
     at.add_exception(exception)
   end
