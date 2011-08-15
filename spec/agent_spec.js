@@ -1,4 +1,5 @@
 var Agent = require('../lib/mechanize/agent'),
+Cookie = require('cookiejar').Cookie,
 i = require('sys').inspect;
 
 
@@ -20,6 +21,10 @@ describe("Mechanize/Agent", function () {
     options = {
       uri: 'http://example.com/'
     };
+  });
+
+  it("should have a cookieJar", function () {
+    agent.cookieJar.should.exist;
   });
 
   context("getting page", function () {
@@ -53,7 +58,11 @@ describe("Mechanize/Agent", function () {
       });
 
       context("with POST method", function () {
+        var cookie;
+
         beforeEach(function () {
+          cookie = new Cookie("sessionid=123;domain=.example.com;path=/");
+          agent.cookieJar.setCookie(cookie);
           contentType = 'application/x-www-form-urlencoded';
           form.method = 'POST';
           form.enctype = contentType;
@@ -85,6 +94,10 @@ describe("Mechanize/Agent", function () {
 
         it("should have content length", function () {
           requestOptions.headers['Content-Length'].should.eql('25');
+        });
+
+        it("should have cookie", function () {
+          requestOptions.headers.Cookie.should.eql('sessionid=123');
         });
 
         it("should have body", function () {
