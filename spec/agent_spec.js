@@ -1,5 +1,6 @@
 var Agent = require('../lib/mechanize/agent'),
 Cookie = require('cookiejar').Cookie,
+CookieAccessInfo = require('cookiejar').CookieAccessInfo,
 i = require('sys').inspect;
 
 
@@ -28,10 +29,71 @@ describe("Mechanize/Agent", function () {
   });
 
   context("getting page", function () {
+    var domain, uri;
+
     beforeEach(function () {
-      agent.get({uri: 'http://example.com/index.html'}, function (err, page) {
-        responseErr = err;
-        responsePage = page;
+      domain = 'example.com';
+      uri = 'http://example.com/index.html';
+    });
+
+    context("with meta cookies", function () {
+      beforeEach(function () {
+        responseBody = fixture("meta_cookies.html");
+        agent.get({uri: uri}, function (err, page) {
+          responseErr = err;
+          responsePage = page;
+        });
+      });
+
+      it("should set cookies", function () {
+        var accessInfo = new CookieAccessInfo(domain, '/', true, false),
+        cookies = agent.cookieJar.getCookies(accessInfo);
+        cookies.length.should.eql(2);
+      });
+    });
+
+    context("with single header cookie", function () {
+      beforeEach(function () {
+        response = {
+          statusCode: '200',
+          headers: {
+            'set-cookie': "sessionid=345; path=/; expires=Fri, 01 Jan 2021 00:00:00 GMT; secure; HttpOnly"
+          }
+        };
+        responseBody = fixture("login.html");
+        agent.get({uri: uri}, function (err, page) {
+          responseErr = err;
+          responsePage = page;
+        });
+      });
+
+      it("should set cookies", function () {
+        var accessInfo = new CookieAccessInfo(domain, '/', true, false),
+        cookies = agent.cookieJar.getCookies(accessInfo);
+        cookies.length.should.eql(1);
+      });
+    });
+
+    context("with header cookies", function () {
+      beforeEach(function () {
+        response = {
+          statusCode: '200',
+          headers: {
+            'set-cookie': [ "sessionid=345; path=/; expires=Fri, 01 Jan 2021 00:00:00 GMT; secure; HttpOnly",
+                            "name=smith; path=/; expires=Fri, 01 Jan 2021 00:00:00 GMT; secure; HttpOnly"]
+          }
+        };
+        responseBody = fixture("login.html");
+        agent.get({uri: uri}, function (err, page) {
+          responseErr = err;
+          responsePage = page;
+        });
+      });
+
+      it("should set cookies", function () {
+        var accessInfo = new CookieAccessInfo(domain, '/', true, false),
+        cookies = agent.cookieJar.getCookies(accessInfo);
+        cookies.length.should.eql(2);
       });
     });
 
@@ -129,7 +191,7 @@ describe("Mechanize/Agent", function () {
           requestOptions.method.should.eql('POST');
         });
 
-        it("should post form fileds in body", function () {
+        it("should post form fields in body", function () {
           requestOptions.body.should.eql(requestData);
         });
 

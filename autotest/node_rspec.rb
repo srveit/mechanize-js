@@ -50,6 +50,7 @@ class Autotest::NodeRspec < Autotest
 
   def redirect
     ' 2> /dev/null'
+    ''
   end
 
   def normalize(files_to_test)

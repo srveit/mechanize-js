@@ -67,5 +67,9 @@ describe('Mechanize/Page', function () {
     it("should return links", function () {
       page.links().length.should.eql(11);
     });
+
+    it("should have serach", function () {
+      page.search('//a').length.should.eql(11);
+    });
   });
 });
