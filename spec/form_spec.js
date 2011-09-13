@@ -108,7 +108,8 @@ describe("Mechanize/Form", function () {
     });
 
     it("should have buildQuery", function () {
-      form.buildQuery().should.eql([ [ 'userID', '' ], [ 'name', '' ], [ 'street', 'Main' ] ]);
+      form.buildQuery().should.eql([ [ 'userID', '' ], [ 'name', '' ],
+                                     [ 'street', 'Main' ] ]);
     });
 
     it("should have requestData", function () {
