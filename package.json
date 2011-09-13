@@ -1,6 +1,6 @@
 {
   "name": "mechanize",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Automate interaction with websites (web scraping)",
   "keywords": [
     "dom",
@@ -8,16 +8,11 @@
     "javascript"
   ],
   "homepage": "https://github.com/srveit/mechanize-js/wiki",
-  "author": {
-    "name": "Stephen R. Veit",
-    "email": "srveit@veitconsulting.com",
-    "url": "http://stephenveit.com"
-  },
-  "contributors": [
-  ],
+  "author": "Stephen R. Veit <srveit@veitconsulting.com> (http://stephenveit.com)",
+  "contributors": [],
   "bugs": {
-    "mail": "srveit@veitconsulting.com",
-    "web": "http://github.com/srveit/mechanize-js/issues"
+    "email": "srveit@veitconsulting.com",
+    "url": "http://github.com/srveit/mechanize-js/issues"
   },
   "licenses": [
     {
@@ -36,20 +31,21 @@
     "request": ">=2.1.1",
     "vargs": ">=0.1.0"
   },
-  "devDependencies" : {
+  "devDependencies": {
     "coffee-script": ">= 1.1.2",
     "jasmine-node": ">= 1.0.6",
     "should": ">=0.2.1",
     "nodelint": ">=0.4.0"
   },
-  "engines" : { "node" : ">= 0.4.1" },
+  "engines": {
+    "node": ">= 0.4.1"
+  },
   "directories": {
     "lib": "./lib/mechanize"
   },
   "main": "./lib/mechanize",
-  "scripts" : {
-    "test" : "./test/run.sh",
-    "prepublish" : "make doc"
+  "scripts": {
+    "test": "./test/run.sh",
+    "prepublish": "make doc"
   }
-
 }
