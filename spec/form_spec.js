@@ -110,5 +110,23 @@ describe("Mechanize/Form", function () {
     it("should have buildQuery", function () {
       form.buildQuery().should.eql([ [ 'userID', '' ], [ 'name', '' ], [ 'street', 'Main' ] ]);
     });
+
+    it("should have requestData", function () {
+      form.requestData().should.eql("userID=&name=&street=Main");
+    });
+
+    context("with field value that need to be quoted", function () {
+      var encoded;
+      beforeEach(function () {
+        encoded = 'field2=a%3D1%26b%3Dslash%2Fsp+%28paren%29vert%7Csm%3Bcm%2C';
+        form.setFieldValue('field2', 'a=1&b=slash/sp (paren)vert|sm;cm,');
+      });
+
+      it("should encode", function () {
+        form.requestData().should.eql("userID=&name=&street=Main&" + encoded);
+      });
+
+    });
+
   });
 });
