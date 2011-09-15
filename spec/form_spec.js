@@ -116,6 +116,18 @@ describe("Mechanize/Form", function () {
       form.requestData().should.eql("userID=&name=&street=Main");
     });
 
+    context("with deleted field", function () {
+      beforeEach(function () {
+        form.deleteField('name');
+      });
+
+      it("should not include field in buildQuery", function () {
+        form.buildQuery().should.eql([ [ 'userID', '' ],
+                                       [ 'street', 'Main' ] ]);
+      });
+
+    });
+
     context("with field value that need to be quoted", function () {
       var encoded;
       beforeEach(function () {
