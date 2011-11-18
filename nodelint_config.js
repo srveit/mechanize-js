@@ -1,7 +1,7 @@
 var options = {
   bitwise    : false,
   regexp     : false,
-  predef: ['exports', 'module', 'require', 'process', 
+  predef: ['exports', 'module', 'require', 'process',
            '__filename', '__dirname', 'global', 'console',
            'addReporter', 'afterEach', 'beforeEach', 'clearInterval',
            'clearTimeout', 'currentRunner', 'describe', 'execute', 'it',

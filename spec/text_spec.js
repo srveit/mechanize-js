@@ -17,9 +17,9 @@ describe("Mechanize/Form/Text", function () {
     body = fixture('form_elements.html'),
     code = null,
     page = new Page(url, response, body, code, agent);
-    
+
     form = page.form('form1');
-    
+
   });
 
   context("text field", function () {

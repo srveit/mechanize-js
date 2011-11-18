@@ -1,6 +1,6 @@
---- jslint.js.orig	2011-07-21 08:41:41.000000000 -0500
-+++ jslint.js	2011-07-21 08:42:14.000000000 -0500
-@@ -932,7 +932,9 @@
+--- jslint.js.orig	2011-11-18 08:22:50.000000000 -0600
++++ jslint.js	2011-11-18 08:23:14.000000000 -0600
+@@ -1159,7 +1159,9 @@
              html: hx,
              style: sx,
              styleproperty: ssx
@@ -9,14 +9,16 @@
 +
 +        shouldMethods = ['exist'];
  
-     function F() {}
  
-@@ -2539,7 +2541,7 @@
- // Look for the final semicolon.
- 
-         if (!t.block) {
--            if (!r || !r.exps) {
-+            if ((!r || !r.exps) && shouldMethods.indexOf(r.right) < 0) {
-                 warning(
- "Expected an assignment or function call and instead saw an expression.",
-                         token);
+     function F() {}     // Used by Object.create
+@@ -3147,7 +3149,9 @@
+                 } else if (!the_statement.assign &&
+                         the_statement.id !== 'delete' &&
+                         the_statement.id !== '++' &&
+-                        the_statement.id !== '--') {
++                        the_statement.id !== '--' &&
++                        (!the_statement.second || 
++                         shouldMethods.indexOf(the_statement.second.string) < 0)) {
+                     warn('assignment_function_expression', token);
+                 }
+                 semicolon();

@@ -27,7 +27,7 @@ describe("Mechanize/Form/CheckBox", function () {
       checkBox = form.checkBox("checkBoxChecked");
     });
 
-    it("should not be checked", function () {
+    it("should be checked", function () {
       checkBox.checked.should.eql(true);
     });
   });

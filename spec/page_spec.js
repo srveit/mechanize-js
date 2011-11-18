@@ -24,7 +24,7 @@ describe('Mechanize/Page', function () {
     beforeEach(function () {
       page = new Page(null, {'content-type': 'text/html'}, null, null, agent);
     });
-    
+
     it("should be created", function () {
       page.should.exist;
     });

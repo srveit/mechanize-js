@@ -89,12 +89,8 @@ describe("Mechanize/Form", function () {
     it("should submit form", function () {
       form.submit(function (err, page) {
         should.not.exist(err);
-        asyncSpecDone();
+        formSubmitted.should.equal(true);
       });
-      if (!formSubmitted) {
-        asyncSpecWait();
-      }
-      formSubmitted.should.equal(true);
     });
 
     it("should add button to query", function () {
