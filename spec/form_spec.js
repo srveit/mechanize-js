@@ -55,7 +55,7 @@ describe("Mechanize/Form", function () {
     });
 
     it("should have fields", function () {
-      form.fields.length.should.equal(3);
+      form.fields.length.should.equal(4);
     });
 
     it("should have buttons", function () {
