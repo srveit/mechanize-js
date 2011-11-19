@@ -1,7 +1,6 @@
 var Agent = require('../lib/mechanize/agent'),
 Cookie = require('cookiejar').Cookie,
-CookieAccessInfo = require('cookiejar').CookieAccessInfo,
-i = require('sys').inspect;
+CookieAccessInfo = require('cookiejar').CookieAccessInfo;
 
 
 describe("Mechanize/Agent", function () {
