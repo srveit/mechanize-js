@@ -34,7 +34,6 @@ var formatException = function (e) {
   jasmine = require('jasmine-node'),
   fs = require('fs');
   jasmine.util.formatException = formatException;
-  require.paths.unshift(__dirname + '/../node_modules/mechanize/lib');
   fixture = function (filename) {
     return fs.readFileSync(__dirname + '/fixtures/' + filename, 'utf8');
   };
