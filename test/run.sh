@@ -11,7 +11,7 @@ main () {
       fail "Nodelint failed:\n$NODELINT" >&2
   fi
 
-  JASMINE="jasmine-node --noColor spec"
+  JASMINE="$PKG/node_modules/.bin/jasmine-node --noColor spec"
   $JASMINE 2> /dev/null
   if [ $? -ne 0 ]; then
       fail "Jasmine-node failed:\n$JASMINE" >&2
