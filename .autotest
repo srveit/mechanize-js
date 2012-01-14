@@ -9,7 +9,7 @@ def command_line_options(options)
   [[:no_full_after_start, "--fast-start"],
    [:no_full_after_failed, "--no-full-after-failed"],
    [:verbose, "--verbose"],
-   [:quiet, "--quite"]].each do |option, arg|
+   [:quiet, "--quiet"]].each do |option, arg|
     args << arg if options[option]
   end
   if options[:rc]
