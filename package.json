@@ -44,8 +44,7 @@
   },
   "main": "./lib/mechanize",
   "scripts": {
-    "test": "./test/run.sh",
-    "prepublish": "make doc"
+    "test": "./test/run.sh"
   },
   "readme": "# mechanize\n\nThe Mechanize module is used for automating interaction with websites.\nMechanize automatically stores and sends cookies, follows redirects,\ncan follow links, and submit forms. Form fields can be populated and\nsubmitted. Mechanize also keeps track of the sites that you have\nvisited as a history.\n\n## Dependencies\n\n    cookiejar >= 1.3.0\n    libxmljs >= 0.4.2\n    request >= 2.1.1\n    mime >= 1.2.3\n    vargs >= 0.1.0\n\n## Credits\n\nThis borrows heavily from Aaron Patterson's\n[mechanize](http://mechanize.rubyforge.org/) Ruby gem."
 }

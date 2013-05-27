@@ -1,0 +1,23 @@
+--- jslint.js.orig	201the_statement.second.string2-08-22 15:46:03.000000000 -0500
++++ jslint.js	2013-05-27 10:44:40.000000000 -0500
+@@ -964,8 +964,9 @@
+             html: hx,
+             style: sx,
+             styleproperty: ssx
+-        };
++        },
+ 
++        shouldMethods = ['exist'];
+ 
+     function F() {}     // Used by Object.create
+ 
+@@ -2926,7 +2927,8 @@
+                 } else if (!the_statement.assign &&
+                         the_statement.id !== 'delete' &&
+                         the_statement.id !== '++' &&
+-                        the_statement.id !== '--') {
++                        the_statement.id !== '--' &&
++                        shouldMethods.indexOf(the_statement.second.string) < 0) {
+                     warn('assignment_function_expression', token);
+                 }
+                 semicolon();

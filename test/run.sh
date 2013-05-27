@@ -60,7 +60,7 @@ fail () {
   exit 1
 }
 patch_jslint () {
-    PATCH_FILE=$PKG/autotest/jslint.js.patch
+    PATCH_FILE=$PKG/jslint.js.patch
     JSLINTDIR=$PKG/node_modules/nodelint/jslint
     pushd $JSLINTDIR
     grep -q shouldMethods jslint.js

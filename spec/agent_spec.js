@@ -1,11 +1,11 @@
-var Agent = require('../lib/mechanize/agent'),
-Cookie = require('cookiejar').Cookie,
-CookieAccessInfo = require('cookiejar').CookieAccessInfo;
+var Agent = require('../lib/mechanize/agent');
+var Cookie = require('cookiejar').Cookie;
+var CookieAccessInfo = require('cookiejar').CookieAccessInfo;
 
 
 describe("Mechanize/Agent", function () {
-  var agent, options, response, responseBody, requestOptions, responseErr, 
-  responsePage;
+  var agent, options, response, responseBody, requestOptions, responseErr,
+    responsePage;
 
   beforeEach(function () {
     agent = new Agent();
@@ -45,7 +45,8 @@ describe("Mechanize/Agent", function () {
       });
 
       it("should set cookies", function () {
-        var accessInfo = new CookieAccessInfo(domain, '/', true, false),
+        var accessInfo, cookies;
+        accessInfo = new CookieAccessInfo(domain, '/', true, false);
         cookies = agent.cookieJar.getCookies(accessInfo);
         cookies.length.should.eql(2);
       });
@@ -56,7 +57,7 @@ describe("Mechanize/Agent", function () {
         response = {
           statusCode: '200',
           headers: {
-            'set-cookie': "sessionid=345; path=/; " + 
+            'set-cookie': "sessionid=345; path=/; " +
               "expires=Fri, 01 Jan 2021 00:00:00 GMT; secure; HttpOnly"
           }
         };
@@ -68,7 +69,8 @@ describe("Mechanize/Agent", function () {
       });
 
       it("should set cookies", function () {
-        var accessInfo = new CookieAccessInfo(domain, '/', true, false),
+        var accessInfo, cookies;
+        accessInfo = new CookieAccessInfo(domain, '/', true, false);
         cookies = agent.cookieJar.getCookies(accessInfo);
         cookies.length.should.eql(1);
       });
@@ -79,10 +81,10 @@ describe("Mechanize/Agent", function () {
         response = {
           statusCode: '200',
           headers: {
-            'set-cookie': [ 
-              "sessionid=345; path=/; " + 
+            'set-cookie': [
+              "sessionid=345; path=/; " +
                 "expires=Fri, 01 Jan 2021 00:00:00 GMT; secure; HttpOnly",
-              "name=smith; path=/; " + 
+              "name=smith; path=/; " +
                 "expires=Fri, 01 Jan 2021 00:00:00 GMT; secure; HttpOnly"
             ]
           }
@@ -95,7 +97,8 @@ describe("Mechanize/Agent", function () {
       });
 
       it("should set cookies", function () {
-        var accessInfo = new CookieAccessInfo(domain, '/', true, false),
+        var accessInfo, cookies;
+        accessInfo = new CookieAccessInfo(domain, '/', true, false);
         cookies = agent.cookieJar.getCookies(accessInfo);
         cookies.length.should.eql(2);
       });
