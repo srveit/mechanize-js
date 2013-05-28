@@ -1,25 +1,24 @@
-var formModule = require('../lib/mechanize/form'),
-Page = require('../lib/mechanize/page'),
-should = require('should');
-
+var formModule = require('../lib/mechanize/form');
+var Page = require('../lib/mechanize/page');
+var should = require('should');
 
 describe("Mechanize/Form", function () {
-  var form,
-  formSubmitted;
+  var form, formSubmitted;
 
   context("with no action attribute", function () {
     beforeEach(function () {
-      var agent = {
-        submit: function (form, button, headers, fn) {
+      var agent, url, response, body, code, page;
+      agent = {
+        submit: function (form, button, headers, cb) {
           var page = {};
           formSubmitted = true;
-          fn(null, page);
+          cb(null, page);
         }
-      },
-      url = 'form.html',
-      response = {},
-      body = fixture('login_no_action.html'),
-      code = null,
+      };
+      url = 'form.html';
+      response = {};
+      body = fixture('login_no_action.html');
+      code = null;
       page = new Page(url, response, body, code, agent);
 
       form = page.form('login');
@@ -37,17 +36,18 @@ describe("Mechanize/Form", function () {
 
   context("with action attribute", function () {
     beforeEach(function () {
-      var agent = {
-        submit: function (form, button, headers, fn) {
+      var agent, url, response, body, code, page;
+      agent = {
+        submit: function (form, button, headers, cb) {
           var page = {};
           formSubmitted = true;
-          fn(null, page);
+          cb(null, page);
         }
-      },
-      url = null,
-      response = {},
-      body = fixture('login.html'),
-      code = null,
+      };
+      url = null;
+      response = {};
+      body = fixture('login.html');
+      code = null;
       page = new Page(url, response, body, code, agent);
 
       form = page.form('MAINFORM');

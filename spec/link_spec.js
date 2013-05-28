@@ -1,19 +1,20 @@
-var Link = require('../lib/mechanize/page/link'),
-Page = require('../lib/mechanize/page');
+var Link = require('../lib/mechanize/page/link');
+var Page = require('../lib/mechanize/page');
 
 
 describe('Mechanize/Page/Link', function () {
   var link, href, nodeID, page, node;
 
   beforeEach(function () {
-    var agent = {},
-    url = null,
-    response = {},
-    body = '<html><body>' + 
+    var agent, url, response, body, code;
+    agent = {};
+    url = null;
+    response = {};
+    body = '<html><body>' +
       '<a id="first" href="http://example.com/first">Example</a>' +
-      '<a id="second" href="http://example.com/second">' + 
+      '<a id="second" href="http://example.com/second">' +
       '<img src="picture.png" alt="picture"/></a>' +
-      '</body></html>',
+      '</body></html>';
     code = null;
     page = new Page(url, response, body, code, agent);
 

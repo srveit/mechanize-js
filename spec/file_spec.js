@@ -1,12 +1,12 @@
 var File = require('../lib/mechanize/file');
 
-
 describe('Mechanize/File', function () {
   var response, body, file, userAgentVersion, userAgent;
 
   beforeEach(function () {
-    var agent = {},
-    uri = null,
+    var agent, uri, code, response;
+    agent = {};
+    uri = null;
     code = null;
     response = {};
     userAgentVersion = '5.0 (Macintosh; Intel Mac OS X 10_6_7) AppleWebKit/' +
