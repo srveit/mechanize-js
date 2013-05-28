@@ -1,25 +1,26 @@
-var Page = require('../lib/mechanize/page.js'),
-should = require('should');
+var Page = require('../lib/mechanize/page.js');
+var should = require('should');
 
 
 describe("Mechanize/Form/CheckBox", function () {
   var checkBox, form;
 
   beforeEach(function () {
-    var agent = {
+    var agent, url, response, body, code, page;
+    agent = {
       submit: function (form, button, headers, fn) {
         var page = {};
         fn(null, page);
       }
-    },
-    url = 'form.html',
-    response = {},
-    body = fixture('form_elements.html'),
-    code = null,
+    };
+    url = 'form.html';
+    response = {};
+    body = fixture('form_elements.html');
+    code = null;
     page = new Page(url, response, body, code, agent);
-    
+
     form = page.form('form1');
-    
+
   });
 
   context("checked check box", function () {
