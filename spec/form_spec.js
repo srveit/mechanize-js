@@ -9,7 +9,7 @@ describe("Mechanize/Form", function () {
     beforeEach(function () {
       var agent, url, response, body, code, page;
       agent = {
-        submit: function (form, button, headers, cb) {
+        submit: function (form, button, headers, requestOptions, cb) {
           var page = {};
           formSubmitted = true;
           cb(null, page);
@@ -38,7 +38,7 @@ describe("Mechanize/Form", function () {
     beforeEach(function () {
       var agent, url, response, body, code, page;
       agent = {
-        submit: function (form, button, headers, cb) {
+        submit: function (form, button, headers, requestOptions, cb) {
           var page = {};
           formSubmitted = true;
           cb(null, page);

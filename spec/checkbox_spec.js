@@ -8,9 +8,9 @@ describe("Mechanize/Form/CheckBox", function () {
   beforeEach(function () {
     var agent, url, response, body, code, page;
     agent = {
-      submit: function (form, button, headers, fn) {
+      submit: function (form, button, headers, requestOptions, cb) {
         var page = {};
-        fn(null, page);
+        cb(null, page);
       }
     };
     url = 'form.html';

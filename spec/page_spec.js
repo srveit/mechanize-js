@@ -72,4 +72,31 @@ describe('Mechanize/Page', function () {
       page.search('//a').length.should.eql(11);
     });
   });
+
+  context("with null parsed body", function () {
+    beforeEach(function () {
+      var uri = 'https://login.yahoo.com/config/login?',
+        response = {
+          headers: {
+            location: 'https://login.yahoo.com/config/verify?.done=' +
+              'http%3a//us.mg206.mail.yahoo.com/dc/launch%3f.partner=' +
+              'sbc%26.gx=0%26.rand=e7cfrljanjnfa',
+            'content-type': 'text/html'
+          },
+          statusCode: 302,
+          body: body
+        };
+
+      body = fixture('xml-comment.html');
+      page = new Page(uri, response, body, code, agent);
+    });
+
+    it("should have serach", function () {
+      page.search('//a').length.should.eql(0);
+    });
+
+    it("should have statusCode", function () {
+      page.statusCode().should.eql(302);
+    });
+  });
 });
