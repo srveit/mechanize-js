@@ -8,7 +8,7 @@ describe("Mechanize/Form/Text", function () {
   beforeEach(function () {
     var agent, url, response, body, code, page;
     agent = {
-      submit: function (form, button, headers, fn) {
+      submit: function (form, button, headers, requestOptions, fn) {
         var page = {};
         fn(null, page);
       }

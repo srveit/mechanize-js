@@ -135,7 +135,7 @@ describe("Mechanize/Agent", function () {
           contentType = 'application/x-www-form-urlencoded';
           form.method = 'POST';
           form.enctype = contentType;
-          agent.submit(form, function (err, page) {
+          agent.submit(form, null, {}, {}, function (err, page) {
             submitErr = err;
             submitPage = page;
           });
@@ -188,7 +188,7 @@ describe("Mechanize/Agent", function () {
       context("with POST method", function () {
         beforeEach(function () {
           form.method = 'POST';
-          agent.submit(form, function (err, page) {
+          agent.submit(form, null, {}, {}, function (err, page) {
             submitErr = err;
             submitPage = page;
           });
