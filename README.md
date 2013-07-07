@@ -9,10 +9,9 @@ visited as a history.
 ## Dependencies
 
     cookiejar >= 1.3.0
-    libxmljs >= 0.4.2
-    request >= 2.1.1
-    mime >= 1.2.3
-    vargs >= 0.1.0
+    libxmljs >= 0.8.1
+    request >= 2.21.1
+    mime >= 1.2.9
 
 ## Credits
 
