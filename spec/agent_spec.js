@@ -104,8 +104,8 @@ describe("Mechanize/Agent", function () {
       });
     });
 
-    context("with encoding", function() {
-      beforeEach(function() {
+    context("with encoding", function () {
+      beforeEach(function () {
         options = {};
         agent.get({ uri: uri, encoding: null }, function (err, page) {
           responseErr = err;
@@ -113,13 +113,13 @@ describe("Mechanize/Agent", function () {
         });
       });
 
-      it ("should have encoding", function() {
-        expect(requestOptions.encoding).toBe(null);
+      it("should have encoding", function () {
+        requestOptions.should.have.property('encoding', null);
       });
     });
 
-    context("without encoding", function() {
-      beforeEach(function() {
+    context("without encoding", function () {
+      beforeEach(function () {
         options = {};
         agent.get({ uri: uri }, function (err, page) {
           responseErr = err;
@@ -127,8 +127,8 @@ describe("Mechanize/Agent", function () {
         });
       });
 
-      it ("should not have encoding", function() {
-        expect(requestOptions.encoding).toBe(undefined);
+      it("should not have encoding", function () {
+        requestOptions.should.not.have.property('encoding');
       });
     });
 
