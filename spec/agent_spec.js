@@ -104,6 +104,34 @@ describe("Mechanize/Agent", function () {
       });
     });
 
+    context("with encoding", function () {
+      beforeEach(function () {
+        options = {};
+        agent.get({ uri: uri, encoding: null }, function (err, page) {
+          responseErr = err;
+          responsePage = page;
+        });
+      });
+
+      it("should have encoding", function () {
+        requestOptions.should.have.property('encoding', null);
+      });
+    });
+
+    context("without encoding", function () {
+      beforeEach(function () {
+        options = {};
+        agent.get({ uri: uri }, function (err, page) {
+          responseErr = err;
+          responsePage = page;
+        });
+      });
+
+      it("should not have encoding", function () {
+        requestOptions.should.not.have.property('encoding');
+      });
+    });
+
   });
 
   context("submitting form", function () {
