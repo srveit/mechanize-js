@@ -6,6 +6,24 @@ can follow links, and submit forms. Form fields can be populated and
 submitted. Mechanize also keeps track of the sites that you have
 visited as a history.
 
+## Getting Started
+
+From the root folder you can run the get page example:
+
+`node bin/get_page.js`
+
+To load from a specific URL:
+
+`node bin/get_page.js "http://www.cnn.com"`
+
+The example gets the page and then performs a console.log() on all of the returned object data.
+
+## Installation
+
+From the mechanize directory, run npm install:
+
+`npm install`
+
 ## Dependencies
 
     cookiejar >= 1.3.0
