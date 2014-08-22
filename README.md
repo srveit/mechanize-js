@@ -14,13 +14,15 @@ From the root folder, you can run the *get_page* example:
 
 To load from a specific URL:
 
-`node bin/get_page.js "http://www.cnn.com"``
+`node bin/get_page.js "http://www.cnn.com"`
+
+The example gets the page and then performs a `console.log()` on all of the returned object data.
 
 For form posting, you can run the *submit_form* example:
 
 `node bin/submit_form.js "http://localhost/"`
 
-The example gets the page and then performs a console.log() on all of the returned object data.
+The example POSTs a username and password to the */login* path at the specificied URL
 
 ## Installation
 

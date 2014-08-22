@@ -17,7 +17,7 @@ var requestData = 'username='+username+'&password='+password;
 
 var form = {
   page: {uri: uri},
-  action: 'login.php',
+  action: 'login',
   method: 'POST',
   enctype: 'application/x-www-form-urlencoded',
   requestData: function () {
