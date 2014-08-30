@@ -24,6 +24,12 @@ For form posting, you can run the *submit_form* example:
 
 The example POSTs a username and password to the */login* path at the specificied URL
 
+For an example of chaining requests, you can run the *submit_form_chain* example:
+
+`node bin/submit_form_chain.js`
+
+The example gets the main Google home page, locates the first form on the page, sets the "q" parameter on that form to the query "farm", POSTs the form, and displays the returned results page.
+
 ## Installation
 
 From the mechanize directory, run npm install:
