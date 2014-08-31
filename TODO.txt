@@ -2,3 +2,4 @@ Make sure case does not matter when setting headers. See merge in agent.js.
 
 Consolidate userAgentAlias, userAgent, userAgentVersion in agent.js.
 
+Multi-part upload
