@@ -28,7 +28,11 @@ For an example of chaining requests, you can run the *submit_form_chain* example
 
 `node bin/submit_form_chain.js`
 
-The example gets the main Google home page, locates the first form on the page, sets the "q" parameter on that form to the query "farm", POSTs the form, and displays the returned results page.
+To see an example of chaining to log into Twitter and access the personal notifications page, run the *twitter_notifications* example:
+
+`node bin/twitter_notifications.js MYTWITTERUSERNAME MYTWITTERPASSWORD`
+
+The example gets the Twitter login page, fills out the username and password fields, logs into Twitter, gets the private notifications page, and displays the returned results.
 
 ## Installation
 
