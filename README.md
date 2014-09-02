@@ -18,11 +18,27 @@ To load from a specific URL:
 
 The example gets the page and then performs a `console.log()` on all of the returned object data.
 
+### Posting a form
+
 For form posting, you can run the *submit_form* example:
 
 `node bin/submit_form.js "http://localhost/"`
 
 The example POSTs a username and password to the */login* path at the specificied URL
+
+### Chaining page accesses
+
+For an example of chaining requests, you can run the *submit_form_chain* example:
+
+`node bin/submit_form_chain.js`
+
+### Logging into Twitter and getting personal notifications
+
+To see an example of chaining to log into Twitter and access the notifications page, run the *twitter_notifications* example:
+
+`node bin/twitter_notifications.js MYTWITTERUSERNAME MYTWITTERPASSWORD`
+
+The example gets the Twitter login page, fills out the username and password fields, logs into Twitter, gets the private notifications page, and displays the returned results.
 
 ## Installation
 

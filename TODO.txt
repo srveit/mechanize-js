@@ -2,3 +2,7 @@ Make sure case does not matter when setting headers. See merge in agent.js.
 
 Consolidate userAgentAlias, userAgent, userAgentVersion in agent.js.
 
+Multi-part upload
+
+Replicate the fundamental code examples in the Ruby Mechanize docs (http://docs.seattlerb.org/mechanize/EXAMPLES_rdoc.html)
+
