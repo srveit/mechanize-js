@@ -7,3 +7,4 @@ doc/app
 *#*
 .DS_Store
 node_modules
+.lock-wscript
