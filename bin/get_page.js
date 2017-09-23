@@ -1,12 +1,16 @@
-var arguments = process.argv.slice(2);
+#!/usr/bin/env node
+'use strict';
 
-var Mechanize = require('../lib/mechanize');
-var uri = 'http://www.google.com';
-if(arguments.length > 0) {
-	uri = arguments[0];
+const mechanize = require('../lib/mechanize'),
+  args = process.argv.slice(2);
+
+let uri = 'http://www.google.com';
+
+if(args.length > 0) {
+  uri = args[0];
 }
 
-Mechanize.newAgent().
+mechanize.newAgent().
   get({uri: uri}, function (err, page) {
-      console.log(page);
+    console.log(page);
   });

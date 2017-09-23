@@ -1,13 +1,16 @@
-var Mechanize = require('../lib/mechanize');
+#!/usr/bin/env node
+'use strict';
 
-var uri = "http://example.com/";
+const mechanize = require('../lib/mechanize'),
+  args = process.argv.slice(2);
 
-var arguments = process.argv.slice(2);
-if(arguments.length > 0) {
-	uri = arguments[0];
+let uri = "http://example.com/";
+
+if (args.length > 0) {
+  uri = args[0];
 }
 
-var agent = Mechanize.newAgent();
+var agent = mechanize.newAgent();
 cookie = new Cookie("sessionid=123;domain=.example.com;path=/");
 agent.cookieJar.setCookie(cookie);
 
