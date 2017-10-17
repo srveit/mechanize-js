@@ -6,7 +6,7 @@ module.exports = {
     "node": true,
     "jasmine": true
   },
-  "extends": ["eslint:recommended", "plugin:Jasmine/recommended"],
+  "extends": ["eslint:recommended", "plugin:jasmine/recommended"],
   "rules": {
     "indent": [
       "error",
