@@ -8,7 +8,7 @@ describe('Mechanize/History', function () {
     history = new History();
   });
 
-  it("should exist", function () {
+  it('should exist', function () {
     history.should.exist;
     //history.should.eql(2);
   });

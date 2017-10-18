@@ -3,9 +3,9 @@ var Cookie = require('cookiejar').Cookie;
 var CookieAccessInfo = require('cookiejar').CookieAccessInfo;
 
 
-describe("Mechanize/Agent", function () {
-  var agent, options, response, responseBody, requestOptions, responseErr,
-    responsePage;
+describe('Mechanize/Agent', function () {
+  var agent, response, responseBody, requestOptions,
+    options, responseErr, responsePage;    // eslint-disable-line no-unused-vars
 
   beforeEach(function () {
     agent = new Agent();
@@ -23,11 +23,11 @@ describe("Mechanize/Agent", function () {
     };
   });
 
-  it("should have a cookieJar", function () {
+  it('should have a cookieJar', function () {
     agent.cookieJar.should.exist;
   });
 
-  context("getting page", function () {
+  context('getting page', function () {
     var domain, uri;
 
     beforeEach(function () {
@@ -35,16 +35,16 @@ describe("Mechanize/Agent", function () {
       uri = 'http://example.com/index.html';
     });
 
-    context("with meta cookies", function () {
+    context('with meta cookies', function () {
       beforeEach(function () {
-        responseBody = fixture("meta_cookies.html");
+        responseBody = fixture('meta_cookies.html');
         agent.get({uri: uri}, function (err, page) {
           responseErr = err;
           responsePage = page;
         });
       });
 
-      it("should set cookies", function () {
+      it('should set cookies', function () {
         var accessInfo, cookies;
         accessInfo = new CookieAccessInfo(domain, '/', true, false);
         cookies = agent.cookieJar.getCookies(accessInfo);
@@ -52,23 +52,23 @@ describe("Mechanize/Agent", function () {
       });
     });
 
-    context("with single header cookie", function () {
+    context('with single header cookie', function () {
       beforeEach(function () {
         response = {
           statusCode: '200',
           headers: {
-            'set-cookie': "sessionid=345; path=/; " +
-              "expires=Fri, 01 Jan 2021 00:00:00 GMT; secure; HttpOnly"
+            'set-cookie': 'sessionid=345; path=/; ' +
+              'expires=Fri, 01 Jan 2021 00:00:00 GMT; secure; HttpOnly'
           }
         };
-        responseBody = fixture("login.html");
+        responseBody = fixture('login.html');
         agent.get({uri: uri}, function (err, page) {
           responseErr = err;
           responsePage = page;
         });
       });
 
-      it("should set cookies", function () {
+      it('should set cookies', function () {    // eslint-disable-line jasmine/no-spec-dupes
         var accessInfo, cookies;
         accessInfo = new CookieAccessInfo(domain, '/', true, false);
         cookies = agent.cookieJar.getCookies(accessInfo);
@@ -76,27 +76,27 @@ describe("Mechanize/Agent", function () {
       });
     });
 
-    context("with header cookies", function () {
+    context('with header cookies', function () {
       beforeEach(function () {
         response = {
           statusCode: '200',
           headers: {
             'set-cookie': [
-              "sessionid=345; path=/; " +
-                "expires=Fri, 01 Jan 2021 00:00:00 GMT; secure; HttpOnly",
-              "name=smith; path=/; " +
-                "expires=Fri, 01 Jan 2021 00:00:00 GMT; secure; HttpOnly"
+              'sessionid=345; path=/; ' +
+                'expires=Fri, 01 Jan 2021 00:00:00 GMT; secure; HttpOnly',
+              'name=smith; path=/; ' +
+                'expires=Fri, 01 Jan 2021 00:00:00 GMT; secure; HttpOnly'
             ]
           }
         };
-        responseBody = fixture("login.html");
+        responseBody = fixture('login.html');
         agent.get({uri: uri}, function (err, page) {
           responseErr = err;
           responsePage = page;
         });
       });
 
-      it("should set cookies", function () {
+      it('should set cookies', function () {    // eslint-disable-line jasmine/no-spec-dupes
         var accessInfo, cookies;
         accessInfo = new CookieAccessInfo(domain, '/', true, false);
         cookies = agent.cookieJar.getCookies(accessInfo);
@@ -104,7 +104,7 @@ describe("Mechanize/Agent", function () {
       });
     });
 
-    context("with encoding", function () {
+    context('with encoding', function () {
       beforeEach(function () {
         options = {};
         agent.get({ uri: uri, encoding: null }, function (err, page) {
@@ -113,12 +113,12 @@ describe("Mechanize/Agent", function () {
         });
       });
 
-      it("should have encoding", function () {
+      it('should have encoding', function () {
         requestOptions.should.have.property('encoding', null);
       });
     });
 
-    context("without encoding", function () {
+    context('without encoding', function () {
       beforeEach(function () {
         options = {};
         agent.get({ uri: uri }, function (err, page) {
@@ -127,15 +127,16 @@ describe("Mechanize/Agent", function () {
         });
       });
 
-      it("should not have encoding", function () {
+      it('should not have encoding', function () {
         requestOptions.should.not.have.property('encoding');
       });
     });
 
   });
 
-  context("submitting form", function () {
-    var form, submitErr, submitPage, referer, contentType, requestData;
+  context('submitting form', function () {
+    var form, submitErr, submitPage,    // eslint-disable-line no-unused-vars
+      referer, contentType, requestData;
 
     beforeEach(function () {
       requestData = 'userID=&name=&street=Main';
@@ -147,18 +148,18 @@ describe("Mechanize/Agent", function () {
       };
     });
 
-    context("with partial URL", function () {
+    context('with partial URL', function () {
       beforeEach(function () {
-        referer = "http://example.com/page";
+        referer = 'http://example.com/page';
         form.action = 'login';
         form.page = {uri: referer};
       });
 
-      context("with POST method", function () {
+      context('with POST method', function () {
         var cookie;
 
         beforeEach(function () {
-          cookie = new Cookie("sessionid=123;domain=.example.com;path=/");
+          cookie = new Cookie('sessionid=123;domain=.example.com;path=/');
           agent.cookieJar.setCookie(cookie);
           contentType = 'application/x-www-form-urlencoded';
           form.method = 'POST';
@@ -169,51 +170,51 @@ describe("Mechanize/Agent", function () {
           });
         });
 
-        it("should use URI", function () {
+        it('should use URI', function () {
           requestOptions.uri.should.eql('http://example.com/login');
         });
 
-        it("should have referer", function () {
+        it('should have referer', function () {
           requestOptions.headers.Referer.should.eql(referer);
         });
 
-        it("should have origin", function () {
+        it('should have origin', function () {
           requestOptions.headers.Origin.should.eql('http://example.com');
         });
 
-        it("should have user agent", function () {
+        it('should have user agent', function () {
           requestOptions.headers['User-Agent'].should.eql('My agent');
         });
 
-        it("should have content type", function () {
+        it('should have content type', function () {
           requestOptions.headers['Content-Type'].should.eql(contentType);
         });
 
-        it("should have content length", function () {
+        it('should have content length', function () {
           requestOptions.headers['Content-Length'].should.eql('25');
         });
 
-        it("should have cookie", function () {
+        it('should have cookie', function () {
           requestOptions.headers.Cookie.should.eql('sessionid=123');
         });
 
-        it("should have accept", function () {
+        it('should have accept', function () {
           requestOptions.headers.Accept.should.eql('*/*');
         });
 
-        it("should have body", function () {
+        it('should have body', function () {
           requestOptions.body.should.eql(requestData);
         });
 
       });
     });
 
-    context("with full URL", function () {
+    context('with full URL', function () {
       beforeEach(function () {
         form.action = 'http://example.com/login';
       });
 
-      context("with POST method", function () {
+      context('with POST method', function () {
         beforeEach(function () {
           form.method = 'POST';
           agent.submit(form, null, {}, {}, function (err, page) {
@@ -222,15 +223,15 @@ describe("Mechanize/Agent", function () {
           });
         });
 
-        it("should use URI", function () {
+        it('should use URI', function () {    // eslint-disable-line jasmine/no-spec-dupes
           requestOptions.uri.should.eql('http://example.com/login');
         });
 
-        it("should post form", function () {
+        it('should post form', function () {
           requestOptions.method.should.eql('POST');
         });
 
-        it("should post form fields in body", function () {
+        it('should post form fields in body', function () {
           requestOptions.body.should.eql(requestData);
         });
 

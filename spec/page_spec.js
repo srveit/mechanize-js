@@ -20,60 +20,60 @@ describe('Mechanize/Page', function () {
     agent.userAgent = userAgent;
   });
 
-  context("with no body", function () {
+  context('with no body', function () {
     beforeEach(function () {
       page = new Page(null, {'content-type': 'text/html'}, null, null, agent);
     });
 
-    it("should be created", function () {
+    it('should be created', function () {
       page.should.exist;
     });
   });
 
-  context("with form", function () {
+  context('with form', function () {
     beforeEach(function () {
       body = fixture('login.html');
       page = new Page(uri, response, body, code, agent);
     });
 
-    it("should exist", function () {
+    it('should exist', function () {
       page.should.exist;
     });
 
-    it("should return form", function () {
+    it('should return form', function () {
       var form = page.form('MAINFORM');
       form.should.exist;
     });
 
-    it("should return user agent", function () {
+    it('should return user agent', function () {
       page.userAgent.should.eql(userAgent);
     });
 
-    it("should have a title", function () {
-      page.title.should.eql("Welcome");
+    it('should have a title', function () {
+      page.title.should.eql('Welcome');
     });
 
-    it("should have responseHeaderCharset", function () {
-      page.responseHeaderCharset.should.eql(["ISO-8859-1"]);
+    it('should have responseHeaderCharset', function () {
+      page.responseHeaderCharset.should.eql(['ISO-8859-1']);
     });
   });
 
-  context("with links", function () {
+  context('with links', function () {
     beforeEach(function () {
       body = fixture('links.html');
       page = new Page(uri, response, body, code, agent);
     });
 
-    it("should return links", function () {
+    it('should return links', function () {
       page.links().length.should.eql(11);
     });
 
-    it("should have serach", function () {
+    it('should have search', function () {
       page.search('//a').length.should.eql(11);
     });
   });
 
-  context("with null parsed body", function () {
+  context('with null parsed body', function () {
     beforeEach(function () {
       var uri = 'https://login.yahoo.com/config/login?',
         response = {
@@ -91,11 +91,11 @@ describe('Mechanize/Page', function () {
       page = new Page(uri, response, body, code, agent);
     });
 
-    it("should have serach", function () {
+    it('should not have search', function () {
       page.search('//a').length.should.eql(0);
     });
 
-    it("should have statusCode", function () {
+    it('should have statusCode', function () {
       page.statusCode().should.eql(302);
     });
   });
