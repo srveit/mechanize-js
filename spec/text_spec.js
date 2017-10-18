@@ -1,8 +1,6 @@
 var Page = require('../lib/mechanize/page.js');
-var should = require('should');
 
-
-describe("Mechanize/Form/Text", function () {
+describe('Mechanize/Form/Text', function () {
   var text, form;
 
   beforeEach(function () {
@@ -23,22 +21,22 @@ describe("Mechanize/Form/Text", function () {
 
   });
 
-  context("text field", function () {
+  context('text field', function () {
     beforeEach(function () {
-      text = form.field("text");
+      text = form.field('text');
     });
 
-    it("should not be disabled", function () {
+    it('should not be disabled', function () {
       text.disabled.should.eql(false);
     });
   });
 
-  context("disabled text field", function () {
+  context('disabled text field', function () {
     beforeEach(function () {
-      text = form.field("textDisabled");
+      text = form.field('textDisabled');
     });
 
-    it("should be disabled", function () {
+    it('should be disabled', function () {
       text.disabled.should.eql(true);
     });
   });

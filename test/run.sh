@@ -4,11 +4,11 @@ main () {
   # setup
   FAILURES=0
 
-  NODELINT="$PKG/node_modules/.bin/nodelint $PKG/*.js $PKG/lib/*.js $PKG/lib/mechanize/*.js $PKG/spec/*.js --config $PKG/nodelint_config.js"
-  # echo $NODELINT
-  $NODELINT
+  ESLINT="$PKG/node_modules/.bin/eslint $PKG/*.js $PKG/lib/*.js $PKG/lib/mechanize/*.js $PKG/spec/*.js"
+  # echo $ESLINT
+  $ESLINT
   if [ $? -ne 0 ]; then
-      fail "Nodelint failed:\n$NODELINT" >&2
+      fail "ESlint failed:\n$ESLINT" >&2
   fi
 
   JASMINE="$PKG/node_modules/.bin/jasmine-node --noColor spec"
@@ -70,5 +70,5 @@ patch_jslint () {
     popd
 }
 
-patch_jslint
+#patch_jslint
 main

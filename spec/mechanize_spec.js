@@ -1,11 +1,10 @@
-var mechanize = require('../lib/mechanize');
+// var mechanize = require('../lib/mechanize');
 
 describe('Mechanize', function () {
-  var agent;
-
-  beforeEach(function () {
-    agent = mechanize.newAgent();
-  });
+  // var agent;
+  // beforeEach(function () {
+  //   agent = mechanize.newAgent();
+  // });
 
   it('shows asynchronous test', function () {
     setTimeout(function () {

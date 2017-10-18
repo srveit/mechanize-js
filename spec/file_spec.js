@@ -1,7 +1,7 @@
 var File = require('../lib/mechanize/file');
 
 describe('Mechanize/File', function () {
-  var response, body, file, userAgentVersion, userAgent;
+  var body, file, userAgentVersion, userAgent;
 
   beforeEach(function () {
     var agent, uri, code, response;
@@ -18,7 +18,7 @@ describe('Mechanize/File', function () {
     file = new File(agent, uri, response, body, code);
   });
 
-  it("should exist", function () {
+  it('should exist', function () {
     file.should.exist;
   });
 

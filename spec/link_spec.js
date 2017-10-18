@@ -20,52 +20,52 @@ describe('Mechanize/Page/Link', function () {
 
   });
 
-  context("text link", function () {
+  context('text link', function () {
     beforeEach(function () {
-      node = page.at("//a[1]");
+      node = page.at('//a[1]');
       href = 'http://example.com/first';
       nodeID = 'first';
       link = new Link(page, node);
     });
 
-    it("should exist", function () {
+    it('should exist', function () {
       link.should.exist;
     });
 
-    it("should have href", function () {
+    it('should have href', function () {
       link.href.should.eql(href);
     });
 
-    it("should have domID", function () {
+    it('should have domID', function () {
       link.domID.should.eql(nodeID);
     });
 
-    it("should have text", function () {
+    it('should have text', function () {
       link.text.should.eql('Example');
     });
   });
 
-  context("image link", function () {
+  context('image link', function () {
     beforeEach(function () {
-      node = page.at("//a[2]");
+      node = page.at('//a[2]');
       href = 'http://example.com/second';
       nodeID = 'second';
       link = new Link(page, node);
     });
 
-    it("should exist", function () {
+    it('should exist', function () {    // eslint-disable-line jasmine/no-spec-dupes
       link.should.exist;
     });
 
-    it("should have href", function () {
+    it('should have href', function () {    // eslint-disable-line jasmine/no-spec-dupes
       link.href.should.eql(href);
     });
 
-    it("should have domID", function () {
+    it('should have domID', function () {    // eslint-disable-line jasmine/no-spec-dupes
       link.domID.should.eql(nodeID);
     });
 
-    it("should have text", function () {
+    it('should have text', function () {    // eslint-disable-line jasmine/no-spec-dupes
       link.text.should.eql('picture');
     });
   });
