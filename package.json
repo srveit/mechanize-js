@@ -9,7 +9,17 @@
   ],
   "homepage": "https://github.com/srveit/mechanize-js/wiki",
   "author": "Stephen R. Veit <srveit@veitconsulting.com> (http://stephenveit.com)",
-  "contributors": [],
+  "contributors": [
+    {
+      "name": "佐藤"
+    },
+    {
+      "name": "Dan Rahmel"
+    },
+    {
+      name: "Anders Hjelm"
+    }
+  ],
   "bugs": {
     "email": "srveit@veitconsulting.com",
     "url": "http://github.com/srveit/mechanize-js/issues"

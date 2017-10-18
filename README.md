@@ -48,12 +48,18 @@ From the mechanize directory, run npm install:
 
 ## Dependencies
 
-    cookiejar >= 1.3.0
-    libxmljs >= 0.8.1
-    request >= 2.21.1
-    mime >= 1.2.9
+    cookiejar >= 2.1.1
+    libxmljs >= 0.18.7
+    mime >= 2.0.3
+    request >= 2.83.0
 
 ## Credits
 
 This borrows heavily from Aaron Patterson's
 [mechanize](http://mechanize.rubyforge.org/) Ruby gem.
+
+### Contributors
+
+* 佐藤
+* Dan Rahmel
+* Anders Hjelm
