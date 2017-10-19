@@ -24,6 +24,9 @@
     },
     {
       "name": "Dan Rahmel"
+    },
+    {
+      "name": "Anders Hjelm"
     }
   ],
   "main": "./lib/mechanize",
