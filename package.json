@@ -40,6 +40,9 @@
     "url": "git@github.com:srveit/mechanize-js.git"
   },
   "scripts": {
+    "lint": "eslint *.js lib/*.js lib/**/*.js spec/*.js",
+    "jasmine": "jasmine",
+    "cover": "nyc npm jasmine",
     "test": "./test/run.sh"
   },
   "config": {},
@@ -53,7 +56,9 @@
     "ajv": "^5.2.3",
     "eslint": "^4.9.0",
     "eslint-plugin-jasmine": "^2.9.1",
-    "jasmine-node": "^1.14.5",
+    "jasmine": "^2.8.0",
+    "jasmine-spec-reporter": "^4.2.1",
+    "nyc": "^11.2.1",
     "should": "^13.1.2"
   },
   "peerDependencies": {},

@@ -59,16 +59,5 @@ fail () {
   echo_err -e "\033[33mFailure: $@\033[m"
   exit 1
 }
-patch_jslint () {
-    PATCH_FILE=$PKG/jslint.js.patch
-    JSLINTDIR=$PKG/node_modules/nodelint/jslint
-    pushd $JSLINTDIR
-    grep -q shouldMethods jslint.js
-    if [ $? -ne 0 ]; then
-        patch < $PATCH_FILE
-    fi
-    popd
-}
 
-#patch_jslint
 main
