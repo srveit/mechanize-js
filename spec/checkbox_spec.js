@@ -1,7 +1,7 @@
 var Page = require('../lib/mechanize/page.js');
 
-describe('Mechanize/Form/CheckBox', function () {
-  var checkBox, form;
+describe('Mechanize/Form/Checkbox', function () {
+  var checkbox, form;
 
   beforeEach(function () {
     var agent, url, response, body, code, page;
@@ -23,21 +23,21 @@ describe('Mechanize/Form/CheckBox', function () {
 
   context('checked check box', function () {
     beforeEach(function () {
-      checkBox = form.checkBox('checkBoxChecked');
+      checkbox = form.checkbox('checkboxChecked');
     });
 
     it('should be checked', function () {
-      checkBox.checked.should.eql(true);
+      checkbox.checked.should.eql(true);
     });
   });
 
   context('unchecked check box', function () {
     beforeEach(function () {
-      checkBox = form.checkBox('checkBoxUnchecked');
+      checkbox = form.checkbox('checkboxUnchecked');
     });
 
     it('should not be checked', function () {
-      checkBox.checked.should.eql(false);
+      checkbox.checked.should.eql(false);
     });
   });
 });
