@@ -53,19 +53,19 @@ describe('Mechanize/Page/Link', function () {
       link = new Link(page, node);
     });
 
-    it('should exist', function () {    // eslint-disable-line jasmine/no-spec-dupes
+    it('should exist', function () {
       link.should.exist;
     });
 
-    it('should have href', function () {    // eslint-disable-line jasmine/no-spec-dupes
+    it('should have href', function () {
       link.href.should.eql(href);
     });
 
-    it('should have domID', function () {    // eslint-disable-line jasmine/no-spec-dupes
+    it('should have domID', function () {
       link.domID.should.eql(nodeID);
     });
 
-    it('should have text', function () {    // eslint-disable-line jasmine/no-spec-dupes
+    it('should have text', function () {
       link.text.should.eql('picture');
     });
   });

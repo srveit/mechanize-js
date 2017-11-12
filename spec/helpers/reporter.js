@@ -9,7 +9,7 @@ const util = require('util'),
     jasmineCorePath: jasmine.jasmineCorePath
   },
   {SpecReporter} = require('jasmine-spec-reporter'),
-  specReporter = new SpecReporter(options);
+  specReporter = new SpecReporter(options); // eslint-disable-line no-unused-vars
 
 // jasmine.getEnv().clearReporters();              // remove default reporter logs
 // jasmine.getEnv().addReporter(specReporter);

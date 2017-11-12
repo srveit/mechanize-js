@@ -40,7 +40,7 @@
     "url": "git@github.com:srveit/mechanize-js.git"
   },
   "scripts": {
-    "lint": "eslint *.js lib/*.js lib/**/*.js spec/*.js",
+    "lint": "eslint *.js bin*.js lib/*.js lib/*/*.js lib/*/*/*.js spec/*.js spec/*/*.js",
     "jasmine": "jasmine",
     "cover": "nyc npm jasmine",
     "test": "./test/run.sh"

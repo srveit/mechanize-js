@@ -53,7 +53,7 @@ describe('Mechanize/Form', function () {
       formSubmitted = false;
     });
 
-    it('should have fields', function () {    // eslint-disable-line jasmine/no-spec-dupes
+    it('should have fields', function () {
       form.fields.length.should.equal(4);
     });
 
@@ -80,13 +80,13 @@ describe('Mechanize/Form', function () {
       });
     });
 
-    it('should have requestData', function () {    // eslint-disable-line jasmine/no-spec-dupes
+    it('should have requestData', function () {
       var requestData = fixture('www_form_urlencoded.txt');
       form.requestData().should.equal(requestData);
     });
 
     it('should submit form', function () {
-      form.submit(function (err, page) {    // eslint-disable-line no-unused-vars
+      form.submit(function (err, page) {
         should.not.exist(err);
         formSubmitted.should.equal(true);
       });
@@ -98,7 +98,7 @@ describe('Mechanize/Form', function () {
       form.clickedButtons.should.eql([button]);
     });
 
-    it('should have action', function () {    // eslint-disable-line jasmine/no-spec-dupes
+    it('should have action', function () {
       form.action.should.equal('Login.aspx');
     });
 
@@ -107,7 +107,7 @@ describe('Mechanize/Form', function () {
         [ 'street', 'Main' ] ]);
     });
 
-    it('should have requestData', function () {    // eslint-disable-line jasmine/no-spec-dupes
+    it('should have requestData', function () {
       form.requestData().should.eql('userID=&name=&street=Main');
     });
 

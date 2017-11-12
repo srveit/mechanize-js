@@ -1,14 +1,13 @@
-var Agent = require('../lib/mechanize/agent');
-var Cookie = require('cookiejar').Cookie;
-var CookieAccessInfo = require('cookiejar').CookieAccessInfo;
-
+'use strict';
+const {newAgent} = require('../lib/mechanize/agent'),
+  {Cookie, CookieAccessInfo} = require('cookiejar');
 
 describe('Mechanize/Agent', function () {
-  var agent, response, responseBody, requestOptions,
-    options, responseErr, responsePage;    // eslint-disable-line no-unused-vars
+  let agent, response, responseBody, requestOptions,
+    options, responseErr, responsePage;
 
   beforeEach(function () {
-    agent = new Agent();
+    agent = newAgent();
     agent.userAgentAlias = 'My agent';
     requestOptions = null;
     response = {
@@ -68,7 +67,7 @@ describe('Mechanize/Agent', function () {
         });
       });
 
-      it('should set cookies', function () {    // eslint-disable-line jasmine/no-spec-dupes
+      it('should set cookies', function () {
         var accessInfo, cookies;
         accessInfo = new CookieAccessInfo(domain, '/', true, false);
         cookies = agent.cookieJar.getCookies(accessInfo);
@@ -96,7 +95,7 @@ describe('Mechanize/Agent', function () {
         });
       });
 
-      it('should set cookies', function () {    // eslint-disable-line jasmine/no-spec-dupes
+      it('should set cookies', function () {
         var accessInfo, cookies;
         accessInfo = new CookieAccessInfo(domain, '/', true, false);
         cookies = agent.cookieJar.getCookies(accessInfo);
@@ -135,7 +134,7 @@ describe('Mechanize/Agent', function () {
   });
 
   context('submitting form', function () {
-    var form, submitErr, submitPage,    // eslint-disable-line no-unused-vars
+    var form, submitErr, submitPage,
       referer, contentType, requestData;
 
     beforeEach(function () {
@@ -223,7 +222,7 @@ describe('Mechanize/Agent', function () {
           });
         });
 
-        it('should use URI', function () {    // eslint-disable-line jasmine/no-spec-dupes
+        it('should use URI', function () {
           requestOptions.uri.should.eql('http://example.com/login');
         });
 
