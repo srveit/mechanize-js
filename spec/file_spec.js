@@ -1,3 +1,4 @@
+'use strict';
 var File = require('../lib/mechanize/file');
 
 describe('Mechanize/File', function () {

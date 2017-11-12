@@ -1,7 +1,7 @@
 module.exports = {
   "plugins": ["jasmine"],
   "env": {
-    "browser": true,
+    "es6": true,
     "commonjs": true,
     "node": true,
     "jasmine": true
