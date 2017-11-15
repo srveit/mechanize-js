@@ -25,11 +25,11 @@ describe('Mechanize/Form', function () {
     });
 
     it('should have fields', function () {
-      form.fields.length.should.equal(3);
+      expect(form.fields.length).toBe(3);
     });
 
     it('should have action', function () {
-      form.action.should.equal('form.html');
+      expect(form.action).toBe('form.html');
     });
   });
 
@@ -54,61 +54,61 @@ describe('Mechanize/Form', function () {
     });
 
     it('should have fields', function () {
-      form.fields.length.should.equal(4);
+      expect(form.fields.length).toBe(4);
     });
 
     it('should have buttons', function () {
-      form.buttons.length.should.equal(1);
+      expect(form.buttons.length).toBe(1);
     });
 
     it('should have field', function () {
       var field = form.field('street');
-      field.should.exist;
-      field.value.should.equal('Main');
+      expect(field).not.toBe(undefined);
+      expect(field.value).toBe('Main');
     });
 
     it('should set field value', function () {
       form.setFieldValue('__EVENTTARGET', 'new value');
-      form.field('__EVENTTARGET').value.should.equal('new value');
+      expect(form.field('__EVENTTARGET').value).toBe('new value');
     });
 
     context('multipart/form-data encoded', function () {
       it('should have requestData', function () {
         var requestData = fixture('multipart_body.txt');
         form.enctype = 'multipart/form-data';
-        form.requestData().should.equal(requestData);
+        expect(form.requestData()).toBe(requestData);
       });
     });
 
     it('should have requestData', function () {
       var requestData = fixture('www_form_urlencoded.txt');
-      form.requestData().should.equal(requestData);
+      expect(form.requestData()).toBe(requestData);
     });
 
     it('should submit form', function () {
       form.submit(function (err, page) {
-        should.not.exist(err);
-        formSubmitted.should.equal(true);
+        expect(err).toBe(undefined);
+        expect(formSubmitted).toBe(true);
       });
     });
 
     it('should add button to query', function () {
       var button = {name: 'button'};
       form.addButtonToQuery(button);
-      form.clickedButtons.should.eql([button]);
+      expect(form.clickedButtons).toEqual([button]);
     });
 
     it('should have action', function () {
-      form.action.should.equal('Login.aspx');
+      expect(form.action).toBe('Login.aspx');
     });
 
     it('should have buildQuery', function () {
-      form.buildQuery().should.eql([ [ 'userID', '' ], [ 'name', '' ],
+      expect(form.buildQuery()).toEqual([ [ 'userID', '' ], [ 'name', '' ],
         [ 'street', 'Main' ] ]);
     });
 
     it('should have requestData', function () {
-      form.requestData().should.eql('userID=&name=&street=Main');
+      expect(form.requestData()).toBe('userID=&name=&street=Main');
     });
 
     context('with deleted field', function () {
@@ -117,7 +117,7 @@ describe('Mechanize/Form', function () {
       });
 
       it('should not include field in buildQuery', function () {
-        form.buildQuery().should.eql([ [ 'userID', '' ],
+        expect(form.buildQuery()).toEqual([ [ 'userID', '' ],
           [ 'street', 'Main' ] ]);
       });
 
@@ -131,7 +131,7 @@ describe('Mechanize/Form', function () {
       });
 
       it('should encode', function () {
-        form.requestData().should.eql('userID=&name=&street=Main&' + encoded);
+        expect(form.requestData()).toBe('userID=&name=&street=Main&' + encoded);
       });
 
     });

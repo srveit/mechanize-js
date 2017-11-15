@@ -27,7 +27,7 @@ describe('Mechanize/Form/Checkbox', function () {
     });
 
     it('should be checked', function () {
-      checkbox.checked.should.eql(true);
+      expect(checkbox.checked).toEqual(true);
     });
   });
 
@@ -37,7 +37,7 @@ describe('Mechanize/Form/Checkbox', function () {
     });
 
     it('should not be checked', function () {
-      checkbox.checked.should.eql(false);
+      expect(checkbox.checked).toEqual(false);
     });
   });
 });

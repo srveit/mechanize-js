@@ -1,9 +1,9 @@
 var Page = require('../lib/mechanize/page.js');
 
-describe('Mechanize/Form/Text', function () {
+describe('Mechanize/Form/Text', () => {
   var text, form;
 
-  beforeEach(function () {
+  beforeEach(() => {
     var agent, url, response, body, code, page;
     agent = {
       submit: function (form, button, headers, requestOptions, fn) {
@@ -21,23 +21,23 @@ describe('Mechanize/Form/Text', function () {
 
   });
 
-  context('text field', function () {
-    beforeEach(function () {
+  context('text field', () => {
+    beforeEach(() => {
       text = form.field('text');
     });
 
-    it('should not be disabled', function () {
-      text.disabled.should.eql(false);
+    it('should not be disabled', () => {
+      expect(text.disabled).toEqual(false);
     });
   });
 
-  context('disabled text field', function () {
-    beforeEach(function () {
+  context('disabled text field', () => {
+    beforeEach(() => {
       text = form.field('textDisabled');
     });
 
-    it('should be disabled', function () {
-      text.disabled.should.eql(true);
+    it('should be disabled', () => {
+      expect(text.disabled).toEqual(true);
     });
   });
 });

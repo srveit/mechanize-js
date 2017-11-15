@@ -29,9 +29,8 @@ module.exports = {
     ]
   },
   "globals": {
+    "mockServer": false,
     "fixture": false,
-    "context": false,
-    "asyncSpecDone": false,
-    "asyncSpecWait": false
+    "context": false
   }
 }

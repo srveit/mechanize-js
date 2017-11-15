@@ -9,8 +9,8 @@ describe('Mechanize/History', function () {
   });
 
   it('should exist', function () {
-    history.should.exist;
-    //history.should.eql(2);
+    expect(history).not.toBe(undefined);
+    //expect(history).toEqual(2);
   });
 
 });

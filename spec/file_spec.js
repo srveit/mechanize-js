@@ -20,7 +20,7 @@ describe('Mechanize/File', function () {
   });
 
   it('should exist', function () {
-    file.should.exist;
+    expect(file).not.toBe(undefined);
   });
 
 });

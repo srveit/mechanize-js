@@ -1,6 +1,6 @@
 {
   "name": "mechanize",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "Automate interaction with websites (web scraping)",
   "keywords": [
     "dom",
@@ -48,6 +48,7 @@
   "config": {},
   "dependencies": {
     "cookiejar": "^2.1.1",
+    "express": "^4.16.2",
     "libxmljs": "^0.18.7",
     "mime": "^2.0.3",
     "moment": "^2.19.1",

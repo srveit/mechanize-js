@@ -29,19 +29,19 @@ describe('Mechanize/Page/Link', function () {
     });
 
     it('should exist', function () {
-      link.should.exist;
+      expect(link).not.toBe(undefined);
     });
 
     it('should have href', function () {
-      link.href.should.eql(href);
+      expect(link.href).toEqual(href);
     });
 
     it('should have domID', function () {
-      link.domID.should.eql(nodeID);
+      expect(link.domID).toEqual(nodeID);
     });
 
     it('should have text', function () {
-      link.text.should.eql('Example');
+      expect(link.text).toEqual('Example');
     });
   });
 
@@ -54,19 +54,19 @@ describe('Mechanize/Page/Link', function () {
     });
 
     it('should exist', function () {
-      link.should.exist;
+      expect(link).not.toBe(undefined);
     });
 
     it('should have href', function () {
-      link.href.should.eql(href);
+      expect(link.href).toEqual(href);
     });
 
     it('should have domID', function () {
-      link.domID.should.eql(nodeID);
+      expect(link.domID).toEqual(nodeID);
     });
 
     it('should have text', function () {
-      link.text.should.eql('picture');
+      expect(link.text).toEqual('picture');
     });
   });
 });

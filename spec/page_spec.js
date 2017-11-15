@@ -26,7 +26,7 @@ describe('Mechanize/Page', function () {
     });
 
     it('should be created', function () {
-      page.should.exist;
+      expect(page).not.toBe(undefined);
     });
   });
 
@@ -37,24 +37,24 @@ describe('Mechanize/Page', function () {
     });
 
     it('should exist', function () {
-      page.should.exist;
+      expect(page).not.toBe(undefined);
     });
 
     it('should return form', function () {
       var form = page.form('MAINFORM');
-      form.should.exist;
+      expect(form).not.toBe(undefined);
     });
 
     it('should return user agent', function () {
-      page.userAgent.should.eql(userAgent);
+      expect(page.userAgent).toEqual(userAgent);
     });
 
     it('should have a title', function () {
-      page.title.should.eql('Welcome');
+      expect(page.title).toEqual('Welcome');
     });
 
     it('should have responseHeaderCharset', function () {
-      page.responseHeaderCharset.should.eql(['ISO-8859-1']);
+      expect(page.responseHeaderCharset).toEqual(['ISO-8859-1']);
     });
   });
 
@@ -65,11 +65,11 @@ describe('Mechanize/Page', function () {
     });
 
     it('should return links', function () {
-      page.links().length.should.eql(11);
+      expect(page.links().length).toEqual(11);
     });
 
     it('should have search', function () {
-      page.search('//a').length.should.eql(11);
+      expect(page.search('//a').length).toEqual(11);
     });
   });
 
@@ -92,11 +92,11 @@ describe('Mechanize/Page', function () {
     });
 
     it('should not have search', function () {
-      page.search('//a').length.should.eql(0);
+      expect(page.search('//a').length).toEqual(0);
     });
 
     it('should have statusCode', function () {
-      page.statusCode().should.eql(302);
+      expect(page.statusCode()).toEqual(302);
     });
   });
 });
