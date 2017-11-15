@@ -36,7 +36,7 @@ describe('Mechanize/Agent', () => {
         agent.get({uri})
           .then(() => done())
           .catch(error => {
-            console.error('error getting page');
+            console.error('error getting page', error);
             done();
           });
       });
@@ -60,7 +60,7 @@ describe('Mechanize/Agent', () => {
         agent.get({uri})
           .then(() => done())
           .catch(error => {
-            console.error('error getting page');
+            console.error('error getting page', error);
             done();
           });
       });
@@ -88,7 +88,7 @@ describe('Mechanize/Agent', () => {
         agent.get({uri})
           .then(() => done())
           .catch(error => {
-            console.error('error getting page');
+            console.error('error getting page', error);
             done();
           });
       });
@@ -98,21 +98,28 @@ describe('Mechanize/Agent', () => {
         expect(cookies.length).toEqual(2);
       });
     });
+  });
 
-  describe('submitting form', () => {
-    var form, submitErr, submitPage,
-      referer, contentType, requestData;
-
-    beforeEach(() => {
-      requestData = 'userID=&name=&street=Main';
-      form = {
-        requestData: () => {
-          return requestData;
-        },
-        addButtonToQuery: () => {}
-      };
+  describe('getting page with form', () => {
+    let uri, form;
+    beforeEach(done => {
+      uri = baseUrl + '/page.html';
+      const responseBody = fixture('login.html');
+      server.getPage.and.returnValue(responseBody);
+      agent.get({uri})
+        .then(page => {
+          form = page.form('MAINFORM');
+          done();
+        })
+        .catch(error => {
+          console.error('error getting page', error);
+          done();
+        });
     });
 
+    fit('should have a form', () => {
+      expect(form).not.toBe(undefined);
+    });
     describe('with partial URL', () => {
       beforeEach(() => {
         referer = 'http://example.com/page';
