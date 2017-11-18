@@ -68,9 +68,10 @@ const createMock = ({name, rootPath, environment, port}) => {
       mock[name] = jasmine.createSpy(name).and.returnValue({}); // eslint-disable-line jasmine/no-unsafe-spy
       mock.app[method](rootPath + path + '*', (req, res) => {
         console.log('called', mockName, 'mock', name, path);
-        console.log('req', req);
+
         const response = mock[name]({
           path: req.path,
+          headers: req.headers,
           body: req.body
         });
         if (response.error) {
@@ -111,6 +112,10 @@ const createMock = ({name, rootPath, environment, port}) => {
           process.env[key] = mockUrl;
         } else if (value === '<mockPort>') {
           process.env[key] = urlParsed.port;
+        } else if (value === '<mockHostname>') {
+          process.env[key] = urlParsed.hostname;
+        } else if (value === '<mockHost>') {
+          process.env[key] = urlParsed.host;
         } else {
           process.env[key] = value;
         }
@@ -152,12 +157,14 @@ const createMock = ({name, rootPath, environment, port}) => {
 
 const mockServer = done => {
   const environment = {
-    SERVER_BASE_URL: '<mockUrl>'
+    SERVER_BASE_URL: '<mockUrl>',
+    SERVER_HOSTNAME: '<mockHostname>',
+    SERVER_HOST: '<mockHost>'
   };
 
   const server = createMock({name: 'server', rootPath: '', environment});
-  server.mockHandler('postForm', 'post', '/form');
-  server.mockHandler('getPage', 'get', '/page.html');
+  server.mockHandler('postForm', 'post', '/');
+  server.mockHandler('getPage', 'get', '/');
 
   server.addDefaultHandler();
 

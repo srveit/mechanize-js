@@ -4,7 +4,7 @@ const {newAgent} = require('../lib/mechanize/agent'),
  {URL} = require('url');
 
 describe('Mechanize/Agent', () => {
-  let server, domain, baseUrl, agent, requestOptions;
+  let server, host, domain, baseUrl, agent, requestOptions;
 
   beforeAll(done => {
     server = mockServer();
@@ -13,6 +13,7 @@ describe('Mechanize/Agent', () => {
   afterAll(done => server.stop(done));
   beforeEach(() => {
     baseUrl = process.env.SERVER_BASE_URL;
+    host = process.env.SERVER_HOST;
     const url = new URL(baseUrl);
     domain = url.hostname;
     agent = newAgent();
@@ -117,96 +118,61 @@ describe('Mechanize/Agent', () => {
         });
     });
 
-    fit('should have a form', () => {
-      expect(form).not.toBe(undefined);
-    });
-    describe('with partial URL', () => {
-      beforeEach(() => {
-        referer = 'http://example.com/page';
-        form.action = 'login';
-        form.page = {uri: referer};
-      });
-
-      describe('with POST method', () => {
-        var cookie;
-
-        beforeEach(() => {
-          cookie = new Cookie('sessionid=123;domain=.example.com;path=/');
-          agent.cookieJar.setCookie(cookie);
-          contentType = 'application/x-www-form-urlencoded';
-          form.method = 'POST';
-          form.enctype = contentType;
-          agent.submit(form, null, {}, {}, function (err, page) {
-            submitErr = err;
-            submitPage = page;
-          });
-        });
-
-        it('should use URI', () => {
-          expect(requestOptions.uri).toEqual('http://example.com/login');
-        });
-
-        it('should have referer', () => {
-          expect(requestOptions.headers.Referer).toEqual(referer);
-        });
-
-        it('should have origin', () => {
-          expect(requestOptions.headers.Origin).toEqual('http://example.com');
-        });
-
-        it('should have user agent', () => {
-          expect(requestOptions.headers['User-Agent']).toEqual('My agent');
-        });
-
-        it('should have content type', () => {
-          expect(requestOptions.headers['Content-Type']).toEqual(contentType);
-        });
-
-        it('should have content length', () => {
-          expect(requestOptions.headers['Content-Length']).toEqual('25');
-        });
-
-        it('should have cookie', () => {
-          expect(requestOptions.headers.Cookie).toEqual('sessionid=123');
-        });
-
-        it('should have accept', () => {
-          expect(requestOptions.headers.Accept).toEqual('*/*');
-        });
-
-        it('should have body', () => {
-          expect(requestOptions.body).toEqual(requestData);
-        });
-
-      });
+    it('should have a form', () => {
+      expect(form).toEqual(jasmine.objectContaining({
+        action: 'Login.aspx',
+        addButtonToQuery: jasmine.any(Function),
+        addField: jasmine.any(Function),
+        buildQuery: jasmine.any(Function),
+        checkbox: jasmine.any(Function),
+        deleteField: jasmine.any(Function),
+        enctype: 'application/x-www-form-urlencoded',
+        field: jasmine.any(Function),
+        labelFor: jasmine.any(Function),
+        method: 'post',
+        name: 'MAINFORM',
+        noValidate: false,
+        page: jasmine.any(Object),
+        requestData: jasmine.any(Function),
+        setFieldValue: jasmine.any(Function),
+        submit: jasmine.any(Function),
+        target: null
+      }));
     });
 
-    describe('with full URL', () => {
-      beforeEach(() => {
-        form.action = 'http://example.com/login';
+    describe('then submitting form', () => {
+      let cookie, contentType, submitPage, submitError;
+
+      beforeEach(done => {
+        server.postForm.calls.reset();
+        cookie = new Cookie('sessionid=123;domain=' + domain + ';path=/');
+        agent.setCookie(cookie);
+        agent.submit({form})
+          .then(page => submitPage = page)
+          .catch(error => submitError = error)
+          .then(() => done());
       });
 
-      describe('with POST method', () => {
-        beforeEach(() => {
-          form.method = 'POST';
-          agent.submit(form, null, {}, {}, function (err, page) {
-            submitErr = err;
-            submitPage = page;
-          });
+      it('should post the form', () => {
+        expect(server.postForm).toHaveBeenCalledWith({
+          path: '/Login.aspx',
+          headers: {
+            'user-agent': 'Mechanize/1.0.0 Node.js/v8.9.1 (http://github.com/srveit/mechanize-js/)',
+            accept: '*/*',
+            'content-type': 'application/x-www-form-urlencoded',
+            'content-length': '25',
+            referer: baseUrl + '/page.html',
+            origin: baseUrl,
+            cookie: 'sessionid=123',
+            host: host,
+            connection: 'close'
+          },
+          body: {
+            userID: '',
+            name: '',
+            street: 'Main'
+          }
         });
-
-        it('should use URI', () => {
-          expect(requestOptions.uri).toEqual('http://example.com/login');
-        });
-
-        it('should post form', () => {
-          expect(requestOptions.method).toEqual('POST');
-        });
-
-        it('should post form fields in body', () => {
-          expect(requestOptions.body).toEqual(requestData);
-        });
-
       });
     });
   });
