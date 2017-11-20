@@ -25,19 +25,21 @@ describe('Mechanize/Page/Link', () => {
     });
 
     it('should exist', () => {
-      expect(link).not.toBe(undefined);
+      expect(link).toEqual(jasmine.objectContaining({
+        text: jasmine.any(Function)
+      }));
     });
 
     it('should have href', () => {
       expect(link.href).toEqual(href);
     });
 
-    it('should have domID', () => {
-      expect(link.domID).toEqual(nodeID);
+    it('should have domId', () => {
+      expect(link.domId).toEqual(nodeID);
     });
 
     it('should have text', () => {
-      expect(link.text).toEqual('Example');
+      expect(link.text()).toEqual('Example');
     });
   });
 
@@ -50,19 +52,21 @@ describe('Mechanize/Page/Link', () => {
     });
 
     it('should exist', () => {
-      expect(link).not.toBe(undefined);
+      expect(link).toEqual(jasmine.objectContaining({
+        text: jasmine.any(Function)
+      }));
     });
 
     it('should have href', () => {
       expect(link.href).toEqual(href);
     });
 
-    it('should have domID', () => {
-      expect(link.domID).toEqual(nodeID);
+    it('should have domId', () => {
+      expect(link.domId).toEqual(nodeID);
     });
 
     it('should have text', () => {
-      expect(link.text).toEqual('picture');
+      expect(link.text()).toEqual('picture');
     });
   });
 });
