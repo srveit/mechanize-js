@@ -107,6 +107,9 @@ This borrows heavily from Aaron Patterson's
 
 
 <!--
+
+https://sonarcloud.io/dashboard/index/srveit:mechanize
+
 [testling-image]: https://ci.testling.com/srveit/mechanize-js.png
 [testling-url]: https://ci.testling.com/srveit/mechanize-js
 [cdnjs-image]: https://img.shields.io/cdnjs/v/mechanize-js.svg
