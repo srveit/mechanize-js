@@ -1,14 +1,14 @@
 'use strict';
 const {newHistory} = require('../lib/mechanize/history');
 
-describe('Mechanize/History', function () {
-  var history;
+describe('Mechanize/History', () => {
+  let history;
 
-  beforeEach(function () {
+  beforeEach(() => {
     history = newHistory();
   });
 
-  it('should exist', function () {
+  it('should exist', () => {
     expect(history).toEqual(jasmine.objectContaining({
       push: jasmine.any(Function),
       currentPage: jasmine.any(Function)

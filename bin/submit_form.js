@@ -23,14 +23,12 @@ var form = {
   action: 'login',
   method: 'POST',
   enctype: 'application/x-www-form-urlencoded',
-  requestData: function () {
+  requestData: () => {
     return requestData;
   },
-  addButtonToQuery: function () {}
+  addButtonToQuery: () => {}
 };
 
-agent.submit(form, null, {}, {}, function (err, page) {
-  submitErr = err;
-  submitPage = page;
-  console.log(page);
-});
+agent.submit({form})
+  .then(page => console.log(page))
+  .catch(error => console.error(error));

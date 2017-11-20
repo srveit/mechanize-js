@@ -2,10 +2,10 @@
 const {newPage} = require('../lib/mechanize/page');
 
 describe('Mechanize/Form/Checkbox', () => {
-  var checkbox, form;
+  let checkbox, form;
 
   beforeEach(() => {
-    var uri, body, page;
+    let uri, body, page;
 
     uri = 'form.html';
     body = fixture('form_elements.html');

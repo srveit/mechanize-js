@@ -1,18 +1,20 @@
-var arguments = process.argv.slice(2);
+'use strict';
+const mechanize = require('../lib/mechanize'),
+  args = process.argv.slice(2);
 
-var Mechanize = require('../lib/mechanize');
-var uri = 'http://www.google.com';
-if(arguments.length > 0) {
-	uri = arguments[0];
+let uri = 'http://www.google.com';
+if(args.length > 0) {
+  uri = args[0];
 }
 
-Mechanize.newAgent().
-  get({uri: uri}, function (err, page) {
-      // Get the first form from the page (index #0)
-      var form = page.form(0);
-      // Set the parameter "q" which on the Google page is the search term
-      form.setFieldValue("q", "farm");
-      form.submit(function(err, page) {
-        console.log(page);
-      });
-  });
+mechanize.newAgent()
+  .get({uri})
+  .then(page => {
+    // Get the first form from the page (index #0)
+    const form = page.form(0);
+    // Set the parameter "q" which on the Google page is the search term
+    form.setFieldValue("q", "farm");
+    return form.submit({});
+  })
+  .then(page => console.log(page))
+  .catch(error => console.error(error));

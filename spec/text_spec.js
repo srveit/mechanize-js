@@ -2,24 +2,15 @@
 const {newPage} = require('../lib/mechanize/page');
 
 describe('Mechanize/Form/Text', () => {
-  var text, form;
-
+  let text, form;
   beforeEach(() => {
-    var agent, url, response, body, code, page;
-    agent = {
-      submit: function (form, button, headers, requestOptions, fn) {
-        var page = {};
-        fn(null, page);
-      }
-    };
+    let url, response, body, code, page;
+    agent = newAgent();
     url = 'form.html';
-    response = {};
     body = fixture('form_elements.html');
-    code = null;
-    page = new Page(url, response, body, code, agent);
+    page = newPage({url, body});
 
     form = page.form('form1');
-
   });
 
   describe('text field', () => {

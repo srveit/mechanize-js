@@ -43,7 +43,7 @@ describe('Mechanize/Form', () => {
 
   describe('with action attribute', () => {
     beforeEach(() => {
-      var uri, body, page;
+      let uri, body, page;
       uri = baseUrl;
       body = fixture('login.html');
       page = newPage({uri, body, agent});
@@ -66,17 +66,17 @@ describe('Mechanize/Form', () => {
     });
 
     it('should have multipart requestData', () => {
-      var requestData = fixture('multipart_body.txt');
+      const requestData = fixture('multipart_body.txt');
       expect(form.requestData('multipart/form-data')).toBe(requestData);
     });
 
     it('should have URL encoded requestData', () => {
-      var requestData = fixture('www_form_urlencoded.txt');
+      const requestData = fixture('www_form_urlencoded.txt');
       expect(form.requestData()).toBe(requestData);
     });
 
     it('should have plain requestData', () => {
-      var requestData = fixture('mainform_text_plain.txt');
+      const requestData = fixture('mainform_text_plain.txt');
       expect(form.requestData('text/plain')).toBe(requestData);
     });
 
@@ -95,11 +95,11 @@ describe('Mechanize/Form', () => {
 
     describe('and adding button to query', () => {
       beforeEach(() => {
-        var button = newButton({name: 'button'});
+        const button = newButton({name: 'button'});
         form.addButtonToQuery(button);
       });
       it('should add button to requestData', () => {
-        var requestData = fixture('www_form_urlencoded_with_button.txt');
+        const requestData = fixture('www_form_urlencoded_with_button.txt');
         expect(form.requestData()).toBe(requestData);
       });
     });
@@ -165,7 +165,7 @@ describe('Mechanize/Form', () => {
     });
 
     describe('with field value that need to be quoted', () => {
-      var encoded;
+      let encoded;
       beforeEach(() => {
         encoded = 'field2=a%3D1%26b%3Dslash%2Fsp+%28paren%29vert%7Csm%3Bcm%2C';
         form.setFieldValue('field2', 'a=1&b=slash/sp (paren)vert|sm;cm,');
@@ -181,10 +181,9 @@ describe('Mechanize/Form', () => {
 
   describe('with text/plain encoding', () => {
     beforeEach(() => {
-      var uri, body, page;
-      uri = null;
-      body = fixture('form_text_plain.html');
-      page = newPage({uri, body});
+      const uri = null,
+        body = fixture('form_text_plain.html'),
+        page = newPage({uri, body});
 
       form = page.form('form1');
       form.setFieldValue('text', 'hello');

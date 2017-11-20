@@ -2,10 +2,10 @@
 const {newAgent} = require('../lib/mechanize/agent'),
   {newPage} = require('../lib/mechanize/page');
 
-describe('Mechanize/Page', function () {
+describe('Mechanize/Page', () => {
   let response, body, page, userAgentVersion, userAgent, agent;
 
-  beforeEach(function () {
+  beforeEach(() => {
     agent = newAgent();
     response = {
       headers: {
@@ -15,12 +15,12 @@ describe('Mechanize/Page', function () {
     agent.setUserAgent('Mac Safari');
   });
 
-  describe('with no body', function () {
-    beforeEach(function () {
+  describe('with no body', () => {
+    beforeEach(() => {
       page = newPage({response: {'content-type': 'text/html'}, agent});
     });
 
-    it('should be created', function () {
+    it('should be created', () => {
       expect(page).toEqual(jasmine.objectContaining({
         at: jasmine.any(Function),
         body: undefined,
@@ -41,15 +41,15 @@ describe('Mechanize/Page', function () {
     });
   });
 
-  describe('with form', function () {
+  describe('with form', () => {
     let form;
-    beforeEach(function () {
+    beforeEach(() => {
       body = fixture('login.html');
       page = newPage({response, body, agent});
       form = page.form('MAINFORM');
     });
 
-    it('should exist', function () {
+    it('should exist', () => {
       expect(page).toEqual(jasmine.objectContaining({
         at: jasmine.any(Function),
         form: jasmine.any(Function),
@@ -63,7 +63,7 @@ describe('Mechanize/Page', function () {
       }));
     });
 
-    it('should return form', function () {
+    it('should return form', () => {
       expect(form).toEqual(jasmine.objectContaining({
         addField: jasmine.any(Function),
         buildQuery: jasmine.any(Function),
@@ -81,37 +81,37 @@ describe('Mechanize/Page', function () {
       }));
     });
 
-    it('should return user agent', function () {
+    it('should return user agent', () => {
       expect(page.userAgent()).toMatch(/Mozilla/);
     });
 
-    it('should have a title', function () {
+    it('should have a title', () => {
       expect(page.title()).toEqual('Welcome');
     });
 
-    it('should have responseHeaderCharset', function () {
+    it('should have responseHeaderCharset', () => {
       expect(page.responseHeaderCharset()).toEqual(['ISO-8859-1']);
     });
   });
 
-  describe('with links', function () {
-    beforeEach(function () {
+  describe('with links', () => {
+    beforeEach(() => {
       body = fixture('links.html');
       page = newPage({response, body, agent});
     });
 
-    it('should return links', function () {
+    it('should return links', () => {
       expect(page.links().length).toEqual(11);
     });
 
-    it('should have search', function () {
+    it('should have search', () => {
       expect(page.search('//a').length).toEqual(11);
     });
   });
 
-  describe('with null parsed body', function () {
+  describe('with null parsed body', () => {
     let uri, response;
-    beforeEach(function () {
+    beforeEach(() => {
       uri = 'https://login.yahoo.com/config/login?';
       response = {
         headers: {
@@ -128,11 +128,11 @@ describe('Mechanize/Page', function () {
       page = newPage({uri, response, body, agent});
     });
 
-    it('should not have search', function () {
+    it('should not have search', () => {
       expect(page.search('//a').length).toEqual(0);
     });
 
-    it('should have statusCode', function () {
+    it('should have statusCode', () => {
       expect(page.statusCode()).toEqual(302);
     });
   });
