@@ -52,6 +52,7 @@
     "express": "^4.16.2",
     "libxmljs": "^0.18.7",
     "mime": "^2.0.3",
+    "mime-types": "^2.1.17",
     "moment": "^2.19.1",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
