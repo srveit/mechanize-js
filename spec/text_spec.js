@@ -5,7 +5,6 @@ describe('Mechanize/Form/Text', () => {
   let text, form;
   beforeEach(() => {
     let url, response, body, code, page;
-    agent = newAgent();
     url = 'form.html';
     body = fixture('form_elements.html');
     page = newPage({url, body});
