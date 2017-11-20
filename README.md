@@ -1,5 +1,7 @@
 # mechanize
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/srveit/mechanize-js.svg)](https://greenkeeper.io/)
+
 The Mechanize module is used for automating interaction with websites.
 Mechanize automatically stores and sends cookies, follows redirects,
 can follow links, and submit forms. Form fields can be populated and
