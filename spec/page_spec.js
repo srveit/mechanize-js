@@ -20,7 +20,7 @@ describe('Mechanize/Page', function () {
     agent.userAgent = userAgent;
   });
 
-  context('with no body', function () {
+  describe('with no body', function () {
     beforeEach(function () {
       page = new Page(null, {'content-type': 'text/html'}, null, null, agent);
     });
@@ -30,7 +30,7 @@ describe('Mechanize/Page', function () {
     });
   });
 
-  context('with form', function () {
+  describe('with form', function () {
     beforeEach(function () {
       body = fixture('login.html');
       page = new Page(uri, response, body, code, agent);
@@ -58,7 +58,7 @@ describe('Mechanize/Page', function () {
     });
   });
 
-  context('with links', function () {
+  describe('with links', function () {
     beforeEach(function () {
       body = fixture('links.html');
       page = new Page(uri, response, body, code, agent);
@@ -73,7 +73,7 @@ describe('Mechanize/Page', function () {
     });
   });
 
-  context('with null parsed body', function () {
+  describe('with null parsed body', function () {
     beforeEach(function () {
       var uri = 'https://login.yahoo.com/config/login?',
         response = {

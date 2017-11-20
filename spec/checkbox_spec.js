@@ -1,43 +1,35 @@
-var Page = require('../lib/mechanize/page.js');
+'use strict';
+const {newPage} = require('../lib/mechanize/page');
 
-describe('Mechanize/Form/Checkbox', function () {
+describe('Mechanize/Form/Checkbox', () => {
   var checkbox, form;
 
-  beforeEach(function () {
-    var agent, url, response, body, code, page;
-    agent = {
-      submit: function (form, button, headers, requestOptions, cb) {
-        var page = {};
-        cb(null, page);
-      }
-    };
-    url = 'form.html';
-    response = {};
+  beforeEach(() => {
+    var uri, body, page;
+
+    uri = 'form.html';
     body = fixture('form_elements.html');
-    code = null;
-    page = new Page(url, response, body, code, agent);
+    page = newPage({body});
 
     form = page.form('form1');
 
   });
 
-  context('checked check box', function () {
-    beforeEach(function () {
+  describe('checked check box', () => {
+    beforeEach(() => {
       checkbox = form.checkbox('checkboxChecked');
     });
 
-    it('should be checked', function () {
-      expect(checkbox.checked).toEqual(true);
-    });
+    it('should be checked', () =>
+       expect(checkbox.isChecked()).toEqual(true));
   });
 
-  context('unchecked check box', function () {
-    beforeEach(function () {
+  describe('unchecked check box', () => {
+    beforeEach(() => {
       checkbox = form.checkbox('checkboxUnchecked');
     });
 
-    it('should not be checked', function () {
-      expect(checkbox.checked).toEqual(false);
-    });
+    it('should be unchecked', () =>
+       expect(checkbox.isChecked()).toEqual(false));
   });
 });

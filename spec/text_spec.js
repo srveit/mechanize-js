@@ -1,4 +1,5 @@
-var Page = require('../lib/mechanize/page.js');
+'use strict';
+const {newPage} = require('../lib/mechanize/page');
 
 describe('Mechanize/Form/Text', () => {
   var text, form;
@@ -21,7 +22,7 @@ describe('Mechanize/Form/Text', () => {
 
   });
 
-  context('text field', () => {
+  describe('text field', () => {
     beforeEach(() => {
       text = form.field('text');
     });
@@ -31,7 +32,7 @@ describe('Mechanize/Form/Text', () => {
     });
   });
 
-  context('disabled text field', () => {
+  describe('disabled text field', () => {
     beforeEach(() => {
       text = form.field('textDisabled');
     });

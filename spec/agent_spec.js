@@ -19,9 +19,8 @@ describe('Mechanize/Agent', () => {
     agent = newAgent();
   });
 
-  it('should have a userAgent', () => {
-    expect(agent.userAgent()).toEqual(jasmine.any(String));
-  });
+  it('should have a userAgent', () =>
+     expect(agent.userAgent()).toEqual(jasmine.any(String)));
 
   describe('getting page', () => {
     let uri;
