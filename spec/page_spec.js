@@ -34,7 +34,7 @@ describe('Mechanize/Page', () => {
         statusCode: jasmine.any(Function),
         submit: jasmine.any(Function),
         title: jasmine.any(Function),
-        uri: undefined,
+        uri: 'local:/',
         userAgent: jasmine.any(Function),
         userAgentVersion: undefined
       }));
@@ -101,7 +101,13 @@ describe('Mechanize/Page', () => {
     });
 
     it('should return links', () => {
+      console.log('page.uri', page.uri);
       expect(page.links().length).toEqual(11);
+    });
+
+    it('should href', () => {
+      expect(page.links()[0].href)
+        .toBe('http://www.example.com/about/contact/contact.asp');
     });
 
     it('should have search', () => {
