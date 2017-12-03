@@ -67,7 +67,7 @@ const createMock = ({name, rootPath, environment, port}) => {
     mockHandler = (name, method, path, responseName) => {
       mock[name] = jasmine.createSpy(name).and.returnValue({}); // eslint-disable-line jasmine/no-unsafe-spy
       mock.app[method](rootPath + path + '*', (req, res) => {
-        console.log('called', mockName, 'mock', name, path);
+        // console.log('called', mockName, 'mock', name, path);
 
         const response = mock[name]({
           path: req.path,

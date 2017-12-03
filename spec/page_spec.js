@@ -25,7 +25,7 @@ describe('Mechanize/Page', () => {
         at: jasmine.any(Function),
         body: undefined,
         code: undefined,
-        doc: undefined,
+        doc: jasmine.any(Object),
         form: jasmine.any(Function),
         labelFor: jasmine.any(Function),
         links: jasmine.any(Function),
@@ -101,7 +101,6 @@ describe('Mechanize/Page', () => {
     });
 
     it('should return links', () => {
-      console.log('page.uri', page.uri);
       expect(page.links().length).toEqual(11);
     });
 
