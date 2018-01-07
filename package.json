@@ -36,7 +36,7 @@
     "request": "^2.83.0"
   },
   "devDependencies": {
-    "ajv": "^5.2.3",
+    "ajv": "^6.0.0",
     "eslint": "^4.8.0",
     "eslint-plugin-jasmine": "^2.9.1",
     "jasmine-node": "^1.14.5",
