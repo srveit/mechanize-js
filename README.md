@@ -67,6 +67,10 @@ From the mechanize directory, run npm install:
     mime >= 2.0.3
     request >= 2.83.0
 
+## Documentation
+
+[mechanize-js](https://rawgit.com/srveit/mechanize-js/update-to-node-8/docs/index.html)
+
 ## Credits
 
 This borrows heavily from Aaron Patterson's
