@@ -41,7 +41,7 @@
   },
   "scripts": {
     "lint-json": "for f in package.json .eslintrc.json .jsdocrc .nycrc spec/.eslintrc.json spec/support/jasmine.json; do jsonlint -q $f; done",
-    "lint-js": "eslint *.js bin*.js lib/*.js lib/*/*.js lib/*/*/*.js spec/*.js spec/*/*.js",
+    "lint-js": "eslint lib/*.js lib/*/*.js lib/*/*/*.js spec/*.js spec/*/*.js",
     "lint": "npm-run-all lint-json lint-js",
     "test": "jasmine",
     "coverage": "nyc npm run test",
