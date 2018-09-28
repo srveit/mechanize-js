@@ -133,7 +133,8 @@ describe('Mechanize/Form', () => {
         expect(server.postForm).toHaveBeenCalledWith({
           path: '/Login.aspx',
           headers: {
-            'user-agent': 'Mechanize/1.0.0 Node.js/v8.9.1 (http://github.com/srveit/mechanize-js/)',
+            'user-agent': jasmine.stringMatching(
+                /Mechanize\/[.0-9]+ Node.js\/v[.0-9]+ \(http:\/\/github.com\/srveit\/mechanize-js\/\)/),
             accept: '*/*',
             'content-type': 'application/x-www-form-urlencoded',
             'content-length': '25',
