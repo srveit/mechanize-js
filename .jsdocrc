@@ -5,6 +5,6 @@
     "recurse": true
   },
   "source": {
-    "include": ["app.js", "lib"]
+    "include": ["lib"]
   }
 }
