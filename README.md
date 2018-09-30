@@ -11,6 +11,7 @@
 [![Code Climate][code-climate-image]][code-climate-url]
 [![Gitter][gitter-image]][gitter-url]
 [![Dependency Status][dependency-image]][dependency-url]
+[![Greenkeeper badge][greenkeeper-image]][greenkeeper-url]
 <!-- [![js-canonical-style][canonical-image]][canonical-url] -->
 
 The Mechanize module is used for automating interaction with websites.
@@ -107,7 +108,8 @@ This borrows heavily from Aaron Patterson's
 [license-url]: http://choosealicense.com/licenses/mit/
 [canonical-image]: https://img.shields.io/badge/code%20style-canonical-brightgreen.svg?style=flat
 [canonical-url]: https://github.com/gajus/eslint-config-canonical
-
+[greenkeeper-image]: https://badges.greenkeeper.io/srveit/mechanize-js.svg
+[greenkeeper-url]: https://greenkeeper.io/
 
 <!--
 
