@@ -1,13 +1,17 @@
 #!/usr/bin/env node
 'use strict';
 const args = process.argv.slice(2),
-      mechanize = require('../lib/mechanize');
-let uri = 'http://www.google.com';
+  {newAgent} = require('../lib/mechanize'),
 
-if (args.length > 0) {
-  uri = args[0];
-}
+  showPageLinks = async url => {
+    const agent = newAgent(),
+      page = await agent.get({uri: url}),
+      links = page.links();
 
-mechanize.newAgent()
-  .get({uri})
-  .then(page => console.log(page.links()));
+    for (const link of links) {
+      console.log(link.href, link.domId, link.domClass);
+    }
+  };
+
+showPageLinks(args[0] || 'http://www.google.com');
+

@@ -10,3 +10,4 @@ doc/app
 node_modules
 .lock-wscript
 .scannerwork
+reports

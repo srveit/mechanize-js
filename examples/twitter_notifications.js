@@ -1,21 +1,14 @@
 'use strict';
-const mechanize = require('../lib/mechanize'),
+const {newAgent} = require('../lib/mechanize'),
   args = process.argv.slice(2),
-  uri = 'https://twitter.com/login';
 
-if (args.length < 2) {
-  console.error("Missing username and password");
-  process.exit(1);
-}
+  getNotifications = async (username, password) => {
+    const agent = newAgent(),
+      uri = 'https://twitter.com/login',
+      page = await agent.get({uri}),
 
-const [username, password] = args,
-  myAgent = mechanize.newAgent();
-
-myAgent
-  .get({uri})
-  .then(page => {
-    // Get the second form from the page (index #1)
-    const form = page.form(1),
+      // Get the second form from the page (index #1)
+      form = page.form(2),
       token = form.field("authenticity_token").value,
       uniques = {},
       valid = {
@@ -32,8 +25,8 @@ myAgent
 
     // The form includes duplicate fields and fields that Twitter doesn't like (generates a 400 bad request)
     // This loop strips fields that Twitter doesn't use
-    for(var i in form.fields) {
-      if(form.fields[i].name in uniques || !(form.fields[i].name in valid)) {
+    for (const i in form.fields) {
+      if (form.fields[i].name in uniques || !(form.fields[i].name in valid)) {
         // Remove unused field
         form.fields.splice(i, 1);
         continue;
@@ -44,11 +37,28 @@ myAgent
     }
     
     // Once authenticated, Twitter redirects to the home page, so follow redirects
-    form.submit(null, {}, {followAllRedirects: true})
-      .then(page => {
-        console.log("Login Success");
-        // Now that we're logged in, access a page specific to a logged in user
-        myAgent.get({uri: "https://twitter.com/i/notifications"})
-          .then(page => console.log(page);
-      });
-  });
+    const nextPage = await form.submit({
+      requestOptions: {
+        followAllRedirects: true
+      }
+    });
+    console.log("Login Success");
+    // Now that we're logged in, access a page specific to a logged in user
+    const notificationPage = await agent.get({
+      uri: "https://twitter.com/i/notifications"
+    });
+
+    return notificationPage.search('//div[@class="ActivityItem-container"]');
+  },
+
+  twitterNotifications = async (username, password) => {
+    const notifications = await getNotifications(username, password);
+    console.log(notifications);
+  };
+
+if (args.length < 2) {
+  console.error("Missing username and password");
+  process.exit(1);
+}
+
+twitterNotifications(args[0], args[1]);

@@ -1,20 +1,17 @@
 'use strict';
-const mechanize = require('../lib/mechanize'),
-  args = process.argv.slice(2);
+const {newAgent} = require('../lib/mechanize'),
+  args = process.argv.slice(2),
 
-let uri = 'http://www.google.com';
-if(args.length > 0) {
-  uri = args[0];
-}
+  submitFormChain = async url => {
+    const agent = newAgent(),
+      page = await agent.get({uri: url}),
+      // Get the first form from the page (index #0)
+      form = page.form(0);
 
-mechanize.newAgent()
-  .get({uri})
-  .then(page => {
-    // Get the first form from the page (index #0)
-    const form = page.form(0);
     // Set the parameter "q" which on the Google page is the search term
     form.setFieldValue("q", "farm");
-    return form.submit({});
-  })
-  .then(page => console.log(page))
-  .catch(error => console.error(error));
+    const secondPage = await form.submit({});
+    console.log(page);
+  };
+
+submitFormChain(args[0] || 'http://www.google.com');

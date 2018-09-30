@@ -140,7 +140,6 @@ describe('Mechanize/Form', () => {
             'content-length': '25',
             referer: baseUrl,
             origin: baseUrl,
-            cookie: '',
             host: host,
             connection: 'close'
           },

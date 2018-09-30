@@ -11,7 +11,6 @@
 [![Code Climate][code-climate-image]][code-climate-url]
 [![Gitter][gitter-image]][gitter-url]
 [![Dependency Status][dependency-image]][dependency-url]
-[![bitHound Overall Score][bithound-image]][bithound-url]
 <!-- [![js-canonical-style][canonical-image]][canonical-url] -->
 
 The Mechanize module is used for automating interaction with websites.
@@ -24,11 +23,11 @@ visited as a history.
 
 From the root folder, you can run the *get_page* example:
 
-`node bin/get_page.js`
+`node examples/get_page.js`
 
 To load from a specific URL:
 
-`node bin/get_page.js "http://www.cnn.com"`
+`node examples/get_page.js "http://www.cnn.com"`
 
 The example gets the page and then performs a `console.log()` on all of the returned object data.
 
@@ -36,7 +35,7 @@ The example gets the page and then performs a `console.log()` on all of the retu
 
 For form posting, you can run the *submit_form* example:
 
-`node bin/submit_form.js "http://localhost/"`
+`node examples/submit_form.js "http://localhost/"`
 
 The example POSTs a username and password to the */login* path at the specificied URL
 
@@ -44,13 +43,13 @@ The example POSTs a username and password to the */login* path at the specificie
 
 For an example of chaining requests, you can run the *submit_form_chain* example:
 
-`node bin/submit_form_chain.js`
+`node examples/submit_form_chain.js`
 
 ### Logging into Twitter and getting personal notifications
 
 To see an example of chaining to log into Twitter and access the notifications page, run the *twitter_notifications* example:
 
-`node bin/twitter_notifications.js MYTWITTERUSERNAME MYTWITTERPASSWORD`
+`node examples/twitter_notifications.js MYTWITTERUSERNAME MYTWITTERPASSWORD`
 
 The example gets the Twitter login page, fills out the username and password fields, logs into Twitter, gets the private notifications page, and displays the returned results.
 
@@ -62,10 +61,10 @@ From the mechanize directory, run npm install:
 
 ## Dependencies
 
-    cookiejar >= 2.1.1
-    libxmljs >= 0.18.7
-    mime >= 2.0.3
-    request >= 2.83.0
+    cookiejar >= 2.1.2
+    libxmljs >= 0.19.5
+    mime >= 2.3.1
+    request >= 2.88.0
 
 ## Documentation
 
