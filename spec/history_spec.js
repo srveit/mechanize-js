@@ -1,16 +1,18 @@
-var History = require('../lib/mechanize/history');
+'use strict';
+const {newHistory} = require('../lib/mechanize/history');
 
+describe('Mechanize/History', () => {
+  let history;
 
-describe('Mechanize/History', function () {
-  var history;
-
-  beforeEach(function () {
-    history = new History();
+  beforeEach(() => {
+    history = newHistory();
   });
 
-  it('should exist', function () {
-    history.should.exist;
-    //history.should.eql(2);
+  it('should exist', () => {
+    expect(history).toEqual(jasmine.objectContaining({
+      push: jasmine.any(Function),
+      currentPage: jasmine.any(Function)
+    }));
   });
 
 });

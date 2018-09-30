@@ -1,3 +1,4 @@
+.nyc_output
 log/*.log.*
 *.log
 tmp/**/*
@@ -8,3 +9,5 @@ doc/app
 .DS_Store
 node_modules
 .lock-wscript
+.scannerwork
+reports

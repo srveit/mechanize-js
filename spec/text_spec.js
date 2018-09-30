@@ -1,43 +1,34 @@
-var Page = require('../lib/mechanize/page.js');
+'use strict';
+const {newPage} = require('../lib/mechanize/page');
 
-describe('Mechanize/Form/Text', function () {
-  var text, form;
-
-  beforeEach(function () {
-    var agent, url, response, body, code, page;
-    agent = {
-      submit: function (form, button, headers, requestOptions, fn) {
-        var page = {};
-        fn(null, page);
-      }
-    };
+describe('Mechanize/Form/Text', () => {
+  let text, form;
+  beforeEach(() => {
+    let url, response, body, code, page;
     url = 'form.html';
-    response = {};
     body = fixture('form_elements.html');
-    code = null;
-    page = new Page(url, response, body, code, agent);
+    page = newPage({url, body});
 
     form = page.form('form1');
-
   });
 
-  context('text field', function () {
-    beforeEach(function () {
+  describe('text field', () => {
+    beforeEach(() => {
       text = form.field('text');
     });
 
-    it('should not be disabled', function () {
-      text.disabled.should.eql(false);
+    it('should not be disabled', () => {
+      expect(text.disabled).toEqual(false);
     });
   });
 
-  context('disabled text field', function () {
-    beforeEach(function () {
+  describe('disabled text field', () => {
+    beforeEach(() => {
       text = form.field('textDisabled');
     });
 
-    it('should be disabled', function () {
-      text.disabled.should.eql(true);
+    it('should be disabled', () => {
+      expect(text.disabled).toEqual(true);
     });
   });
 });

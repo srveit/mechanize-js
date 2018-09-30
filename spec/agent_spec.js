@@ -1,85 +1,80 @@
-var Agent = require('../lib/mechanize/agent');
-var Cookie = require('cookiejar').Cookie;
-var CookieAccessInfo = require('cookiejar').CookieAccessInfo;
+'use strict';
+const {newAgent} = require('../lib/mechanize/agent'),
+ {Cookie, CookieAccessInfo} = require('cookiejar'),
+ {URL} = require('url');
 
+describe('Mechanize/Agent', () => {
+  let server, host, domain, baseUrl, agent, requestOptions;
 
-describe('Mechanize/Agent', function () {
-  var agent, response, responseBody, requestOptions,
-    options, responseErr, responsePage;    // eslint-disable-line no-unused-vars
-
-  beforeEach(function () {
-    agent = new Agent();
-    agent.userAgentAlias = 'My agent';
-    requestOptions = null;
-    response = {
-      statusCode: '200'
-    };
-    agent.request = function (options, fn) {
-      requestOptions = options;
-      fn(null, response, responseBody);
-    };
-    options = {
-      uri: 'http://example.com/'
-    };
+  beforeAll(done => {
+    server = mockServer();
+    server.start(done);
+  });
+  afterAll(done => server.stop(done));
+  beforeEach(() => {
+    baseUrl = process.env.SERVER_BASE_URL;
+    host = process.env.SERVER_HOST;
+    const url = new URL(baseUrl);
+    domain = url.hostname;
+    agent = newAgent();
   });
 
-  it('should have a cookieJar', function () {
-    agent.cookieJar.should.exist;
-  });
+  it('should have a userAgent', () =>
+     expect(agent.userAgent()).toEqual(jasmine.any(String)));
 
-  context('getting page', function () {
-    var domain, uri;
+  describe('getting page', () => {
+    let uri;
 
-    beforeEach(function () {
-      domain = 'example.com';
-      uri = 'http://example.com/index.html';
+    beforeEach(() => {
+      uri = baseUrl + '/page.html';
     });
 
-    context('with meta cookies', function () {
-      beforeEach(function () {
-        responseBody = fixture('meta_cookies.html');
-        agent.get({uri: uri}, function (err, page) {
-          responseErr = err;
-          responsePage = page;
-        });
+    describe('with meta cookies', () => {
+      beforeEach(done => {
+        const responseBody = fixture('meta_cookies.html');
+        server.getPage.and.returnValue(responseBody);
+        agent.get({uri})
+          .then(() => done())
+          .catch(error => {
+            console.error('error getting page', error);
+            done();
+          });
       });
 
-      it('should set cookies', function () {
-        var accessInfo, cookies;
-        accessInfo = new CookieAccessInfo(domain, '/', true, false);
-        cookies = agent.cookieJar.getCookies(accessInfo);
-        cookies.length.should.eql(2);
+      it('should set cookies', () => {
+        const cookies = agent.getCookies({domain});
+        expect(cookies.length).toEqual(2);
       });
     });
 
-    context('with single header cookie', function () {
-      beforeEach(function () {
-        response = {
-          statusCode: '200',
+    describe('with single header cookie', () => {
+      beforeEach(done => {
+        const responseBody = fixture('login.html');
+        server.getPage.and.returnValue({
           headers: {
             'set-cookie': 'sessionid=345; path=/; ' +
               'expires=Fri, 01 Jan 2021 00:00:00 GMT; secure; HttpOnly'
-          }
-        };
-        responseBody = fixture('login.html');
-        agent.get({uri: uri}, function (err, page) {
-          responseErr = err;
-          responsePage = page;
+          },
+          body: responseBody
         });
+        agent.get({uri})
+          .then(() => done())
+          .catch(error => {
+            console.error('error getting page', error);
+            done();
+          });
       });
 
-      it('should set cookies', function () {    // eslint-disable-line jasmine/no-spec-dupes
-        var accessInfo, cookies;
-        accessInfo = new CookieAccessInfo(domain, '/', true, false);
-        cookies = agent.cookieJar.getCookies(accessInfo);
-        cookies.length.should.eql(1);
+      it('should set cookies', () => {
+        const cookies = agent.getCookies({domain});
+        expect(cookies.length).toEqual(1);
       });
     });
 
-    context('with header cookies', function () {
-      beforeEach(function () {
-        response = {
-          statusCode: '200',
+    describe('with header cookies', () => {
+      beforeEach(done => {
+        const responseBody = fixture('login.html');
+        server.getPage.and.returnValue({
           headers: {
             'set-cookie': [
               'sessionid=345; path=/; ' +
@@ -87,154 +82,97 @@ describe('Mechanize/Agent', function () {
               'name=smith; path=/; ' +
                 'expires=Fri, 01 Jan 2021 00:00:00 GMT; secure; HttpOnly'
             ]
-          }
-        };
-        responseBody = fixture('login.html');
-        agent.get({uri: uri}, function (err, page) {
-          responseErr = err;
-          responsePage = page;
+          },
+          body: responseBody
         });
+        agent.get({uri})
+          .then(() => done())
+          .catch(error => {
+            console.error('error getting page', error);
+            done();
+          });
       });
 
-      it('should set cookies', function () {    // eslint-disable-line jasmine/no-spec-dupes
-        var accessInfo, cookies;
-        accessInfo = new CookieAccessInfo(domain, '/', true, false);
-        cookies = agent.cookieJar.getCookies(accessInfo);
-        cookies.length.should.eql(2);
+      it('should set cookies', () => {
+        const cookies = agent.getCookies({domain});
+        expect(cookies.length).toEqual(2);
       });
     });
-
-    context('with encoding', function () {
-      beforeEach(function () {
-        options = {};
-        agent.get({ uri: uri, encoding: null }, function (err, page) {
-          responseErr = err;
-          responsePage = page;
-        });
-      });
-
-      it('should have encoding', function () {
-        requestOptions.should.have.property('encoding', null);
-      });
-    });
-
-    context('without encoding', function () {
-      beforeEach(function () {
-        options = {};
-        agent.get({ uri: uri }, function (err, page) {
-          responseErr = err;
-          responsePage = page;
-        });
-      });
-
-      it('should not have encoding', function () {
-        requestOptions.should.not.have.property('encoding');
-      });
-    });
-
   });
 
-  context('submitting form', function () {
-    var form, submitErr, submitPage,    // eslint-disable-line no-unused-vars
-      referer, contentType, requestData;
-
-    beforeEach(function () {
-      requestData = 'userID=&name=&street=Main';
-      form = {
-        requestData: function () {
-          return requestData;
-        },
-        addButtonToQuery: function () {}
-      };
+  describe('getting page with form', () => {
+    let uri, form;
+    beforeEach(done => {
+      uri = baseUrl + '/page.html';
+      const responseBody = fixture('login.html');
+      server.getPage.and.returnValue(responseBody);
+      agent.get({uri})
+        .then(page => {
+          form = page.form('MAINFORM');
+          done();
+        })
+        .catch(error => {
+          console.error('error getting page', error);
+          done();
+        });
     });
 
-    context('with partial URL', function () {
-      beforeEach(function () {
-        referer = 'http://example.com/page';
-        form.action = 'login';
-        form.page = {uri: referer};
-      });
-
-      context('with POST method', function () {
-        var cookie;
-
-        beforeEach(function () {
-          cookie = new Cookie('sessionid=123;domain=.example.com;path=/');
-          agent.cookieJar.setCookie(cookie);
-          contentType = 'application/x-www-form-urlencoded';
-          form.method = 'POST';
-          form.enctype = contentType;
-          agent.submit(form, null, {}, {}, function (err, page) {
-            submitErr = err;
-            submitPage = page;
-          });
-        });
-
-        it('should use URI', function () {
-          requestOptions.uri.should.eql('http://example.com/login');
-        });
-
-        it('should have referer', function () {
-          requestOptions.headers.Referer.should.eql(referer);
-        });
-
-        it('should have origin', function () {
-          requestOptions.headers.Origin.should.eql('http://example.com');
-        });
-
-        it('should have user agent', function () {
-          requestOptions.headers['User-Agent'].should.eql('My agent');
-        });
-
-        it('should have content type', function () {
-          requestOptions.headers['Content-Type'].should.eql(contentType);
-        });
-
-        it('should have content length', function () {
-          requestOptions.headers['Content-Length'].should.eql('25');
-        });
-
-        it('should have cookie', function () {
-          requestOptions.headers.Cookie.should.eql('sessionid=123');
-        });
-
-        it('should have accept', function () {
-          requestOptions.headers.Accept.should.eql('*/*');
-        });
-
-        it('should have body', function () {
-          requestOptions.body.should.eql(requestData);
-        });
-
-      });
+    it('should have a form', () => {
+      expect(form).toEqual(jasmine.objectContaining({
+        action: 'Login.aspx',
+        addButtonToQuery: jasmine.any(Function),
+        addField: jasmine.any(Function),
+        buildQuery: jasmine.any(Function),
+        checkbox: jasmine.any(Function),
+        deleteField: jasmine.any(Function),
+        enctype: 'application/x-www-form-urlencoded',
+        field: jasmine.any(Function),
+        labelFor: jasmine.any(Function),
+        method: 'post',
+        name: 'MAINFORM',
+        noValidate: false,
+        page: jasmine.any(Object),
+        requestData: jasmine.any(Function),
+        setFieldValue: jasmine.any(Function),
+        submit: jasmine.any(Function),
+        target: null
+      }));
     });
 
-    context('with full URL', function () {
-      beforeEach(function () {
-        form.action = 'http://example.com/login';
+    describe('then submitting form', () => {
+      let cookie, contentType, submitPage, submitError;
+
+      beforeEach(done => {
+        server.postForm.calls.reset();
+        cookie = new Cookie('sessionid=123;domain=' + domain + ';path=/');
+        agent.setCookie(cookie);
+        agent.submit({form})
+          .then(page => submitPage = page)
+          .catch(error => submitError = error)
+          .then(() => done());
       });
 
-      context('with POST method', function () {
-        beforeEach(function () {
-          form.method = 'POST';
-          agent.submit(form, null, {}, {}, function (err, page) {
-            submitErr = err;
-            submitPage = page;
-          });
+      it('should post the form', () => {
+        expect(server.postForm).toHaveBeenCalledWith({
+          path: '/Login.aspx',
+          headers: {
+            'user-agent': jasmine.stringMatching(
+                /Mechanize\/[.0-9]+ Node.js\/v[.0-9]+ \(http:\/\/github.com\/srveit\/mechanize-js\/\)/),
+            accept: '*/*',
+            'content-type': 'application/x-www-form-urlencoded',
+            'content-length': '25',
+            referer: baseUrl + '/page.html',
+            origin: baseUrl,
+            cookie: 'sessionid=123',
+            host: host,
+            connection: 'close'
+          },
+          body: {
+            userID: '',
+            name: '',
+            street: 'Main'
+          }
         });
-
-        it('should use URI', function () {    // eslint-disable-line jasmine/no-spec-dupes
-          requestOptions.uri.should.eql('http://example.com/login');
-        });
-
-        it('should post form', function () {
-          requestOptions.method.should.eql('POST');
-        });
-
-        it('should post form fields in body', function () {
-          requestOptions.body.should.eql(requestData);
-        });
-
       });
     });
   });

@@ -1,72 +1,72 @@
-var Link = require('../lib/mechanize/page/link');
-var Page = require('../lib/mechanize/page');
+'use strict';
+const {newLink} = require('../lib/mechanize/page/link'),
+  {newPage} = require('../lib/mechanize/page');
 
+describe('Mechanize/Page/Link', () => {
+  let link, href, nodeID, page, node;
 
-describe('Mechanize/Page/Link', function () {
-  var link, href, nodeID, page, node;
-
-  beforeEach(function () {
-    var agent, url, response, body, code;
+  beforeEach(() => {
+    let agent, body;
     agent = {};
-    url = null;
-    response = {};
     body = '<html><body>' +
       '<a id="first" href="http://example.com/first">Example</a>' +
       '<a id="second" href="http://example.com/second">' +
       '<img src="picture.png" alt="picture"/></a>' +
       '</body></html>';
-    code = null;
-    page = new Page(url, response, body, code, agent);
-
+    page = newPage({body, agent});
   });
 
-  context('text link', function () {
-    beforeEach(function () {
+  describe('text link', () => {
+    beforeEach(() => {
       node = page.at('//a[1]');
       href = 'http://example.com/first';
       nodeID = 'first';
-      link = new Link(page, node);
+      link = newLink({node, page});
     });
 
-    it('should exist', function () {
-      link.should.exist;
+    it('should exist', () => {
+      expect(link).toEqual(jasmine.objectContaining({
+        text: jasmine.any(Function)
+      }));
     });
 
-    it('should have href', function () {
-      link.href.should.eql(href);
+    it('should have href', () => {
+      expect(link.href).toEqual(href);
     });
 
-    it('should have domID', function () {
-      link.domID.should.eql(nodeID);
+    it('should have domId', () => {
+      expect(link.domId).toEqual(nodeID);
     });
 
-    it('should have text', function () {
-      link.text.should.eql('Example');
+    it('should have text', () => {
+      expect(link.text()).toEqual('Example');
     });
   });
 
-  context('image link', function () {
-    beforeEach(function () {
+  describe('image link', () => {
+    beforeEach(() => {
       node = page.at('//a[2]');
       href = 'http://example.com/second';
       nodeID = 'second';
-      link = new Link(page, node);
+      link = newLink({node, page});
     });
 
-    it('should exist', function () {    // eslint-disable-line jasmine/no-spec-dupes
-      link.should.exist;
+    it('should exist', () => {
+      expect(link).toEqual(jasmine.objectContaining({
+        text: jasmine.any(Function)
+      }));
     });
 
-    it('should have href', function () {    // eslint-disable-line jasmine/no-spec-dupes
-      link.href.should.eql(href);
+    it('should have href', () => {
+      expect(link.href).toEqual(href);
     });
 
-    it('should have domID', function () {    // eslint-disable-line jasmine/no-spec-dupes
-      link.domID.should.eql(nodeID);
+    it('should have domId', () => {
+      expect(link.domId).toEqual(nodeID);
     });
 
-    it('should have text', function () {    // eslint-disable-line jasmine/no-spec-dupes
-      link.text.should.eql('picture');
+    it('should have text', () => {
+      expect(link.text()).toEqual('picture');
     });
   });
 });

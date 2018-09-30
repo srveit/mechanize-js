@@ -1,102 +1,144 @@
-var Page = require('../lib/mechanize/page');
+'use strict';
+const {newAgent} = require('../lib/mechanize/agent'),
+  {newPage} = require('../lib/mechanize/page');
 
+describe('Mechanize/Page', () => {
+  let response, body, page, userAgentVersion, userAgent, agent;
 
-describe('Mechanize/Page', function () {
-  var response, body, page, userAgentVersion, userAgent, agent, uri, code;
-
-  beforeEach(function () {
-    agent = {};
-    uri = null;
-    code = null;
+  beforeEach(() => {
+    agent = newAgent();
     response = {
       headers: {
         'content-type': 'text/html; charset=ISO-8859-1'
       }
     };
-    userAgentVersion = '5.0 (Macintosh; Intel Mac OS X 10_6_7) AppleWebKit/' +
-      '534.30 (KHTML, like Gecko) Chrome/12.0.742.77 Safari/534.30';
-    userAgent = 'Mozilla/' + userAgentVersion;
-    agent.userAgentVersion = userAgentVersion;
-    agent.userAgent = userAgent;
+    agent.setUserAgent('Mac Safari');
   });
 
-  context('with no body', function () {
-    beforeEach(function () {
-      page = new Page(null, {'content-type': 'text/html'}, null, null, agent);
+  describe('with no body', () => {
+    beforeEach(() => {
+      page = newPage({response: {'content-type': 'text/html'}, agent});
     });
 
-    it('should be created', function () {
-      page.should.exist;
+    it('should be created', () => {
+      expect(page).toEqual(jasmine.objectContaining({
+        at: jasmine.any(Function),
+        body: undefined,
+        code: undefined,
+        doc: jasmine.any(Object),
+        form: jasmine.any(Function),
+        labelFor: jasmine.any(Function),
+        links: jasmine.any(Function),
+        responseHeaderCharset: jasmine.any(Function),
+        search: jasmine.any(Function),
+        statusCode: jasmine.any(Function),
+        submit: jasmine.any(Function),
+        title: jasmine.any(Function),
+        uri: 'local:/',
+        userAgent: jasmine.any(Function),
+        userAgentVersion: undefined
+      }));
     });
   });
 
-  context('with form', function () {
-    beforeEach(function () {
+  describe('with form', () => {
+    let form;
+    beforeEach(() => {
       body = fixture('login.html');
-      page = new Page(uri, response, body, code, agent);
+      page = newPage({response, body, agent});
+      form = page.form('MAINFORM');
     });
 
-    it('should exist', function () {
-      page.should.exist;
+    it('should exist', () => {
+      expect(page).toEqual(jasmine.objectContaining({
+        at: jasmine.any(Function),
+        form: jasmine.any(Function),
+        labelFor: jasmine.any(Function),
+        links: jasmine.any(Function),
+        responseHeaderCharset: jasmine.any(Function),
+        search: jasmine.any(Function),
+        statusCode: jasmine.any(Function),
+        submit: jasmine.any(Function),
+        title: jasmine.any(Function)
+      }));
     });
 
-    it('should return form', function () {
-      var form = page.form('MAINFORM');
-      form.should.exist;
+    it('should return form', () => {
+      expect(form).toEqual(jasmine.objectContaining({
+        addField: jasmine.any(Function),
+        buildQuery: jasmine.any(Function),
+        checkbox: jasmine.any(Function),
+        deleteField: jasmine.any(Function),
+        field: jasmine.any(Function),
+        fieldValue: jasmine.any(Function),
+        labelFor: jasmine.any(Function),
+        name: 'MAINFORM',
+        page: jasmine.any(Object),
+        requestData: jasmine.any(Function),
+        setFieldValue: jasmine.any(Function),
+        submit: jasmine.any(Function),
+        submitButton: jasmine.any(Function)
+      }));
     });
 
-    it('should return user agent', function () {
-      page.userAgent.should.eql(userAgent);
+    it('should return user agent', () => {
+      expect(page.userAgent()).toMatch(/Mozilla/);
     });
 
-    it('should have a title', function () {
-      page.title.should.eql('Welcome');
+    it('should have a title', () => {
+      expect(page.title()).toEqual('Welcome');
     });
 
-    it('should have responseHeaderCharset', function () {
-      page.responseHeaderCharset.should.eql(['ISO-8859-1']);
+    it('should have responseHeaderCharset', () => {
+      expect(page.responseHeaderCharset()).toEqual(['ISO-8859-1']);
     });
   });
 
-  context('with links', function () {
-    beforeEach(function () {
+  describe('with links', () => {
+    beforeEach(() => {
       body = fixture('links.html');
-      page = new Page(uri, response, body, code, agent);
+      page = newPage({response, body, agent});
     });
 
-    it('should return links', function () {
-      page.links().length.should.eql(11);
+    it('should return links', () => {
+      expect(page.links().length).toEqual(11);
     });
 
-    it('should have search', function () {
-      page.search('//a').length.should.eql(11);
+    it('should href', () => {
+      expect(page.links()[0].href)
+        .toBe('http://www.example.com/about/contact/contact.asp');
+    });
+
+    it('should have search', () => {
+      expect(page.search('//a').length).toEqual(11);
     });
   });
 
-  context('with null parsed body', function () {
-    beforeEach(function () {
-      var uri = 'https://login.yahoo.com/config/login?',
-        response = {
-          headers: {
-            location: 'https://login.yahoo.com/config/verify?.done=' +
-              'http%3a//us.mg206.mail.yahoo.com/dc/launch%3f.partner=' +
-              'sbc%26.gx=0%26.rand=e7cfrljanjnfa',
-            'content-type': 'text/html'
-          },
-          statusCode: 302,
-          body: body
-        };
+  describe('with null parsed body', () => {
+    let uri, response;
+    beforeEach(() => {
+      uri = 'https://login.yahoo.com/config/login?';
+      response = {
+        headers: {
+          location: 'https://login.yahoo.com/config/verify?.done=' +
+            'http%3a//us.mg206.mail.yahoo.com/dc/launch%3f.partner=' +
+            'sbc%26.gx=0%26.rand=e7cfrljanjnfa',
+          'content-type': 'text/html'
+        },
+        statusCode: 302,
+        body: body
+      };
 
       body = fixture('xml-comment.html');
-      page = new Page(uri, response, body, code, agent);
+      page = newPage({uri, response, body, agent});
     });
 
-    it('should not have search', function () {
-      page.search('//a').length.should.eql(0);
+    it('should not have search', () => {
+      expect(page.search('//a').length).toEqual(0);
     });
 
-    it('should have statusCode', function () {
-      page.statusCode().should.eql(302);
+    it('should have statusCode', () => {
+      expect(page.statusCode()).toEqual(302);
     });
   });
 });
