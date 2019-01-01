@@ -58,7 +58,7 @@
     "jsonlint": "^1.6.3",
     "libxmljs": "^0.19.5",
     "lodash": "^4.17.11",
-    "marked": "^0.5.1",
+    "marked": "^0.6.0",
     "mime": "^2.3.1",
     "mime-types": "^2.1.17",
     "moment": "^2.19.3",
