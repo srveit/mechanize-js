@@ -53,7 +53,7 @@
     "ajv-keywords": "^3.2.0",
     "codecov": "^3.1.0",
     "cookiejar": "^2.1.2",
-    "eslint": "^5.6.1",
+    "eslint": "^6.0.0",
     "express": "^4.16.2",
     "jsonlint": "^1.6.3",
     "libxmljs": "^0.19.5",
