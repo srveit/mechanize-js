@@ -92,8 +92,8 @@ This borrows heavily from Aaron Patterson's
 [travis-url]: https://travis-ci.org/srveit/mechanize-js
 [appveyor-image]: https://img.shields.io/appveyor/ci/srveit/mechanize-js/master.svg
 [appveyor-url]: https://ci.appveyor.com/project/srveit/mechanize-js/branch/master
-[coveralls-image]: https://img.shields.io/coveralls/srveit/mechanize-js/master.svg
-[coveralls-url]: https://coveralls.io/r/srveit/mechanize-js
+[coveralls-image]: https://coveralls.io/repos/github/srveit/mechanize-js/badge.svg?branch=master
+[coveralls-url]: https://coveralls.io/github/srveit/mechanize-js?branch=master
 [code-climate-image]: https://img.shields.io/codeclimate/maintainability/srveit/mechanize-js.svg
 [code-climate-url]: https://codeclimate.com/github/srveit/mechanize-js
 [gitter-image]: https://img.shields.io/gitter/room/mechanize-js/Lobby.svg
