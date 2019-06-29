@@ -13,6 +13,7 @@
 [![Dependency Status][dependency-image]][dependency-url]
 [![Greenkeeper badge][greenkeeper-image]][greenkeeper-url]
 <!-- [![js-canonical-style][canonical-image]][canonical-url] -->
+[![Coverage Status](https://coveralls.io/repos/github/srveit/mechanize-js/badge.svg?branch=master)](https://coveralls.io/github/srveit/mechanize-js?branch=master)
 
 The Mechanize module is used for automating interaction with websites.
 Mechanize automatically stores and sends cookies, follows redirects,
