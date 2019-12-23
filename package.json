@@ -73,7 +73,7 @@
     "jsdoc": "^3.6.2",
     "jsonlint": "^1.6.3",
     "npm-run": "^5.0.1",
-    "nyc": "^14.1.1",
+    "nyc": "^15.0.0",
     "should": "^13.2.3"
   },
   "peerDependencies": {},
