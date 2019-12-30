@@ -6,14 +6,12 @@
 [![Node.js Version][node-version-image]][node-version-url]
 [![Build Status][travis-image]][travis-url]
 [![AppVeyor Build Status][appveyor-image]][appveyor-url]
-[![Test Coverage][coveralls-image]][coveralls-url]
 [![Codecov Status][codecov-image]][codecov-url]
 [![Code Climate][code-climate-image]][code-climate-url]
 [![Gitter][gitter-image]][gitter-url]
 [![Dependency Status][dependency-image]][dependency-url]
 [![Greenkeeper badge][greenkeeper-image]][greenkeeper-url]
 <!-- [![js-canonical-style][canonical-image]][canonical-url] -->
-[![Coverage Status](https://coveralls.io/repos/github/srveit/mechanize-js/badge.svg?branch=master)](https://coveralls.io/github/srveit/mechanize-js?branch=master)
 
 The Mechanize module is used for automating interaction with websites.
 Mechanize automatically stores and sends cookies, follows redirects,

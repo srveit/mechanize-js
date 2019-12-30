@@ -3,6 +3,7 @@
     "app.js",
     "bin/*",
     "docs/*",
+    "examples/*",
     "reports/*"
   ],
   "reporter": [
