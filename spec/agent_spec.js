@@ -163,6 +163,7 @@ describe('Mechanize/Agent', () => {
             'content-length': '25',
             referer: baseUrl + '/page.html',
             origin: baseUrl,
+            'accept-encoding': 'gzip, deflate, br',
             cookie: 'sessionid=123',
             host: host,
             connection: 'close'
