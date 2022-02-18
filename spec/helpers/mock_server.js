@@ -4,9 +4,9 @@ const express = require('express'),
   bodyParser = require('body-parser'),
   _ = require('lodash');
 
-const createMock = ({name, rootPath, environment, port}) => {
+const createMockServer = ({name, rootPath, environment, port}) => {
   let server;
-  const mockName = name,
+  const serverName = name,
     savedEnvironment = {},
 
     space = length =>
@@ -67,7 +67,7 @@ const createMock = ({name, rootPath, environment, port}) => {
     mockHandler = (name, method, path, responseName) => {
       mock[name] = jasmine.createSpy(name).and.returnValue({}); // eslint-disable-line jasmine/no-unsafe-spy
       mock.app[method](rootPath + path + '*', (req, res) => {
-        // console.log('called', mockName, 'mock', name, path);
+        // console.log('called', serverName, 'mock', name, path);
 
         const response = mock[name]({
           path: req.path,
@@ -99,7 +99,7 @@ const createMock = ({name, rootPath, environment, port}) => {
       mock.app.all(
         '*',
         (req, res, next) => {
-          console.log('no', mockName, 'handler for', req.method, req.url); // eslint-disable-line no-console
+          console.log('no', serverName, 'handler for', req.method, req.url); // eslint-disable-line no-console
           next();
         }
       ),
@@ -130,7 +130,7 @@ const createMock = ({name, rootPath, environment, port}) => {
           server = mock.app.listen(port || 0, () => {
             const mockPort = server.address().port,
                   mockUrl = 'http://localhost:' + mockPort + rootPath;
-            console.log(mockName, 'listening at', mockUrl);
+            // console.log(serverName, 'listening at', mockUrl);
             setEnvironment(mockUrl);
             done();
           });
@@ -162,7 +162,7 @@ const mockServer = done => {
     SERVER_HOST: '<mockHost>'
   };
 
-  const server = createMock({name: 'server', rootPath: '', environment});
+  const server = createMockServer({name: 'server', rootPath: '', environment});
   server.mockHandler('postForm', 'post', '/');
   server.mockHandler('getPage', 'get', '/');
 
@@ -171,4 +171,4 @@ const mockServer = done => {
   return server;
 };
 
-global.mockServer = mockServer;
+module.exports.mockServer = mockServer;

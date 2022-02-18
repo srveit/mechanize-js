@@ -1,7 +1,10 @@
 'use strict';
 const {newAgent} = require('../lib/mechanize/agent'),
- {Cookie, CookieAccessInfo} = require('cookiejar'),
- {URL} = require('url');
+  {URL} = require('url'),
+  {fixture} = require('./helpers/fixture.js'),
+  {mockServer} = require('./helpers/mock_server.js');
+
+const futureDate = 'Fri, 01 Jan 2023 00:00:00 GMT';
 
 describe('Mechanize/Agent', () => {
   let server, host, domain, baseUrl, agent, requestOptions;
@@ -41,20 +44,31 @@ describe('Mechanize/Agent', () => {
           });
       });
 
-      it('should set cookies', () => {
-        const cookies = agent.getCookies({domain});
-        expect(cookies.length).toEqual(2);
+      it('should set cookies', async () => {
+        const cookies = await agent.getCookies({domain});
+        expect(cookies).toEqual([
+          jasmine.objectContaining({
+            key: 'sessionid',
+            value: '345'
+          }),
+          jasmine.objectContaining({
+            key: 'name',
+            value: 'jones'
+          }),
+        ]);
       });
     });
 
     describe('with single header cookie', () => {
       beforeEach(done => {
-        const responseBody = fixture('login.html');
-        server.getPage.and.returnValue({
-          headers: {
+        const responseBody = fixture('login.html'),
+          headers = {
             'set-cookie': 'sessionid=345; path=/; ' +
-              'expires=Fri, 01 Jan 2021 00:00:00 GMT; secure; HttpOnly'
-          },
+              `expires=${futureDate}; secure; HttpOnly`
+          };
+
+        server.getPage.and.returnValue({
+          headers,
           body: responseBody
         });
         agent.get({uri})
@@ -65,9 +79,14 @@ describe('Mechanize/Agent', () => {
           });
       });
 
-      it('should set cookies', () => {
-        const cookies = agent.getCookies({domain});
-        expect(cookies.length).toEqual(1);
+      it('should set cookies', async () => {
+        const cookies = await agent.getCookies({domain});
+        expect(cookies).toEqual([
+          jasmine.objectContaining({
+            key: 'sessionid',
+            value: '345'
+          }),
+        ]);
       });
     });
 
@@ -78,9 +97,9 @@ describe('Mechanize/Agent', () => {
           headers: {
             'set-cookie': [
               'sessionid=345; path=/; ' +
-                'expires=Fri, 01 Jan 2021 00:00:00 GMT; secure; HttpOnly',
+                `expires=${futureDate}; secure; HttpOnly`,
               'name=smith; path=/; ' +
-                'expires=Fri, 01 Jan 2021 00:00:00 GMT; secure; HttpOnly'
+                `expires=${futureDate}; secure; HttpOnly`
             ]
           },
           body: responseBody
@@ -93,8 +112,8 @@ describe('Mechanize/Agent', () => {
           });
       });
 
-      it('should set cookies', () => {
-        const cookies = agent.getCookies({domain});
+      it('should set cookies', async () => {
+        const cookies = await agent.getCookies({domain});
         expect(cookies.length).toEqual(2);
       });
     });
@@ -108,6 +127,7 @@ describe('Mechanize/Agent', () => {
       server.getPage.and.returnValue(responseBody);
       agent.get({uri})
         .then(page => {
+          
           form = page.form('MAINFORM');
           done();
         })
@@ -142,14 +162,15 @@ describe('Mechanize/Agent', () => {
     describe('then submitting form', () => {
       let cookie, contentType, submitPage, submitError;
 
-      beforeEach(done => {
+      beforeEach(async () => {
         server.postForm.calls.reset();
-        cookie = new Cookie('sessionid=123;domain=' + domain + ';path=/');
-        agent.setCookie(cookie);
-        agent.submit({form})
-          .then(page => submitPage = page)
-          .catch(error => submitError = error)
-          .then(() => done());
+        await agent.setCookie(`sessionid=1234;domain=${domain};path=/`, uri);
+        await agent.setCookie(`name=bob;domain=${domain};path=/`, uri);
+        try {
+          submitPage = await agent.submit({form});
+        } catch (error) {
+          submitPage = error;
+        }
       });
 
       it('should post the form', () => {
@@ -163,8 +184,8 @@ describe('Mechanize/Agent', () => {
             'content-length': '25',
             referer: baseUrl + '/page.html',
             origin: baseUrl,
-            'accept-encoding': 'gzip, deflate, br',
-            cookie: 'sessionid=123',
+            'accept-encoding': 'gzip,deflate',
+            cookie: 'sessionid=1234; name=bob',
             host: host,
             connection: 'close'
           },

@@ -1,6 +1,7 @@
 'use strict';
 const {newAgent} = require('../lib/mechanize/agent'),
-  {newPage} = require('../lib/mechanize/page');
+  {newPage} = require('../lib/mechanize/page'),
+  {fixture} = require('./helpers/fixture.js');
 
 describe('Mechanize/Page', () => {
   let response, body, page, userAgentVersion, userAgent, agent;
@@ -24,7 +25,6 @@ describe('Mechanize/Page', () => {
       expect(page).toEqual(jasmine.objectContaining({
         at: jasmine.any(Function),
         body: undefined,
-        code: undefined,
         doc: jasmine.any(Object),
         form: jasmine.any(Function),
         labelFor: jasmine.any(Function),

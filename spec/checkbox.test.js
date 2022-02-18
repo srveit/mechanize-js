@@ -1,5 +1,6 @@
 'use strict';
-const {newPage} = require('../lib/mechanize/page');
+const {newPage} = require('../lib/mechanize/page'),
+  {fixture} = require('./helpers/fixture.js');
 
 describe('Mechanize/Form/Checkbox', () => {
   let checkbox, form;

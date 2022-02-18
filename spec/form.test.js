@@ -2,7 +2,9 @@
 const  {URL} = require('url'),
   {newAgent} = require('../lib/mechanize/agent'),
   {newPage} = require('../lib/mechanize/page'),
-  {newButton} = require('../lib/mechanize/form/button');
+  {newButton} = require('../lib/mechanize/form/button'),
+  {fixture} = require('./helpers/fixture.js'),
+  {mockServer} = require('./helpers/mock_server.js');
 
 describe('Mechanize/Form', () => {
   let server, baseUrl, host, domain, agent, form;
@@ -136,6 +138,7 @@ describe('Mechanize/Form', () => {
             'user-agent': jasmine.stringMatching(
                 /Mechanize\/[.0-9]+ Node.js\/v[.0-9]+ \(http:\/\/github.com\/srveit\/mechanize-js\/\)/),
             accept: '*/*',
+            'accept-encoding': 'gzip,deflate',
             'content-type': 'application/x-www-form-urlencoded',
             'content-length': '25',
             referer: baseUrl,
