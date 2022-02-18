@@ -4,7 +4,7 @@ const {newAgent} = require('../lib/mechanize/agent'),
   {fixture} = require('./helpers/fixture.js');
 
 describe('Mechanize/Page', () => {
-  let response, body, page, userAgentVersion, userAgent, agent;
+  let response, body, page, agent;
 
   beforeEach(() => {
     agent = newAgent();
@@ -18,7 +18,12 @@ describe('Mechanize/Page', () => {
 
   describe('with no body', () => {
     beforeEach(() => {
-      page = newPage({response: {'content-type': 'text/html'}, agent});
+      page = newPage({
+        response: {
+          'content-type': 'text/html'
+        },
+        agent
+      });
     });
 
     it('should be created', () => {
@@ -45,7 +50,9 @@ describe('Mechanize/Page', () => {
     let form;
     beforeEach(() => {
       body = fixture('login.html');
-      page = newPage({response, body, agent});
+      page = newPage({
+        response, body, agent
+      });
       form = page.form('MAINFORM');
     });
 
@@ -97,7 +104,9 @@ describe('Mechanize/Page', () => {
   describe('with links', () => {
     beforeEach(() => {
       body = fixture('links.html');
-      page = newPage({response, body, agent});
+      page = newPage({
+        response, body, agent
+      });
     });
 
     it('should return links', () => {
@@ -130,7 +139,9 @@ describe('Mechanize/Page', () => {
       };
 
       body = fixture('xml-comment.html');
-      page = newPage({uri, response, body, agent});
+      page = newPage({
+        uri, response, body, agent
+      });
     });
 
     it('should not have search', () => {

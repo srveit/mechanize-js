@@ -7,7 +7,7 @@ const {newAgent} = require('../lib/mechanize/agent'),
 const futureDate = 'Fri, 01 Jan 2023 00:00:00 GMT';
 
 describe('Mechanize/Agent', () => {
-  let server, host, domain, baseUrl, agent, requestOptions;
+  let server, host, domain, baseUrl, agent;
 
   beforeAll(done => {
     server = mockServer();
@@ -23,7 +23,7 @@ describe('Mechanize/Agent', () => {
   });
 
   it('should have a userAgent', () =>
-     expect(agent.userAgent()).toEqual(jasmine.any(String)));
+    expect(agent.userAgent()).toEqual(jasmine.any(String)));
 
   describe('getting page', () => {
     let uri;
@@ -36,7 +36,9 @@ describe('Mechanize/Agent', () => {
       beforeEach(done => {
         const responseBody = fixture('meta_cookies.html');
         server.getPage.and.returnValue(responseBody);
-        agent.get({uri})
+        agent.get({
+          uri
+        })
           .then(() => done())
           .catch(error => {
             console.error('error getting page', error);
@@ -45,7 +47,9 @@ describe('Mechanize/Agent', () => {
       });
 
       it('should set cookies', async () => {
-        const cookies = await agent.getCookies({domain});
+        const cookies = await agent.getCookies({
+          domain
+        });
         expect(cookies).toEqual([
           jasmine.objectContaining({
             key: 'sessionid',
@@ -54,7 +58,7 @@ describe('Mechanize/Agent', () => {
           jasmine.objectContaining({
             key: 'name',
             value: 'jones'
-          }),
+          })
         ]);
       });
     });
@@ -71,7 +75,9 @@ describe('Mechanize/Agent', () => {
           headers,
           body: responseBody
         });
-        agent.get({uri})
+        agent.get({
+          uri
+        })
           .then(() => done())
           .catch(error => {
             console.error('error getting page', error);
@@ -80,12 +86,14 @@ describe('Mechanize/Agent', () => {
       });
 
       it('should set cookies', async () => {
-        const cookies = await agent.getCookies({domain});
+        const cookies = await agent.getCookies({
+          domain
+        });
         expect(cookies).toEqual([
           jasmine.objectContaining({
             key: 'sessionid',
             value: '345'
-          }),
+          })
         ]);
       });
     });
@@ -104,7 +112,9 @@ describe('Mechanize/Agent', () => {
           },
           body: responseBody
         });
-        agent.get({uri})
+        agent.get({
+          uri
+        })
           .then(() => done())
           .catch(error => {
             console.error('error getting page', error);
@@ -113,7 +123,9 @@ describe('Mechanize/Agent', () => {
       });
 
       it('should set cookies', async () => {
-        const cookies = await agent.getCookies({domain});
+        const cookies = await agent.getCookies({
+          domain
+        });
         expect(cookies.length).toEqual(2);
       });
     });
@@ -125,9 +137,11 @@ describe('Mechanize/Agent', () => {
       uri = baseUrl + '/page.html';
       const responseBody = fixture('login.html');
       server.getPage.and.returnValue(responseBody);
-      agent.get({uri})
+      agent.get({
+        uri
+      })
         .then(page => {
-          
+
           form = page.form('MAINFORM');
           done();
         })
@@ -160,17 +174,13 @@ describe('Mechanize/Agent', () => {
     });
 
     describe('then submitting form', () => {
-      let cookie, contentType, submitPage, submitError;
-
       beforeEach(async () => {
         server.postForm.calls.reset();
         await agent.setCookie(`sessionid=1234;domain=${domain};path=/`, uri);
         await agent.setCookie(`name=bob;domain=${domain};path=/`, uri);
-        try {
-          submitPage = await agent.submit({form});
-        } catch (error) {
-          submitPage = error;
-        }
+        await agent.submit({
+          form
+        });
       });
 
       it('should post the form', () => {
@@ -178,7 +188,7 @@ describe('Mechanize/Agent', () => {
           path: '/Login.aspx',
           headers: {
             'user-agent': jasmine.stringMatching(
-                /Mechanize\/[.0-9]+ Node.js\/v[.0-9]+ \(http:\/\/github.com\/srveit\/mechanize-js\/\)/),
+              /Mechanize\/[.0-9]+ Node.js\/v[.0-9]+ \(http:\/\/github.com\/srveit\/mechanize-js\/\)/),
             accept: '*/*',
             'content-type': 'application/x-www-form-urlencoded',
             'content-length': '25',

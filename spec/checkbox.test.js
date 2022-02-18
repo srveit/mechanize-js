@@ -6,11 +6,10 @@ describe('Mechanize/Form/Checkbox', () => {
   let checkbox, form;
 
   beforeEach(() => {
-    let uri, body, page;
-
-    uri = 'form.html';
-    body = fixture('form_elements.html');
-    page = newPage({body});
+    const body = fixture('form_elements.html');
+    const page = newPage({
+      body
+    });
 
     form = page.form('form1');
 
@@ -22,7 +21,7 @@ describe('Mechanize/Form/Checkbox', () => {
     });
 
     it('should be checked', () =>
-       expect(checkbox.isChecked()).toEqual(true));
+      expect(checkbox.isChecked()).toEqual(true));
   });
 
   describe('unchecked check box', () => {
@@ -31,6 +30,6 @@ describe('Mechanize/Form/Checkbox', () => {
     });
 
     it('should be unchecked', () =>
-       expect(checkbox.isChecked()).toEqual(false));
+      expect(checkbox.isChecked()).toEqual(false));
   });
 });

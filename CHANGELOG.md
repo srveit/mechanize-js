@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Renamed LICENSE.txt to LICENSE
-- Replace request with got
+- Replace request with node-fetch
 - Replace cookiejar with tough-cookie
 
 ## [1.1.0] - 2020-04-26

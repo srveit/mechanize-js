@@ -5,10 +5,11 @@ const {newPage} = require('../lib/mechanize/page'),
 describe('Mechanize/Form/Text', () => {
   let text, form;
   beforeEach(() => {
-    let url, response, body, page;
-    url = 'form.html';
-    body = fixture('form_elements.html');
-    page = newPage({url, body});
+    const url = 'form.html';
+    const body = fixture('form_elements.html');
+    const page = newPage({
+      url, body
+    });
 
     form = page.form('form1');
   });
