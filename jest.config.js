@@ -1,4 +1,3 @@
 module.exports = {
-  testEnvironment: "node",
-  testRunner: "jest-jasmine2"
+  testEnvironment: "node"
 }

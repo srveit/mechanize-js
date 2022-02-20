@@ -28,8 +28,8 @@ describe('Mechanize/Page/Link', () => {
     });
 
     it('should exist', () => {
-      expect(link).toEqual(jasmine.objectContaining({
-        text: jasmine.any(Function)
+      expect(link).toEqual(expect.objectContaining({
+        text: expect.any(Function)
       }));
     });
 
@@ -57,8 +57,8 @@ describe('Mechanize/Page/Link', () => {
     });
 
     it('should exist', () => {
-      expect(link).toEqual(jasmine.objectContaining({
-        text: jasmine.any(Function)
+      expect(link).toEqual(expect.objectContaining({
+        text: expect.any(Function)
       }));
     });
 

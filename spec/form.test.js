@@ -3,16 +3,22 @@ const {newAgent} = require('../lib/mechanize/agent'),
   {newPage} = require('../lib/mechanize/page'),
   {newButton} = require('../lib/mechanize/form/button'),
   {fixture} = require('./helpers/fixture.js'),
-  {mockServer} = require('./helpers/mock_server.js');
+  {mockServer} = require('./helpers/mock-server.js');
 
 describe('Mechanize/Form', () => {
   let server, baseUrl, host, agent, form;
 
-  beforeAll(done => {
-    server = mockServer();
-    server.start(done);
+  beforeAll(async () => {
+    server = mockServer([
+      {
+        method: 'post',
+        path: '/',
+        name: 'postForm'
+      }
+    ]);
+    await server.start();
   });
-  afterAll(done => server.stop(done));
+  afterAll(() => server.stop());
   beforeEach(() => {
     baseUrl = process.env.SERVER_BASE_URL;
     host = process.env.SERVER_HOST;
@@ -30,7 +36,7 @@ describe('Mechanize/Form', () => {
     });
 
     it('should have field', () => {
-      expect(form.field('login_password')).toEqual(jasmine.objectContaining({
+      expect(form.field('login_password')).toEqual(expect.objectContaining({
         name: 'login_password',
         fieldType: 'field'
       }));
@@ -53,14 +59,14 @@ describe('Mechanize/Form', () => {
     });
 
     it('should have field', () => {
-      expect(form.field('street')).toEqual(jasmine.objectContaining({
+      expect(form.field('street')).toEqual(expect.objectContaining({
         name: 'street',
         fieldType: 'hidden'
       }));
     });
 
     it('should have button', () => {
-      expect(form.submitButton()).toEqual(jasmine.objectContaining({
+      expect(form.submitButton()).toEqual(expect.objectContaining({
         name: 'signon',
         fieldType: 'submit'
       }));
@@ -126,16 +132,14 @@ describe('Mechanize/Form', () => {
     });
 
     describe('then submitting form', () => {
-      beforeEach(done => {
-        server.postForm.calls.reset();
-        form.submit({})
-          .then(() => done());
+      beforeEach(async () => {
+        await form.submit({});
       });
       it('should post the form', () => {
         expect(server.postForm).toHaveBeenCalledWith({
           path: '/Login.aspx',
           headers: {
-            'user-agent': jasmine.stringMatching(
+            'user-agent': expect.stringMatching(
               /Mechanize\/[.0-9]+ Node.js\/v[.0-9]+ \(http:\/\/github.com\/srveit\/mechanize-js\/\)/),
             accept: '*/*',
             'accept-encoding': 'gzip,deflate',
@@ -146,6 +150,7 @@ describe('Mechanize/Form', () => {
             host: host,
             connection: 'close'
           },
+          query: {},
           body: {
             userID: '',
             name: '',
@@ -197,14 +202,14 @@ describe('Mechanize/Form', () => {
     });
 
     it('should have field', () => {
-      expect(form.field('text')).toEqual(jasmine.objectContaining({
+      expect(form.field('text')).toEqual(expect.objectContaining({
         name: 'text',
         fieldType: 'text'
       }));
     });
 
     it('should have submit button', () => {
-      expect(form.submitButton()).toEqual(jasmine.objectContaining({
+      expect(form.submitButton()).toEqual(expect.objectContaining({
         name: '',
         type: 'submit',
         fieldType: 'submit'

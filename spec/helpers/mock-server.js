@@ -2,23 +2,23 @@
 const express = require('express'),
   url = require('url'),
   bodyParser = require('body-parser'),
-  _ = require('lodash');
+  {isDate} = require('util').types;
 
 const createMockServer = ({name, rootPath, environment, port}) => {
   let server;
   const serverName = name,
+    mockHandlers = [],
+    mockServer = {},
     savedEnvironment = {},
 
-    mock = {},
-
     space = length =>
-    '                                                                 '
-    .substr(0, length),
+      '                                                                 '
+        .substr(0, length),
 
     camelToDash = str => str
-    .replace(/(^[A-Z])/, ([first]) => first.toLowerCase())
-    .replace(/([A-Z])/g, ([letter]) => `-${letter.toLowerCase()}`)
-    .replace(/([a-z])([0-9])/g, ([letter, number]) => `${letter}-${number}`),
+      .replace(/(^[A-Z])/, ([first]) => first.toLowerCase())
+      .replace(/([A-Z])/g, ([letter]) => `-${letter.toLowerCase()}`)
+      .replace(/([a-z])([0-9])/g, ([letter, number]) => `${letter}-${number}`),
 
     toXml = ({name, value, includeDeclaration = false, indent = 0}) => {
       const xml = includeDeclaration ?
@@ -36,10 +36,10 @@ const createMockServer = ({name, rootPath, environment, port}) => {
       } else if (typeof value === 'string') {
         return xml + space(indent) + '<' + name + '>' +
           value + '</' + name + '>';
-      } else if (_.isDate(value)) {
+      } else if (isDate(value)) {
         return xml + space(indent) + '<' + name + ' type="datetime">' +
           value.toISOString().replace(/\.[0-9]{3}Z/, 'Z') + '</' + name + '>';
-      } else if (_.isArray(value)) {
+      } else if (Array.isArray(value)) {
         if (value.length === 0) {
           return xml + space(indent) + '<' + name + ' type="array"/>';
         }
@@ -53,33 +53,28 @@ const createMockServer = ({name, rootPath, environment, port}) => {
           ).join('\n') + '\n' +
           space(indent) + '</' + name + '>';
       }
-      if (_.isEmpty(value)) {
+      if (Object.keys(value).length === 0) {
         return xml + space(indent) + '<' + name + '/>';
       }
       return xml + space(indent) + '<' + name + '>\n' +
-        _.map(
-          value,
-          (item, key) => toXml({
-            name: key,
-            value: item,
-            indent: indent + 2
-          })
-        ).join('\n') + '\n' +
-        space(indent) + '</' + name + '>';
-
+        Object.entries(value).map(([key, item]) => toXml({
+          name: key,
+          value: item,
+          indent: indent + 2
+        }).join('\n') + '\n' + space(indent) + '</' + name + '>');
     },
 
-    mockHandler = (name, method, path, responseName) => {
-      mock[name] = jasmine.createSpy(name).and.returnValue({});
-      mock.app[method](rootPath + path + '*', (req, res) => {
-        // console.log('called', serverName, 'mock', name, path);
-
-        const response = mock[name]({
+    mockHandler = ({name, method = 'get', path, responseName}) => {
+      mockServer[name] = jest.fn();
+      mockHandlers.push(mockServer[name]);
+      mockServer.app[method](rootPath + path + '*', (req, res) => {
+        const response = mockServer[name]({
           path: req.path,
           headers: req.headers,
-          body: req.body
+          body: req.body,
+          query: req.query
         });
-        if (response.error) {
+        if (response && response.error) {
           res.status(response.error.statusCode || 500).send(response.error);
         } else if (req.headers.accept === 'application/xml') {
           res.setHeader('Content-Type', 'application/xml');
@@ -88,8 +83,8 @@ const createMockServer = ({name, rootPath, environment, port}) => {
             includeDeclaration: true,
             value: response
           }));
-        } else if (req.path.match(/html$/)) {
-          if (response.headers) {
+        } else if (req.path.match(/(xml|html?)$/)) {
+          if (response && response.headers) {
             res.set(response.headers).send(response.body);
           } else {
             res.send(response);
@@ -100,8 +95,7 @@ const createMockServer = ({name, rootPath, environment, port}) => {
       });
     },
 
-    addDefaultHandler = () =>
-    mock.app.all(
+    addDefaultHandler = () => mockServer.app.all(
       '*',
       (req, res, next) => {
         console.log('no', serverName, 'handler for', req.method, req.url); // eslint-disable-line no-console
@@ -111,7 +105,7 @@ const createMockServer = ({name, rootPath, environment, port}) => {
 
     setEnvironment = mockUrl => {
       const urlParsed = url.parse(mockUrl);
-      _.forEach(environment, (value, key) => {
+      Object.entries(environment).map(([key, value]) => {
         savedEnvironment[key] = process.env[key];
         if (value === '<mockUrl>') {
           process.env[key] = mockUrl;
@@ -127,62 +121,78 @@ const createMockServer = ({name, rootPath, environment, port}) => {
       });
     },
 
-    restoreEnvironment = () => _.forEach(
-      environment,
-      (value, key) => {
+      restoreEnvironment = () => Object.entries(environment)
+        .map(([key, value]) => {
         process.env[key] = savedEnvironment[key];
-      }
-    ),
-    start = done => {
-      server = mock.app.listen(port || 0, () => {
-        const mockPort = server.address().port,
-          mockUrl = 'http://localhost:' + mockPort + rootPath;
-        // console.log(serverName, 'listening at', mockUrl);
-        setEnvironment(mockUrl);
-        done();
-      });
-    },
+      }),
 
-    stop = done => {
+    start = () => new Promise((resolve, reject) => {
+      server = mockServer.app.listen(port || 0, (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          const mockPort = server.address().port,
+            mockUrl = 'http://localhost:' + mockPort + rootPath;
+          // console.log(serverName, 'listening at', mockUrl);
+          setEnvironment(mockUrl);
+          resolve(true);
+        }
+      });
+    }),
+
+    stop = () => new Promise(resolve => {
       restoreEnvironment();
-      server.close(() => done());
+      server.close(() => resolve(true));
+    }),
+
+    clearMocks = () => {
+      for (const mockHandler of mockHandlers) {
+        mockHandler.mockClear();
+      }
     };
 
   Object.assign(
-    mock,
+    mockServer,
     {
-      app: express(),
-      mockHandler,
       addDefaultHandler,
+      app: express(),
+      clearMocks,
+      env: () => process.env,
+      mockHandler,
       start,
       stop
     }
   );
 
-  mock.app.use(bodyParser.urlencoded({
+  mockServer.app.use(bodyParser.urlencoded({
     extended: false
   }));
-  mock.app.use(bodyParser.json());
+  mockServer.app.use(bodyParser.json());
 
-  return mock;
+  return mockServer;
 };
 
-const mockServer = () => {
+const mockServer = (handlers = []) => {
   const environment = {
     SERVER_BASE_URL: '<mockUrl>',
+    SERVER_HOST: '<mockHost>',
     SERVER_HOSTNAME: '<mockHostname>',
-    SERVER_HOST: '<mockHost>'
+    SERVER_PORT: '<mockPort>'
   };
 
   const server = createMockServer({
-    name: 'server', rootPath: '', environment
+    name: 'server',
+    rootPath: '',
+    environment
   });
-  server.mockHandler('postForm', 'post', '/');
-  server.mockHandler('getPage', 'get', '/');
+
+  for (const handler of handlers) {
+    server.mockHandler(handler);
+  }
 
   server.addDefaultHandler();
 
   return server;
 };
 
-module.exports.mockServer = mockServer;
+exports.mockServer = mockServer;

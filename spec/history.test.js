@@ -9,9 +9,9 @@ describe('Mechanize/History', () => {
   });
 
   it('should exist', () => {
-    expect(history).toEqual(jasmine.objectContaining({
-      push: jasmine.any(Function),
-      currentPage: jasmine.any(Function)
+    expect(history).toEqual(expect.objectContaining({
+      push: expect.any(Function),
+      currentPage: expect.any(Function)
     }));
   });
 
