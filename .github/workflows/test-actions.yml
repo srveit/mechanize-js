@@ -1,11 +1,65 @@
 name: build-actions
 on: [push]
 jobs:
+  test-darwin:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+        with:
+          fetch-depth: 1 # ! We only skip if the tippy top commit says so!
+          persist-credentials: false
+      - name: Reconfigure git to use HTTP authentication
+        run: >
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - run: npm install
+      - run: npm run lint
+      - run: npm run coverage
+  test-node-14:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+        with:
+          fetch-depth: 1 # ! We only skip if the tippy top commit says so!
+          persist-credentials: false
+      - name: Reconfigure git to use HTTP authentication
+        run: >
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: npm install
+      - run: npm run lint
+      - run: npm test
+  test-node-12:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+        with:
+          fetch-depth: 1 # ! We only skip if the tippy top commit says so!
+          persist-credentials: false
+      - name: Reconfigure git to use HTTP authentication
+        run: >
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+      - run: npm install
+      - run: npm run lint
+      - run: npm test
   test-ubuntu:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@master
         with:
           fetch-depth: 1 # ! We only skip if the tippy top commit says so!
           persist-credentials: false
@@ -17,11 +71,11 @@ jobs:
       - run: npm install
       - run: npm run lint
       - run: npm test
-  test-darwin:
-    runs-on: macos-latest
+  test-windows:
+    runs-on: windows-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@master
         with:
           fetch-depth: 1 # ! We only skip if the tippy top commit says so!
           persist-credentials: false

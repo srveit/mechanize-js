@@ -44,11 +44,12 @@
     "lint-js": "eslint lib/*.js lib/*/*.js lib/*/*/*.js spec/*.js spec/*/*.js",
     "lint": "npm run lint-json && npm run lint-js",
     "test": "jest",
-    "coverage": "nyc npm run test",
+    "coverage": "c8 --reporter clover --reporter html --reporter text-summary npm test",
     "docs": "jsdoc --configure .jsdocrc"
   },
   "config": {},
   "dependencies": {
+    "c8": "^7.11.0",
     "jsdom": "^19.0.0",
     "mime": "^3.0.0",
     "node-fetch": "^2.6.7",
