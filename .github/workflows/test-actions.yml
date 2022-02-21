@@ -1,11 +1,16 @@
 name: build-actions
 on: [push]
 jobs:
-  test-ubuntu:
-    runs-on: ubuntu-latest
+  run:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    env:
+      OS: ${{ matrix.os }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@master
         with:
           fetch-depth: 1 # ! We only skip if the tippy top commit says so!
           persist-credentials: false
@@ -14,22 +19,18 @@ jobs:
           git config --global url."https://github.com/".insteadOf
           ssh://git@github.com/
       - uses: actions/setup-node@v2
-      - run: npm install
-      - run: npm run lint
-      - run: npm test
-  test-darwin:
-    runs-on: macos-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
         with:
-          fetch-depth: 1 # ! We only skip if the tippy top commit says so!
-          persist-credentials: false
-      - name: Reconfigure git to use HTTP authentication
-        run: >
-          git config --global url."https://github.com/".insteadOf
-          ssh://git@github.com/
-      - uses: actions/setup-node@v2
+          node-version: "16"
       - run: npm install
       - run: npm run lint
       - run: npm test
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          directory: ./coverage/
+          env_vars: OS
+          fail_ci_if_error: true
+          files: clover.xml
+          flags: unittests
+          name: codecov-mechanize
+          verbose: true

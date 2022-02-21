@@ -3,7 +3,14 @@
     "es6": true,
     "node": true
   },
-  "extends": "eslint:recommended",
+  "ignorePatterns": [
+    "!.*.json",
+    "docs/*"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:json/recommended"
+  ],
   "parserOptions": {
     "ecmaVersion": 2017,
     "sourceType": "module"
@@ -95,10 +102,7 @@
       }
     ],
     "line-comment-position": "error",
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
+    "linebreak-style": "off",
     "lines-around-comment": "error",
     "lines-around-directive": "off",
     "max-depth": "error",

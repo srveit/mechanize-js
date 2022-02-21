@@ -1,17 +1,16 @@
 {
   "exclude": [
-    "app.js",
-    "bin/*",
     "docs/*",
     "examples/*",
     "reports/*"
   ],
   "reporter": [
-    "lcov",
+    "clover",
+    "html",
     "text-summary"
   ],
   "report-dir": "reports",
   "all": true,
   "check-coverage": true,
-  "lines": 85
+  "lines": 75
 }

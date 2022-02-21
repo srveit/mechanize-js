@@ -3,9 +3,11 @@
 const args = process.argv.slice(2),
   {newAgent} = require('../lib/mechanize'),
 
-  showPageLinks = async url => {
+  showPageLinks = async uri => {
     const agent = newAgent(),
-      page = await agent.get({uri: url}),
+      page = await agent.get({
+        uri
+      }),
       links = page.links();
 
     for (const link of links) {
