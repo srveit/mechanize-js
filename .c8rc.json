@@ -2,7 +2,6 @@
   "exclude": [
     "docs/*",
     "examples/*",
-    "node_modules/*",
     "reports/*"
   ],
   "reporter": [
@@ -13,5 +12,5 @@
   "report-dir": "reports",
   "all": true,
   "check-coverage": true,
-  "lines": 80
+  "lines": 75
 }
