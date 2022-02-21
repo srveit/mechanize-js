@@ -85,8 +85,6 @@ describe('Mechanize/Form', () => {
     it('should have plain requestData', () => {
       const requestData = fixture('mainform_text_plain.txt')
         .replaceAll(/\r\n/gm, '\n');
-      // eslint-disable-next-line no-console
-      console.log('A requestData', requestData.length, 'form.requestData', form.requestData('text/plain').length);
       expect(form.requestData('text/plain')).toBe(requestData);
     });
 
@@ -222,8 +220,6 @@ describe('Mechanize/Form', () => {
     it('should have requestData', () => {
       const requestData = fixture('text_plain.txt')
         .replaceAll(/\r\n/gm, '\n');
-      // eslint-disable-next-line no-console
-      console.log('B requestData', requestData.length, 'form.requestData', form.requestData('text/plain').length);
       expect(form.requestData('text/plain')).toBe(requestData);
     });
 
