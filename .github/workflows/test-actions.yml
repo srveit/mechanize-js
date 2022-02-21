@@ -20,19 +20,19 @@ jobs:
           ssh://git@github.com/
       - uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: "16"
       - run: npm install
       - run: npm run lint
       - run: npm run coverage
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v2
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        directory: ./reports/
-        env_vars: OS
-        fail_ci_if_error: true
-        files: ./clover.xml
-        flags: unittests
-        name: codecov-umbrella
-        path_to_write_report: ./reports/codecov_report.txt
-        verbose: true
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./reports/
+          env_vars: OS
+          fail_ci_if_error: true
+          files: ./clover.xml
+          flags: unittests
+          name: codecov-umbrella
+          path_to_write_report: ./reports/codecov_report.txt
+          verbose: true
