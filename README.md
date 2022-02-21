@@ -10,7 +10,8 @@
 [![Code Climate][code-climate-image]][code-climate-url]
 [![Gitter][gitter-image]][gitter-url]
 [![Dependency Status][dependency-image]][dependency-url]
-[![Greenkeeper badge][greenkeeper-image]][greenkeeper-url]
+[![Known Vulnerabilities][snyk-image]][snyk-url]
+
 <!-- [![js-canonical-style][canonical-image]][canonical-url] -->
 
 The Mechanize module is used for automating interaction with websites.
@@ -45,14 +46,6 @@ For an example of chaining requests, you can run the *submit_form_chain* example
 
 `node examples/submit_form_chain.js`
 
-### Logging into Twitter and getting personal notifications
-
-To see an example of chaining to log into Twitter and access the notifications page, run the *twitter_notifications* example:
-
-`node examples/twitter_notifications.js MYTWITTERUSERNAME MYTWITTERPASSWORD`
-
-The example gets the Twitter login page, fills out the username and password fields, logs into Twitter, gets the private notifications page, and displays the returned results.
-
 ## Installation
 
 From the mechanize directory, run npm install:
@@ -61,19 +54,21 @@ From the mechanize directory, run npm install:
 
 ## Dependencies
 
-    cookiejar >= 2.1.2
     jsdom >= 19.0.0
-    mime >= 2.3.1
-    request >= 2.88.0
+    mime >= 3.0.0
+    node-fetch >= 2.6.7
+    tough-cookie >= 4.0.0
+    unescape >= 1.0.1
+    windows-1252 >= 1.1.0
 
 ## Documentation
 
-[mechanize-js](https://rawgit.com/srveit/mechanize-js/update-to-node-8/docs/index.html)
+[mechanize-js](https://github.com/srveit/mechanize-js)
 
 ## Credits
 
 This borrows heavily from Aaron Patterson's
-[mechanize](http://mechanize.rubyforge.org/) Ruby gem.
+[mechanize](https://rubygems.org/gems/mechanize) Ruby gem.
 
 ### Contributors
 
@@ -107,8 +102,8 @@ This borrows heavily from Aaron Patterson's
 [license-url]: http://choosealicense.com/licenses/mit/
 [canonical-image]: https://img.shields.io/badge/code%20style-canonical-brightgreen.svg?style=flat
 [canonical-url]: https://github.com/gajus/eslint-config-canonical
-[greenkeeper-image]: https://badges.greenkeeper.io/srveit/mechanize-js.svg
-[greenkeeper-url]: https://greenkeeper.io/
+[snyk-image]: https://snyk.io/test/npm/mechanize-js/badge.svg
+[snyk-url]: https://snyk.io/test/npm/mechanize-js
 
 <!--
 
