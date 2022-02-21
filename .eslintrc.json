@@ -102,10 +102,7 @@
       }
     ],
     "line-comment-position": "error",
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
+    "linebreak-style": "off",
     "lines-around-comment": "error",
     "lines-around-directive": "off",
     "max-depth": "error",
