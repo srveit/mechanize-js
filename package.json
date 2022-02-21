@@ -41,7 +41,7 @@
   },
   "scripts": {
     "lint": "eslint . --ext .js,.json",
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "coverage": "c8 npm test",
     "docs": "jsdoc --configure .jsdocrc.json"
   },
