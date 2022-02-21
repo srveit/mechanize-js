@@ -1,6 +1,6 @@
 {
   "name": "mechanize",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Automate interaction with websites (web scraping)",
   "keywords": [
     "dom",
