@@ -44,7 +44,7 @@
     "lint-js": "eslint lib/*.js lib/*/*.js lib/*/*/*.js spec/*.js spec/*/*.js",
     "lint": "npm run lint-json && npm run lint-js",
     "test": "jest",
-    "coverage": "c8 --reporter clover --reporter html --reporter text-summary npm test",
+    "coverage": "c8 --lines 75 --reporter clover --reporter html --reporter text-summary npm test",
     "docs": "jsdoc --configure .jsdocrc"
   },
   "config": {},
