@@ -40,16 +40,15 @@
     "url": "git@github.com:srveit/mechanize-js.git"
   },
   "scripts": {
-    "lint-json": "for f in package.json .eslintrc.json .jsdocrc .nycrc spec/.eslintrc.json spec/helpers/.eslintrc.json; do jsonlint -q $f; done",
-    "lint-js": "eslint lib/*.js lib/*/*.js lib/*/*/*.js spec/*.js spec/*/*.js",
+    "lint-json": "for f in package.json .c8rc.json .eslintrc.json .jsdocrc.json spec/.eslintrc.json spec/helpers/.eslintrc.json; do jsonlint -q $f; done",
+    "lint-js": "eslint lib spec --ext .json,.js",
     "lint": "npm run lint-json && npm run lint-js",
     "test": "jest",
     "coverage": "c8 --lines 75 --reporter clover --reporter html --reporter text-summary npm test",
-    "docs": "jsdoc --configure .jsdocrc"
+    "docs": "jsdoc --configure .jsdocrc.json"
   },
   "config": {},
   "dependencies": {
-    "c8": "^7.11.0",
     "jsdom": "^19.0.0",
     "mime": "^3.0.0",
     "node-fetch": "^2.6.7",
@@ -60,19 +59,19 @@
   "devDependencies": {
     "ajv": "^8.10.0",
     "ajv-keywords": "^5.1.0",
+    "c8": "^7.11.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jest": "^26.1.1",
+    "eslint-plugin-json": "^3.1.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^5.0.0",
     "express": "^4.17.3",
     "jest": "^27.5.1",
     "jest-html-reporter": "^3.4.2",
-    "jsdoc": "^3.6.10",
-    "jsonlint": "github:zaach/jsonlint",
-    "nyc": "^15.1.0"
+    "jsdoc": "^3.6.10"
   },
   "bundledDependencies": [],
   "engines": {
