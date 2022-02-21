@@ -86,7 +86,7 @@ This borrows heavily from Aaron Patterson's
 [travis-url]: https://travis-ci.org/srveit/mechanize-js
 [appveyor-badge]: https://img.shields.io/appveyor/ci/srveit/mechanize-js/master.svg
 [appveyor-url]: https://ci.appveyor.com/project/srveit/mechanize-js/branch/master
-[github-build-badge]: https://img.shields.io//github/workflow/status/srveit/mechanize-js/build-actions
+[github-build-badge]: https://img.shields.io/github/workflow/status/srveit/mechanize-js/build-actions
 [github-build-url]: https://github.com/srveit/mechanize-js/actions/workflows/test-actions.yml
 [coveralls-badge]: https://coveralls.io/repos/github/srveit/mechanize-js/badge.svg?branch=master
 [coveralls-url]: https://coveralls.io/github/srveit/mechanize-js?branch=master
