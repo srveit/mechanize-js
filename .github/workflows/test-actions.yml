@@ -1,8 +1,13 @@
 name: build-actions
 on: [push]
 jobs:
-  test-darwin:
-    runs-on: macos-latest
+  run:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    env:
+      OS: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -19,71 +24,15 @@ jobs:
       - run: npm install
       - run: npm run lint
       - run: npm run coverage
-  test-node-14:
-    runs-on: macos-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@master
-        with:
-          fetch-depth: 1 # ! We only skip if the tippy top commit says so!
-          persist-credentials: false
-      - name: Reconfigure git to use HTTP authentication
-        run: >
-          git config --global url."https://github.com/".insteadOf
-          ssh://git@github.com/
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      - run: npm install
-      - run: npm run lint
-      - run: npm test
-  test-node-12:
-    runs-on: macos-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@master
-        with:
-          fetch-depth: 1 # ! We only skip if the tippy top commit says so!
-          persist-credentials: false
-      - name: Reconfigure git to use HTTP authentication
-        run: >
-          git config --global url."https://github.com/".insteadOf
-          ssh://git@github.com/
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '12'
-      - run: npm install
-      - run: npm run lint
-      - run: npm test
-  test-ubuntu:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@master
-        with:
-          fetch-depth: 1 # ! We only skip if the tippy top commit says so!
-          persist-credentials: false
-      - name: Reconfigure git to use HTTP authentication
-        run: >
-          git config --global url."https://github.com/".insteadOf
-          ssh://git@github.com/
-      - uses: actions/setup-node@v2
-      - run: npm install
-      - run: npm run lint
-      - run: npm test
-  test-windows:
-    runs-on: windows-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@master
-        with:
-          fetch-depth: 1 # ! We only skip if the tippy top commit says so!
-          persist-credentials: false
-      - name: Reconfigure git to use HTTP authentication
-        run: >
-          git config --global url."https://github.com/".insteadOf
-          ssh://git@github.com/
-      - uses: actions/setup-node@v2
-      - run: npm install
-      - run: npm run lint
-      - run: npm test
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        directory: ./reports/
+        env_vars: OS
+        fail_ci_if_error: true
+        files: ./clover.xml
+        flags: unittests
+        name: codecov-umbrella
+        path_to_write_report: ./reports/codecov_report.txt
+        verbose: true
