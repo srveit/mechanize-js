@@ -1,36 +1,42 @@
 'use strict';
-const  {URL} = require('url'),
-  {newAgent} = require('../lib/mechanize/agent'),
+const {newAgent} = require('../lib/mechanize/agent'),
   {newPage} = require('../lib/mechanize/page'),
-  {newButton} = require('../lib/mechanize/form/button');
+  {newButton} = require('../lib/mechanize/form/button'),
+  {fixture} = require('./helpers/fixture.js'),
+  {mockServer} = require('./helpers/mock-server.js');
 
 describe('Mechanize/Form', () => {
-  let server, baseUrl, host, domain, agent, form;
+  let server, baseUrl, host, agent, form;
 
-  beforeAll(done => {
-    server = mockServer();
-    server.start(done);
+  beforeAll(async () => {
+    server = mockServer([
+      {
+        method: 'post',
+        path: '/',
+        name: 'postForm'
+      }
+    ]);
+    await server.start();
   });
-  afterAll(done => server.stop(done));
+  afterAll(() => server.stop());
   beforeEach(() => {
     baseUrl = process.env.SERVER_BASE_URL;
     host = process.env.SERVER_HOST;
-    const url = new URL(baseUrl);
-    domain = url.hostname;
     agent = newAgent();
   });
   describe('with no action attribute', () => {
     beforeEach(() => {
-      let uri, body, page;
-      uri = 'form.html';
-      body = fixture('login_no_action.html');
-      page = newPage({uri, body});
+      const uri = 'form.html';
+      const body = fixture('login_no_action.html');
+      const page = newPage({
+        uri, body
+      });
 
       form = page.form('login');
     });
 
     it('should have field', () => {
-      expect(form.field('login_password')).toEqual(jasmine.objectContaining({
+      expect(form.field('login_password')).toEqual(expect.objectContaining({
         name: 'login_password',
         fieldType: 'field'
       }));
@@ -43,23 +49,24 @@ describe('Mechanize/Form', () => {
 
   describe('with action attribute', () => {
     beforeEach(() => {
-      let uri, body, page;
-      uri = baseUrl;
-      body = fixture('login.html');
-      page = newPage({uri, body, agent});
+      const uri = baseUrl;
+      const body = fixture('login.html');
+      const page = newPage({
+        uri, body, agent
+      });
 
       form = page.form('MAINFORM');
     });
 
     it('should have field', () => {
-      expect(form.field('street')).toEqual(jasmine.objectContaining({
+      expect(form.field('street')).toEqual(expect.objectContaining({
         name: 'street',
         fieldType: 'hidden'
       }));
     });
 
     it('should have button', () => {
-      expect(form.submitButton()).toEqual(jasmine.objectContaining({
+      expect(form.submitButton()).toEqual(expect.objectContaining({
         name: 'signon',
         fieldType: 'submit'
       }));
@@ -85,8 +92,10 @@ describe('Mechanize/Form', () => {
     });
 
     it('should have buildQuery', () => {
-      expect(form.buildQuery()).toEqual([ [ 'userID', '' ], [ 'name', '' ],
-        [ 'street', 'Main' ] ]);
+      expect(form.buildQuery()).toEqual([
+        ['userID', ''], ['name', ''],
+        ['street', 'Main']
+      ]);
     });
 
     it('should have requestData', () => {
@@ -95,7 +104,9 @@ describe('Mechanize/Form', () => {
 
     describe('and adding button to query', () => {
       beforeEach(() => {
-        const button = newButton({name: 'button'});
+        const button = newButton({
+          name: 'button'
+        });
         form.addButtonToQuery(button);
       });
       it('should add button to requestData', () => {
@@ -121,21 +132,17 @@ describe('Mechanize/Form', () => {
     });
 
     describe('then submitting form', () => {
-      let submitPage, submitError;
-      beforeEach(done => {
-        server.postForm.calls.reset();
-        form.submit({})
-          .then(page => submitPage = page)
-          .catch(error => submitError = error)
-          .then(() => done());
+      beforeEach(async () => {
+        await form.submit({});
       });
       it('should post the form', () => {
         expect(server.postForm).toHaveBeenCalledWith({
           path: '/Login.aspx',
           headers: {
-            'user-agent': jasmine.stringMatching(
-                /Mechanize\/[.0-9]+ Node.js\/v[.0-9]+ \(http:\/\/github.com\/srveit\/mechanize-js\/\)/),
+            'user-agent': expect.stringMatching(
+              /Mechanize\/[.0-9]+ Node.js\/v[.0-9]+ \(http:\/\/github.com\/srveit\/mechanize-js\/\)/),
             accept: '*/*',
+            'accept-encoding': 'gzip,deflate',
             'content-type': 'application/x-www-form-urlencoded',
             'content-length': '25',
             referer: baseUrl,
@@ -143,6 +150,7 @@ describe('Mechanize/Form', () => {
             host: host,
             connection: 'close'
           },
+          query: {},
           body: {
             userID: '',
             name: '',
@@ -158,8 +166,10 @@ describe('Mechanize/Form', () => {
       });
 
       it('should not include field in buildQuery', () => {
-        expect(form.buildQuery()).toEqual([ [ 'userID', '' ],
-          [ 'street', 'Main' ] ]);
+        expect(form.buildQuery()).toEqual([
+          ['userID', ''],
+          ['street', 'Main']
+        ]);
       });
 
     });
@@ -183,21 +193,23 @@ describe('Mechanize/Form', () => {
     beforeEach(() => {
       const uri = null,
         body = fixture('form_text_plain.html'),
-        page = newPage({uri, body});
+        page = newPage({
+          uri, body
+        });
 
       form = page.form('form1');
       form.setFieldValue('text', 'hello');
     });
 
     it('should have field', () => {
-      expect(form.field('text')).toEqual(jasmine.objectContaining({
+      expect(form.field('text')).toEqual(expect.objectContaining({
         name: 'text',
         fieldType: 'text'
       }));
     });
 
     it('should have submit button', () => {
-      expect(form.submitButton()).toEqual(jasmine.objectContaining({
+      expect(form.submitButton()).toEqual(expect.objectContaining({
         name: '',
         type: 'submit',
         fieldType: 'submit'

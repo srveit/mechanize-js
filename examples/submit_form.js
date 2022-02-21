@@ -2,12 +2,10 @@
 'use strict';
 
 const {newAgent} = require('../lib/mechanize'),
-  {Cookie} = require('cookiejar'),
   args = process.argv.slice(2),
 
   submitExample = async url => {
     const agent = newAgent(),
-      cookie = new Cookie("sessionid=123;domain=.example.com;path=/"),
       username = "MYUSERNAME",
       password = "MYPASSWORD",
       requestData = 'username='+username+'&password='+password,
@@ -22,7 +20,7 @@ const {newAgent} = require('../lib/mechanize'),
         addButtonToQuery: () => {}
       };
 
-    agent.setCookie(cookie);
+    agent.setCookie('sessionid=123', url);
 
     const page = await agent.submit({form});
     console.log(page);

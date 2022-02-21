@@ -62,7 +62,7 @@ From the mechanize directory, run npm install:
 ## Dependencies
 
     cookiejar >= 2.1.2
-    libxmljs >= 0.19.5
+    jsdom >= 19.0.0
     mime >= 2.3.1
     request >= 2.88.0
 

@@ -6,14 +6,15 @@ describe('Mechanize/Page/Link', () => {
   let link, href, nodeID, page, node;
 
   beforeEach(() => {
-    let agent, body;
-    agent = {};
-    body = '<html><body>' +
+    const agent = {};
+    const body = '<html><body>' +
       '<a id="first" href="http://example.com/first">Example</a>' +
       '<a id="second" href="http://example.com/second">' +
       '<img src="picture.png" alt="picture"/></a>' +
       '</body></html>';
-    page = newPage({body, agent});
+    page = newPage({
+      body, agent
+    });
   });
 
   describe('text link', () => {
@@ -21,12 +22,12 @@ describe('Mechanize/Page/Link', () => {
       node = page.at('//a[1]');
       href = 'http://example.com/first';
       nodeID = 'first';
-      link = newLink({node, page});
+      link = newLink(node, page);
     });
 
     it('should exist', () => {
-      expect(link).toEqual(jasmine.objectContaining({
-        text: jasmine.any(Function)
+      expect(link).toEqual(expect.objectContaining({
+        text: expect.any(Function)
       }));
     });
 
@@ -48,12 +49,12 @@ describe('Mechanize/Page/Link', () => {
       node = page.at('//a[2]');
       href = 'http://example.com/second';
       nodeID = 'second';
-      link = newLink({node, page});
+      link = newLink(node, page);
     });
 
     it('should exist', () => {
-      expect(link).toEqual(jasmine.objectContaining({
-        text: jasmine.any(Function)
+      expect(link).toEqual(expect.objectContaining({
+        text: expect.any(Function)
       }));
     });
 

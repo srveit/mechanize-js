@@ -1,9 +1,10 @@
 'use strict';
 const {newAgent} = require('../lib/mechanize/agent'),
-  {newPage} = require('../lib/mechanize/page');
+  {newPage} = require('../lib/mechanize/page'),
+  {fixture} = require('./helpers/fixture.js');
 
 describe('Mechanize/Page', () => {
-  let response, body, page, userAgentVersion, userAgent, agent;
+  let response, body, page, agent;
 
   beforeEach(() => {
     agent = newAgent();
@@ -17,25 +18,29 @@ describe('Mechanize/Page', () => {
 
   describe('with no body', () => {
     beforeEach(() => {
-      page = newPage({response: {'content-type': 'text/html'}, agent});
+      page = newPage({
+        response: {
+          'content-type': 'text/html'
+        },
+        agent
+      });
     });
 
     it('should be created', () => {
-      expect(page).toEqual(jasmine.objectContaining({
-        at: jasmine.any(Function),
+      expect(page).toEqual(expect.objectContaining({
+        at: expect.any(Function),
         body: undefined,
-        code: undefined,
-        doc: jasmine.any(Object),
-        form: jasmine.any(Function),
-        labelFor: jasmine.any(Function),
-        links: jasmine.any(Function),
-        responseHeaderCharset: jasmine.any(Function),
-        search: jasmine.any(Function),
-        statusCode: jasmine.any(Function),
-        submit: jasmine.any(Function),
-        title: jasmine.any(Function),
+        doc: expect.any(Object),
+        form: expect.any(Function),
+        labelFor: expect.any(Function),
+        links: expect.any(Function),
+        responseHeaderCharset: expect.any(Function),
+        search: expect.any(Function),
+        statusCode: expect.any(Function),
+        submit: expect.any(Function),
+        title: expect.any(Function),
         uri: 'local:/',
-        userAgent: jasmine.any(Function),
+        userAgent: expect.any(Function),
         userAgentVersion: undefined
       }));
     });
@@ -45,39 +50,41 @@ describe('Mechanize/Page', () => {
     let form;
     beforeEach(() => {
       body = fixture('login.html');
-      page = newPage({response, body, agent});
+      page = newPage({
+        response, body, agent
+      });
       form = page.form('MAINFORM');
     });
 
     it('should exist', () => {
-      expect(page).toEqual(jasmine.objectContaining({
-        at: jasmine.any(Function),
-        form: jasmine.any(Function),
-        labelFor: jasmine.any(Function),
-        links: jasmine.any(Function),
-        responseHeaderCharset: jasmine.any(Function),
-        search: jasmine.any(Function),
-        statusCode: jasmine.any(Function),
-        submit: jasmine.any(Function),
-        title: jasmine.any(Function)
+      expect(page).toEqual(expect.objectContaining({
+        at: expect.any(Function),
+        form: expect.any(Function),
+        labelFor: expect.any(Function),
+        links: expect.any(Function),
+        responseHeaderCharset: expect.any(Function),
+        search: expect.any(Function),
+        statusCode: expect.any(Function),
+        submit: expect.any(Function),
+        title: expect.any(Function)
       }));
     });
 
     it('should return form', () => {
-      expect(form).toEqual(jasmine.objectContaining({
-        addField: jasmine.any(Function),
-        buildQuery: jasmine.any(Function),
-        checkbox: jasmine.any(Function),
-        deleteField: jasmine.any(Function),
-        field: jasmine.any(Function),
-        fieldValue: jasmine.any(Function),
-        labelFor: jasmine.any(Function),
+      expect(form).toEqual(expect.objectContaining({
+        addField: expect.any(Function),
+        buildQuery: expect.any(Function),
+        checkbox: expect.any(Function),
+        deleteField: expect.any(Function),
+        field: expect.any(Function),
+        fieldValue: expect.any(Function),
+        labelFor: expect.any(Function),
         name: 'MAINFORM',
-        page: jasmine.any(Object),
-        requestData: jasmine.any(Function),
-        setFieldValue: jasmine.any(Function),
-        submit: jasmine.any(Function),
-        submitButton: jasmine.any(Function)
+        page: expect.any(Object),
+        requestData: expect.any(Function),
+        setFieldValue: expect.any(Function),
+        submit: expect.any(Function),
+        submitButton: expect.any(Function)
       }));
     });
 
@@ -97,7 +104,9 @@ describe('Mechanize/Page', () => {
   describe('with links', () => {
     beforeEach(() => {
       body = fixture('links.html');
-      page = newPage({response, body, agent});
+      page = newPage({
+        response, body, agent
+      });
     });
 
     it('should return links', () => {
@@ -130,7 +139,9 @@ describe('Mechanize/Page', () => {
       };
 
       body = fixture('xml-comment.html');
-      page = newPage({uri, response, body, agent});
+      page = newPage({
+        uri, response, body, agent
+      });
     });
 
     it('should not have search', () => {
