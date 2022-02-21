@@ -7,8 +7,8 @@ const {newAgent} = require('../lib/mechanize'),
   submitExample = async url => {
     const agent = newAgent(),
       username = "MYUSERNAME",
-      password = "MYPASSWORD",
-      requestData = `username=${username}&password=${password}`,
+      example = "MYPASSWORD",
+      requestData = `username=${username}&password=${example}`,
       form = {
         page: {
           uri: url
