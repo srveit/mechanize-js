@@ -4,14 +4,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.2.0] - 2022-02-20
+## [1.2.1] - 2022-02-21
+### Changed
+- Fixed GitHub build badge URL in README.md
+- Updated documentation
+
+## [1.2.0] - 2022-02-21
 ### Added
 - File CHANGELOG.md
+- File lib/mechanize/utils.js
+- Npm module jest
 
 ### Changed
 - Renamed LICENSE.txt to LICENSE
-- Replace request with node-fetch
-- Replace cookiejar with tough-cookie
+- Replaced request with node-fetch
+- Replaced cookiejar with tough-cookie
+- Replaced libxmljs with jsdom
+- Renamed spec files
+
+### Removed
+- File examples/twitter_notifications.js
+- File spec/support/jasmine.json
+- Npm module jasmine
+- Npm module jsonlint
+- Npm module lodash
+- Npm module mime-types
+- Npm module moment
+- Npm module npm-run
+- Npm module nyc
+- Npm module nyc
 
 ## [1.1.0] - 2020-04-26
 ### Added
