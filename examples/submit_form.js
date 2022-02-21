@@ -8,15 +8,15 @@ const {newAgent} = require('../lib/mechanize'),
     const agent = newAgent(),
       username = "MYUSERNAME",
       password = "MYPASSWORD",
-      requestData = 'username='+username+'&password='+password,
+      requestData = `username=${username}&password=${password}`,
       form = {
-        page: {uri: url},
+        page: {
+          uri: url
+        },
         action: 'login',
         method: 'POST',
         enctype: 'application/x-www-form-urlencoded',
-        requestData: () => {
-          return requestData;
-        },
+        requestData: () => requestData,
         addButtonToQuery: () => {}
       };
 

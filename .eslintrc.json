@@ -3,6 +3,10 @@
     "es6": true,
     "node": true
   },
+  "ignorePatterns": [
+    "!.*.json",
+    "docs/*"
+  ],
   "extends": [
     "eslint:recommended",
     "plugin:json/recommended"

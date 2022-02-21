@@ -5,13 +5,13 @@ const {newAgent} = require('../lib/mechanize'),
   submitFormChain = async url => {
     const agent = newAgent(),
       page = await agent.get({uri: url}),
-      // Get the first form from the page (index #0)
+      // get the first form from the page (index #0)
       form = page.form(0);
 
-    // Set the parameter "q" which on the Google page is the search term
+    // set the parameter "q" which on the Google page is the search term
     form.setFieldValue("q", "farm");
     const secondPage = await form.submit({});
-    console.log(page);
+    console.log(secondPage);
   };
 
 submitFormChain(args[0] || 'http://www.google.com');

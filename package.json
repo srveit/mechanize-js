@@ -40,12 +40,13 @@
     "url": "git@github.com:srveit/mechanize-js.git"
   },
   "scripts": {
-    "lint-json": "for f in package.json .c8rc.json .eslintrc.json .jsdocrc.json spec/.eslintrc.json spec/helpers/.eslintrc.json; do jsonlint -q $f; done",
-    "lint-js": "eslint lib spec --ext .json,.js",
-    "lint": "npm run lint-json && npm run lint-js",
+    "lint": "eslint . --ext .js,.json",
     "test": "jest",
-    "coverage": "c8 --lines 75 --reporter clover --reporter html --reporter text-summary npm test",
+    "coverage": "c8 npm test",
     "docs": "jsdoc --configure .jsdocrc.json"
+  },
+  "jest": {
+      "testEnvironment": "node"
   },
   "config": {},
   "dependencies": {
