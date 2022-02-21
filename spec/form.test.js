@@ -84,6 +84,8 @@ describe('Mechanize/Form', () => {
 
     it('should have plain requestData', () => {
       const requestData = fixture('mainform_text_plain.txt');
+      console.log('requestData', requestData.length);
+      console.log('form.requestData', form.requestData('text/plain').length);
       expect(form.requestData('text/plain')).toBe(requestData);
     });
 
