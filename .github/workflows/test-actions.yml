@@ -30,8 +30,7 @@ jobs:
           directory: ./reports/
           env_vars: OS
           fail_ci_if_error: true
-          files: ./clover.xml
+          files: clover.xml
           flags: unittests
           name: codecov-mechanize
-          path_to_write_report: ./reports/codecov_report.txt
           verbose: true
