@@ -15,7 +15,7 @@
   "license": "MIT",
   "author": {
     "name": "Stephen R. Veit",
-    "email": "srveit@veitconsulting.com",
+    "email": "steve@veitconsulting.com",
     "url": "http://veitconsulting.com"
   },
   "contributors": [
@@ -42,7 +42,6 @@
   "scripts": {
     "lint": "eslint . --ext .js,.json",
     "test": "jest --detectOpenHandles",
-    "coverage": "c8 npm test",
     "docs": "jsdoc --configure .jsdocrc.json"
   },
   "jest": {
