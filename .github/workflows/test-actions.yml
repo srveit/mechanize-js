@@ -27,7 +27,7 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
-          directory: ./reports/
+          directory: ./coverage/
           env_vars: OS
           fail_ci_if_error: true
           files: clover.xml

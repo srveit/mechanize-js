@@ -10,4 +10,5 @@ doc/app
 node_modules
 .lock-wscript
 .scannerwork
+coverage
 reports

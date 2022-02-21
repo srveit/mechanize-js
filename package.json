@@ -46,7 +46,21 @@
     "docs": "jsdoc --configure .jsdocrc.json"
   },
   "jest": {
-      "testEnvironment": "node"
+    "testEnvironment": "node",
+    "collectCoverage": true,
+    "coverageProvider": "v8",
+    "coverageDirectory": "./coverage/",
+    "coverageReporters": [
+      "clover",
+      "json",
+      "lcov",
+      "text-summary"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "lines": 75
+      }
+    }
   },
   "config": {},
   "dependencies": {
@@ -60,7 +74,7 @@
   "devDependencies": {
     "ajv": "^8.10.0",
     "ajv-keywords": "^5.1.0",
-    "c8": "^7.11.0",
+    "codecov": "^3.8.3",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.4",

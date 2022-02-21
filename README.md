@@ -1,18 +1,18 @@
 # mechanize
 
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
-[![MIT License][license-image]][license-url]
-[![Node.js Version][node-version-image]][node-version-url]
-[![Build Status][travis-image]][travis-url]
-[![AppVeyor Build Status][appveyor-image]][appveyor-url]
-[![Codecov Status][codecov-image]][codecov-url]
-[![Code Climate][code-climate-image]][code-climate-url]
-[![Gitter][gitter-image]][gitter-url]
-[![Dependency Status][dependency-image]][dependency-url]
-[![Known Vulnerabilities][snyk-image]][snyk-url]
+[![NPM Version][npm-badge]][npm-url]
+[![NPM Downloads][downloads-badge]][downloads-url]
+[![MIT License][license-badge]][license-url]
+[![Node.js Version][node-version-badge]][node-version-url]
+[![AppVeyor Build Status][appveyor-badge]][appveyor-url]
+[![GitHub Build Status][github-build-badge]][github-build-url]
+[![Travis Build Status][travis-badge]][travis-url]
+[![Codecov Status][codecov-badge]][codecov-url]
+[![Code Climate][code-climate-badge]][code-climate-url]
+[![Gitter][gitter-badge]][gitter-url]
+[![Known Vulnerabilities][snyk-badge]][snyk-url]
 
-<!-- [![js-canonical-style][canonical-image]][canonical-url] -->
+<!-- [![js-canonical-style][canonical-badge]][canonical-url] -->
 
 The Mechanize module is used for automating interaction with websites.
 Mechanize automatically stores and sends cookies, follows redirects,
@@ -76,42 +76,42 @@ This borrows heavily from Aaron Patterson's
 * Dan Rahmel
 * Anders Hjelm
 
-[npm-image]: https://img.shields.io/npm/v/mechanize.svg
+[npm-badge]: https://img.shields.io/npm/v/mechanize.svg
 [npm-url]: https://npmjs.org/package/mechanize
-[downloads-image]: https://img.shields.io/npm/dm/mechanize.svg
+[downloads-badge]: https://img.shields.io/npm/dm/mechanize.svg
 [downloads-url]: https://npmjs.org/package/mechanize
-[node-version-image]: https://img.shields.io/node/v/mechanize.svg
+[node-version-badge]: https://img.shields.io/node/v/mechanize.svg
 [node-version-url]: https://nodejs.org/en/download/
-[travis-image]: https://img.shields.io/travis/srveit/mechanize-js/master.svg
+[travis-badge]: https://img.shields.io/travis/srveit/mechanize-js/master.svg
 [travis-url]: https://travis-ci.org/srveit/mechanize-js
-[appveyor-image]: https://img.shields.io/appveyor/ci/srveit/mechanize-js/master.svg
+[appveyor-badge]: https://img.shields.io/appveyor/ci/srveit/mechanize-js/master.svg
 [appveyor-url]: https://ci.appveyor.com/project/srveit/mechanize-js/branch/master
-[coveralls-image]: https://coveralls.io/repos/github/srveit/mechanize-js/badge.svg?branch=master
+[github-build-badge]: https://img.shields.io//github/workflow/status/srveit/mechanize-js/build-actions
+[github-build-url]: https://github.com/srveit/mechanize-js/actions/workflows/test-actions.yml
+[coveralls-badge]: https://coveralls.io/repos/github/srveit/mechanize-js/badge.svg?branch=master
 [coveralls-url]: https://coveralls.io/github/srveit/mechanize-js?branch=master
-[code-climate-image]: https://img.shields.io/codeclimate/maintainability/srveit/mechanize-js.svg
+[code-climate-badge]: https://img.shields.io/codeclimate/maintainability/srveit/mechanize-js.svg
 [code-climate-url]: https://codeclimate.com/github/srveit/mechanize-js
-[gitter-image]: https://img.shields.io/gitter/room/mechanize-js/Lobby.svg
+[gitter-badge]: https://img.shields.io/gitter/room/mechanize-js/Lobby.svg
 [gitter-url]: https://gitter.im/mechanize-js/Lobby
-[bithound-image]: https://www.bithound.io/github/srveit/mechanize-js/badges/score.svg
+[bithound-badge]: https://www.bithound.io/github/srveit/mechanize-js/badges/score.svg
 [bithound-url]: https://www.bithound.io/github/srveit/mechanize-js
-[dependency-image]: https://img.shields.io/david/srveit/mechanize-js.svg
-[dependency-url]: https://david-dm.org/srveit/mechanize-js
-[codecov-image]: https://img.shields.io/codecov/c/github/babel/babylon/master.svg?style=flat
-[codecov-url]: https://codecov.io/gh/babel/babylon
-[license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
+[codecov-badge]: https://img.shields.io/codecov/c/github/srveit/mechanize-js/master.svg?style=flat
+[codecov-url]: https://codecov.io/github/srveit/mechanize-js
+[license-badge]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [license-url]: http://choosealicense.com/licenses/mit/
-[canonical-image]: https://img.shields.io/badge/code%20style-canonical-brightgreen.svg?style=flat
+[canonical-badge]: https://img.shields.io/badge/code%20style-canonical-brightgreen.svg?style=flat
 [canonical-url]: https://github.com/gajus/eslint-config-canonical
-[snyk-image]: https://snyk.io/test/npm/mechanize-js/badge.svg
-[snyk-url]: https://snyk.io/test/npm/mechanize-js
+[snyk-badge]: https://snyk.io/test/github/srveit/mechanize-js/badge.svg
+[snyk-url]: https://snyk.io/test/github/srveit/mechanize-js
 
 <!--
 
 https://sonarcloud.io/dashboard/index/srveit:mechanize
 
-[testling-image]: https://ci.testling.com/srveit/mechanize-js.png
+[testling-badge]: https://ci.testling.com/srveit/mechanize-js.png
 [testling-url]: https://ci.testling.com/srveit/mechanize-js
-[cdnjs-image]: https://img.shields.io/cdnjs/v/mechanize-js.svg
+[cdnjs-badge]: https://img.shields.io/cdnjs/v/mechanize-js.svg
 [cdnjs-url]: https://cdnjs.com/libraries/mechanize-js
 
 [![locked](http://badges.github.io/stability-badges/dist/locked.svg)](http://github.com/badges/stability-badges)
