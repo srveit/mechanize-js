@@ -40,7 +40,7 @@
     "url": "git@github.com:srveit/mechanize-js.git"
   },
   "scripts": {
-    "lint-json": "for f in package.json .eslintrc.json .jsdocrc .nycrc spec/.eslintrc.json; do jsonlint -q $f; done",
+    "lint-json": "for f in package.json .eslintrc.json .jsdocrc .nycrc spec/.eslintrc.json spec/helpers/.eslintrc.json; do jsonlint -q $f; done",
     "lint-js": "eslint lib/*.js lib/*/*.js lib/*/*/*.js spec/*.js spec/*/*.js",
     "lint": "npm run lint-json && npm run lint-js",
     "test": "jest",

@@ -105,7 +105,7 @@ const createMockServer = ({name, rootPath, environment, port}) => {
 
     setEnvironment = mockUrl => {
       const urlParsed = url.parse(mockUrl);
-      Object.entries(environment).map(([key, value]) => {
+      Object.entries(environment).forEach(([key, value]) => {
         savedEnvironment[key] = process.env[key];
         if (value === '<mockUrl>') {
           process.env[key] = mockUrl;
@@ -121,8 +121,8 @@ const createMockServer = ({name, rootPath, environment, port}) => {
       });
     },
 
-      restoreEnvironment = () => Object.entries(environment)
-        .map(([key, value]) => {
+    restoreEnvironment = () => Object.keys(environment)
+      .forEach(key => {
         process.env[key] = savedEnvironment[key];
       }),
 

@@ -7,7 +7,7 @@
     "describe": true,
     "expect": true,
     "it": true,
-    "jasmine": true,
+    "jest": true,
     "mockTwilio": true,
     "mockVss": true,
     "spyOn": true

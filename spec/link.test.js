@@ -22,9 +22,7 @@ describe('Mechanize/Page/Link', () => {
       node = page.at('//a[1]');
       href = 'http://example.com/first';
       nodeID = 'first';
-      link = newLink({
-        node, page
-      });
+      link = newLink(node, page);
     });
 
     it('should exist', () => {
@@ -51,9 +49,7 @@ describe('Mechanize/Page/Link', () => {
       node = page.at('//a[2]');
       href = 'http://example.com/second';
       nodeID = 'second';
-      link = newLink({
-        node, page
-      });
+      link = newLink(node, page);
     });
 
     it('should exist', () => {
