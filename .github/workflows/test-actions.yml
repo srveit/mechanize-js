@@ -23,7 +23,7 @@ jobs:
           node-version: "16"
       - run: npm install
       - run: npm run lint
-      - run: npm run coverage
+      - run: npm test
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
