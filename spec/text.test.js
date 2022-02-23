@@ -4,9 +4,9 @@ const {newPage} = require('../lib/mechanize/page'),
 
 describe('Mechanize/Form/Text', () => {
   let text, form;
-  beforeEach(() => {
+  beforeEach(async () => {
     const url = 'form.html';
-    const body = fixture('form_elements.html');
+    const body = await fixture('form_elements.html');
     const page = newPage({
       url, body
     });

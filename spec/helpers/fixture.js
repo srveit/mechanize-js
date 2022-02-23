@@ -1,10 +1,10 @@
 'use strict';
 const fs = require('fs'),
+  {promisify} = require('util'),
+  readFile = promisify(fs.readFile),
   path = require('path');
 
 const fixture = filename =>
- // eslint-disable-next-line no-sync
- fs.readFileSync(path.join(__dirname, '../fixtures', filename), 'utf8');
-
+  readFile(path.join(__dirname, '../fixtures', filename), 'utf8');
 
 exports.fixture = fixture;

@@ -25,9 +25,9 @@ describe('Mechanize/Form', () => {
     agent = newAgent();
   });
   describe('with no action attribute', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       const uri = 'form.html';
-      const body = fixture('login_no_action.html');
+      const body = await fixture('login_no_action.html');
       const page = newPage({
         uri, body
       });
@@ -48,9 +48,9 @@ describe('Mechanize/Form', () => {
   });
 
   describe('with action attribute', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       const uri = baseUrl;
-      const body = fixture('login.html');
+      const body = await fixture('login.html');
       const page = newPage({
         uri, body, agent
       });
@@ -72,19 +72,19 @@ describe('Mechanize/Form', () => {
       }));
     });
 
-    it('should have multipart requestData', () => {
-      const requestData = fixture('multipart_body.txt');
+    it('should have multipart requestData', async () => {
+      const requestData = await fixture('multipart_body.txt');
       expect(form.requestData('multipart/form-data')).toBe(requestData);
     });
 
-    it('should have URL encoded requestData', () => {
-      const requestData = fixture('www_form_urlencoded.txt');
+    it('should have URL encoded requestData', async () => {
+      const requestData = await fixture('www_form_urlencoded.txt');
       expect(form.requestData()).toBe(requestData);
     });
 
-    it('should have plain requestData', () => {
-      const requestData = fixture('mainform_text_plain.txt')
-        .replaceAll(/\r\n/gm, '\n');
+    it('should have plain requestData', async () => {
+      const fixtureData = await fixture('mainform_text_plain.txt'),
+        requestData = fixtureData.replaceAll(/\r\n/gm, '\n');
       expect(form.requestData('text/plain')).toBe(requestData);
     });
 
@@ -110,8 +110,8 @@ describe('Mechanize/Form', () => {
         });
         form.addButtonToQuery(button);
       });
-      it('should add button to requestData', () => {
-        const requestData = fixture('www_form_urlencoded_with_button.txt');
+      it('should add button to requestData', async () => {
+        const requestData = await fixture('www_form_urlencoded_with_button.txt');
         expect(form.requestData()).toBe(requestData);
       });
     });
@@ -191,9 +191,9 @@ describe('Mechanize/Form', () => {
   });
 
   describe('with text/plain encoding', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       const uri = null,
-        body = fixture('form_text_plain.html'),
+        body = await fixture('form_text_plain.html'),
         page = newPage({
           uri, body
         });
@@ -217,9 +217,9 @@ describe('Mechanize/Form', () => {
       }));
     });
 
-    it('should have requestData', () => {
-      const requestData = fixture('text_plain.txt')
-        .replaceAll(/\r\n/gm, '\n');
+    it('should have requestData', async () => {
+      const fixtureData = await fixture('text_plain.txt'),
+        requestData = fixtureData.replaceAll(/\r\n/gm, '\n');
       expect(form.requestData('text/plain')).toBe(requestData);
     });
 

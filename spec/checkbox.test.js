@@ -5,14 +5,13 @@ const {newPage} = require('../lib/mechanize/page'),
 describe('Mechanize/Form/Checkbox', () => {
   let checkbox, form;
 
-  beforeEach(() => {
-    const body = fixture('form_elements.html');
+  beforeEach(async () => {
+    const body = await fixture('form_elements.html');
     const page = newPage({
       body
     });
 
     form = page.form('form1');
-
   });
 
   describe('checked check box', () => {

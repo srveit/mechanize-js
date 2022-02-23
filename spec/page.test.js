@@ -48,8 +48,8 @@ describe('Mechanize/Page', () => {
 
   describe('with form', () => {
     let form;
-    beforeEach(() => {
-      body = fixture('login.html');
+    beforeEach(async () => {
+      body = await fixture('login.html');
       page = newPage({
         response, body, agent
       });
@@ -102,8 +102,8 @@ describe('Mechanize/Page', () => {
   });
 
   describe('with links', () => {
-    beforeEach(() => {
-      body = fixture('links.html');
+    beforeEach(async () => {
+      body = await fixture('links.html');
       page = newPage({
         response, body, agent
       });
@@ -125,7 +125,7 @@ describe('Mechanize/Page', () => {
 
   describe('with null parsed body', () => {
     let uri, response;
-    beforeEach(() => {
+    beforeEach(async () => {
       uri = 'https://login.yahoo.com/config/login?';
       response = {
         headers: {
@@ -138,7 +138,7 @@ describe('Mechanize/Page', () => {
         body: body
       };
 
-      body = fixture('xml-comment.html');
+      body = await fixture('xml-comment.html');
       page = newPage({
         uri, response, body, agent
       });

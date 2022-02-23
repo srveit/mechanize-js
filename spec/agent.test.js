@@ -45,7 +45,7 @@ describe('Mechanize/Agent', () => {
 
     describe('with meta cookies', () => {
       beforeEach(async () => {
-        const responseBody = fixture('meta_cookies.html');
+        const responseBody = await fixture('meta_cookies.html');
         server.getPage.mockReturnValueOnce(responseBody);
         await agent.get({
           uri
@@ -71,7 +71,7 @@ describe('Mechanize/Agent', () => {
 
     describe('with single header cookie', () => {
       beforeEach(async () => {
-        const responseBody = fixture('login.html'),
+        const responseBody = await fixture('login.html'),
           headers = {
             'set-cookie': 'sessionid=345; path=/; ' +
               `expires=${futureDate}; secure; HttpOnly`
@@ -101,7 +101,7 @@ describe('Mechanize/Agent', () => {
 
     describe('with header cookies', () => {
       beforeEach(async () => {
-        const responseBody = fixture('login.html');
+        const responseBody = await fixture('login.html');
         server.getPage.mockReturnValueOnce({
           headers: {
             'set-cookie': [
@@ -131,7 +131,7 @@ describe('Mechanize/Agent', () => {
     let uri, form;
     beforeEach(async () => {
       uri = baseUrl + '/page.html';
-      const responseBody = fixture('login.html');
+      const responseBody = await fixture('login.html');
       server.getPage.mockReturnValueOnce(responseBody);
       const page = await agent.get({
         uri
