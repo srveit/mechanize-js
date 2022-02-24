@@ -41,7 +41,8 @@
   },
   "config": {},
   "scripts": {
-    "lint": "eslint . --ext .js,.json",
+    "lint-markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\"",
+    "lint": "eslint . --ext .js,.json; npm run lint-markdown",
     "test": "jest --detectOpenHandles",
     "docs": "jsdoc --configure .jsdocrc.json"
   },
@@ -97,6 +98,7 @@
     "jest-html-reporter": "^3.4.2",
     "jest-spec-reporter": "^1.0.17",
     "jsdoc": "^3.6.10",
+    "markdownlint-cli2": "^0.4.0",
     "standard": "^16.0.4"
   },
   "overrides": {},

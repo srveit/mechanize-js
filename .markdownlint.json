@@ -1,0 +1,6 @@
+{
+  "default": true,
+  "no-duplicate-header": {
+    "siblings_only": true
+  }
+}

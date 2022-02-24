@@ -28,7 +28,8 @@ To load from a specific URL:
 
 `node examples/get_page.js "http://www.cnn.com"`
 
-The example gets the page and then performs a `console.log()` on all of the returned object data.
+The example gets the page and then performs a `console.log()` on all
+of the returned object data.
 
 ### Posting a form
 
@@ -36,7 +37,8 @@ For form posting, you can run the *submit_form* example:
 
 `node examples/submit_form.js "http://localhost/"`
 
-The example POSTs a username and password to the */login* path at the specificied URL
+The example POSTs a username and password to the */login* path at the
+specificied URL.
 
 ### Chaining page accesses
 
@@ -130,6 +132,5 @@ https://sonarcloud.io/dashboard/index/srveit:mechanize
 [![Windows Build](https://img.shields.io/appveyor/ci/alexindigo/asynckit/v0.4.0.svg?label=windows:0.12-6.x&style=flat)](https://ci.appveyor.com/project/alexindigo/asynckit)
 [![Windows Tests](https://img.shields.io/appveyor/ci/bcoe/nyc-ilw23/master.svg?label=Windows%20Tests)](https://ci.appveyor.com/project/bcoe/nyc-ilw23)
 [![](http://img.shields.io/badge/unicorn-approved-ff69b4.svg)](https://www.youtube.com/watch?v=9auOCbH5Ns4)
-
 
 -->
