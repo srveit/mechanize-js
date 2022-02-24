@@ -83,8 +83,7 @@ describe('Mechanize/Form', () => {
     });
 
     it('should have plain requestData', async () => {
-      const fixtureData = await fixture('mainform_text_plain.txt'),
-        requestData = fixtureData.replaceAll(/\r\n/gm, '\n');
+      const requestData = await fixture('mainform_text_plain.txt');
       expect(form.requestData('text/plain')).toBe(requestData);
     });
 
@@ -218,8 +217,7 @@ describe('Mechanize/Form', () => {
     });
 
     it('should have requestData', async () => {
-      const fixtureData = await fixture('text_plain.txt'),
-        requestData = fixtureData.replaceAll(/\r\n/gm, '\n');
+      const requestData = await fixture('text_plain.txt');
       expect(form.requestData('text/plain')).toBe(requestData);
     });
 

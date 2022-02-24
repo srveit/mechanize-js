@@ -13,8 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated .github/workflows/test-actions.yml to run on Node 14, 16, and 17
 - Updated Npm module eslint to 8.9.0
 - Updated Npm module eslint-plugin-promise to 6.0.0
+- Updated spec/form.test.js to not fix fixture EOLs since added .gitattributes 
 
 ### Added
+- File .gitattributes
 - Npm module jest-extended
 - Npm module jest-spec-reporter
 - Npm module standard

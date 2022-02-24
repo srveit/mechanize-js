@@ -8,9 +8,13 @@
     "javascript"
   ],
   "homepage": "https://github.com/srveit/mechanize-js/wiki",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:srveit/mechanize-js.git"
+  },
   "bugs": {
-    "email": "srveit@veitconsulting.com",
-    "url": "http://github.com/srveit/mechanize-js/issues"
+    "email": "steve@veitconsulting.com",
+    "url": "https://github.com/srveit/mechanize-js/issues"
   },
   "license": "MIT",
   "author": {
@@ -35,14 +39,21 @@
   "directories": {
     "lib": "./lib/mechanize"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:srveit/mechanize-js.git"
-  },
+  "config": {},
   "scripts": {
     "lint": "eslint . --ext .js,.json",
     "test": "jest --detectOpenHandles",
     "docs": "jsdoc --configure .jsdocrc.json"
+  },
+  "watch": {
+    "lint": {
+      "patterns": [
+        "jest.config.js",
+        "index.js",
+        "{lib,spec}/*.js"
+      ],
+      "quiet": true
+    }
   },
   "jest": {
     "testEnvironment": "node",
@@ -61,7 +72,6 @@
       }
     }
   },
-  "config": {},
   "dependencies": {
     "jsdom": "^19.0.0",
     "mime": "^3.0.0",
@@ -89,6 +99,7 @@
     "jsdoc": "^3.6.10",
     "standard": "^16.0.4"
   },
+  "overrides": {},
   "bundledDependencies": [],
   "engines": {
     "node": ">= 14.0.0"
