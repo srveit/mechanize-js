@@ -41,16 +41,14 @@
   },
   "config": {},
   "scripts": {
+    "docs": "jsdoc --configure .jsdocrc.json",
+    "lint": "eslint . --ext .js,.json",
     "lint-markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\"",
-    "lint": "eslint . --ext .js,.json; npm run lint-markdown",
-    "test": "jest --detectOpenHandles",
-    "docs": "jsdoc --configure .jsdocrc.json"
+    "test": "jest --detectOpenHandles"
   },
   "watch": {
     "lint": {
       "patterns": [
-        "jest.config.js",
-        "index.js",
         "{lib,spec}/*.js"
       ],
       "quiet": true
