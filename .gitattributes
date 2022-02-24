@@ -4,5 +4,5 @@
 *.js text eol=lf
 
 # These test fixtures are text files.
-/tests/fixtures/text_plain.txt text eol=lf
-/tests/fixtures/mainform_text_plain.txt text eol=lf
+/spec/fixtures/text_plain.txt text eol=lf
+/spec/fixtures/mainform_text_plain.txt text eol=lf
