@@ -8,11 +8,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Changed fixture to return a promise
 - Updated Npm module eslint-config-prettier to 8.4.0
+- Updated spec/helpers/fixture.js to use fs/promises
+- Updated lib/mechanize/agent.js to use fs/promises
+- Updated .github/workflows/test-actions.yml to run on Node 14, 16, and 17
+- Updated Npm module eslint to 8.9.0
+- Updated Npm module eslint-plugin-promise to 6.0.0
 
 ### Added
 - Npm module jest-extended
 - Npm module jest-spec-reporter
+- Npm module standard
 
+### Removed
+- Npm module codecov
+- Npm module eslint-config-standard
+- File appveyor.yml
+- File .travis.yml
 
 ## [1.2.1] - 2022-02-21
 ### Changed

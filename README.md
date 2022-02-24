@@ -4,9 +4,7 @@
 [![NPM Downloads][downloads-badge]][downloads-url]
 [![MIT License][license-badge]][license-url]
 [![Node.js Version][node-version-badge]][node-version-url]
-[![AppVeyor Build Status][appveyor-badge]][appveyor-url]
 [![GitHub Build Status][github-build-badge]][github-build-url]
-[![Travis Build Status][travis-badge]][travis-url]
 [![Codecov Status][codecov-badge]][codecov-url]
 [![Code Climate][code-climate-badge]][code-climate-url]
 [![Gitter][gitter-badge]][gitter-url]
@@ -82,10 +80,6 @@ This borrows heavily from Aaron Patterson's
 [downloads-url]: https://npmjs.org/package/mechanize
 [node-version-badge]: https://img.shields.io/node/v/mechanize.svg
 [node-version-url]: https://nodejs.org/en/download/
-[travis-badge]: https://img.shields.io/travis/srveit/mechanize-js/master.svg
-[travis-url]: https://travis-ci.org/srveit/mechanize-js
-[appveyor-badge]: https://img.shields.io/appveyor/ci/srveit/mechanize-js/master.svg
-[appveyor-url]: https://ci.appveyor.com/project/srveit/mechanize-js/branch/master
 [github-build-badge]: https://img.shields.io/github/workflow/status/srveit/mechanize-js/build-actions
 [github-build-url]: https://github.com/srveit/mechanize-js/actions/workflows/test-actions.yml
 [coveralls-badge]: https://coveralls.io/repos/github/srveit/mechanize-js/badge.svg?branch=master
