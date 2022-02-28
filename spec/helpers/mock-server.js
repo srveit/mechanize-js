@@ -184,11 +184,8 @@ const createMockServer = ({name = 'server', rootPath = '', port, handlers = []})
   return mockServer;
 };
 
-const mockServer = (handlers = []) => {
-  return createMockServer({
-    handlers
-  });
-
-};
+const mockServer = (handlers = []) => createMockServer({
+  handlers
+});
 
 exports.mockServer = mockServer;
