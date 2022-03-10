@@ -80,10 +80,12 @@
     "windows-1252": "^1.1.0"
   },
   "devDependencies": {
+    "@jest/reporters": "^27.5.1",
     "ajv": "^8.10.0",
     "ajv-keywords": "^5.1.0",
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.4.0",
+    "eslint-config-standard": "github:standard/eslint-config-standard",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jest": "^26.1.1",
     "eslint-plugin-json": "^3.1.0",

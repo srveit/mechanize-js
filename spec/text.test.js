@@ -1,36 +1,36 @@
-'use strict';
-const {newPage} = require('../lib/mechanize/page'),
-  {fixture} = require('./helpers/fixture.js');
+'use strict'
+const { newPage } = require('../lib/mechanize/page')
+const { fixture } = require('./helpers/fixture.js')
 
 describe('Mechanize/Form/Text', () => {
-  let text, form;
+  let text, form
   beforeEach(async () => {
-    const url = 'form.html';
-    const body = await fixture('form_elements.html');
+    const url = 'form.html'
+    const body = await fixture('form_elements.html')
     const page = newPage({
-      url, body
-    });
+      url, body,
+    })
 
-    form = page.form('form1');
-  });
+    form = page.form('form1')
+  })
 
   describe('text field', () => {
     beforeEach(() => {
-      text = form.field('text');
-    });
+      text = form.field('text')
+    })
 
     it('should not be disabled', () => {
-      expect(text.disabled).toEqual(false);
-    });
-  });
+      expect(text.disabled).toEqual(false)
+    })
+  })
 
   describe('disabled text field', () => {
     beforeEach(() => {
-      text = form.field('textDisabled');
-    });
+      text = form.field('textDisabled')
+    })
 
     it('should be disabled', () => {
-      expect(text.disabled).toEqual(true);
-    });
-  });
-});
+      expect(text.disabled).toEqual(true)
+    })
+  })
+})
