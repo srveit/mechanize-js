@@ -9,6 +9,7 @@
     "plugin:json/recommended"
   ],
   "ignorePatterns": [
+    "!.*.json",
     "/docs"
   ],
   "parserOptions": {

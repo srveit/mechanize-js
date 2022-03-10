@@ -36,6 +36,41 @@ describe('Mechanize/Agent', () => {
   it('should have a userAgent', () =>
     expect(agent.userAgent()).toEqual(expect.any(String)))
 
+  describe('getting JSON', () => {
+    let uri
+    let response
+
+    beforeEach(() => {
+      uri = baseUrl + '/data'
+    })
+
+    beforeEach(async () => {
+      const responseBody = await fixture('data-list.json')
+      server.getPage.mockReturnValueOnce(JSON.parse(responseBody))
+      response = await agent.get({
+        uri,
+      })
+    })
+
+    it('should return an object', async () => {
+      expect(response.body).toEqual({
+        header: {
+          name: 'summary',
+        },
+        rows: [
+          {
+            name: 'Bob',
+            age: 24,
+          },
+          {
+            name: 'Jane',
+            age: 36,
+          },
+        ],
+      })
+    })
+  })
+
   describe('getting page', () => {
     let uri
 
@@ -74,7 +109,7 @@ describe('Mechanize/Agent', () => {
         const responseBody = await fixture('login.html')
         const headers = {
           'set-cookie': 'sessionid=345; path=/; ' +
-              `expires=${futureDate}; secure; HttpOnly`,
+          `expires=${futureDate}; secure; HttpOnly`,
         }
 
         server.getPage.mockReturnValueOnce({
@@ -106,9 +141,9 @@ describe('Mechanize/Agent', () => {
           headers: {
             'set-cookie': [
               'sessionid=345; path=/; ' +
-                `expires=${futureDate}; secure; HttpOnly`,
+            `expires=${futureDate}; secure; HttpOnly`,
               'name=smith; path=/; ' +
-                `expires=${futureDate}; secure; HttpOnly`,
+            `expires=${futureDate}; secure; HttpOnly`,
             ],
           },
           body: responseBody,

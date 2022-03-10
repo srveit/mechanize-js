@@ -1,0 +1,15 @@
+{
+  "header": {
+    "name": "summary"
+  },
+  "rows": [
+    {
+      "name": "Bob",
+      "age": 24
+    },
+    {
+      "name": "Jane",
+      "age": 36
+    }
+  ]
+}

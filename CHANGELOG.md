@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Changed agent.get to return a JavaScript object when response is JSON
 - Changed fixture to return a promise
 - Updated Npm module eslint-config-prettier to 8.4.0
 - Updated spec/helpers/fixture.js to use fs/promises
