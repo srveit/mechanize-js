@@ -97,7 +97,6 @@
     "jest": "^27.5.1",
     "jest-extended": "^2.0.0",
     "jest-html-reporter": "^3.4.2",
-    "jest-spec-reporter": "^1.0.17",
     "jsdoc": "^3.6.10",
     "markdownlint-cli2": "^0.4.0",
     "standard": "^16.0.4"
