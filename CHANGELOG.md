@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- Npm module jest-spec-reporter
 - Npm module codecov
 - Npm module eslint-config-standard
 - File appveyor.yml
