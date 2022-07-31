@@ -74,7 +74,7 @@
   "dependencies": {
     "jsdom": "^19.0.0",
     "mime": "^3.0.0",
-    "node-fetch": "^2.6.7",
+    "node-fetch": "^3.2.10",
     "tough-cookie": "^4.0.0",
     "unescape": "^1.0.1",
     "windows-1252": "^1.1.0"
