@@ -217,10 +217,10 @@ describe('Mechanize/Agent', () => {
             'content-length': '25',
             referer: baseUrl + '/page.html',
             origin: baseUrl,
-            'accept-encoding': 'gzip,deflate',
+            'accept-encoding': 'gzip, deflate, br',
             cookie: 'sessionid=1234; name=bob',
             host,
-            connection: 'close',
+            connection: 'keep-alive',
           },
           query: {},
           body: {

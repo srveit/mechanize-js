@@ -143,13 +143,13 @@ describe('Mechanize/Form', () => {
             'user-agent': expect.stringMatching(
               /Mechanize\/[.0-9]+ Node.js\/v[.0-9]+ \(http:\/\/github.com\/srveit\/mechanize-js\/\)/),
             accept: '*/*',
-            'accept-encoding': 'gzip,deflate',
+            'accept-encoding': 'gzip, deflate, br',
             'content-type': 'application/x-www-form-urlencoded',
             'content-length': '25',
             referer: baseUrl,
             origin: baseUrl,
             host,
-            connection: 'close',
+            connection: 'keep-alive',
           },
           query: {},
           body: {
