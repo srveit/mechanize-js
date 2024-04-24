@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict'
 
-const { newAgent } = require('../lib/mechanize')
+import { newAgent } from '../lib/mechanize'
 const args = process.argv.slice(2)
 
 const submitExample = async url => {

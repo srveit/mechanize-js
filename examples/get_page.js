@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict'
+import { newAgent } from '../lib/mechanize'
 const args = process.argv.slice(2)
-const { newAgent } = require('../lib/mechanize')
 
 const showPageLinks = async uri => {
   const agent = newAgent()

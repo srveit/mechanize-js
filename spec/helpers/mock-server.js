@@ -2,8 +2,8 @@
 import { URL } from 'url'
 import { types } from 'util'
 import { vi } from 'vitest'
+import { json, urlencoded } from 'body-parser'
 const express = require('express')
-const bodyParser = require('body-parser')
 
 const createMockServer = ({ name = 'server', rootPath = '', port, handlers = [] }) => {
   let server
@@ -172,11 +172,11 @@ const createMockServer = ({ name = 'server', rootPath = '', port, handlers = [] 
     },
   }
 
-  mockServer.app.use(bodyParser.urlencoded({
+  mockServer.app.use(urlencoded({
     extended: false,
   }))
 
-  mockServer.app.use(bodyParser.json())
+  mockServer.app.use(json())
 
   for (const handler of handlers) {
     mockServer.mockHandler(handler)
