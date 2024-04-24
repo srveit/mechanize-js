@@ -1,10 +1,11 @@
 'use strict'
-const { newAgent } = require('../lib/mechanize/agent')
-const { URL } = require('url')
-const { fixture } = require('./helpers/fixture.js')
-const { mockServer } = require('./helpers/mock-server.js')
+import { newAgent } from '../lib/mechanize/agent'
+import { URL } from 'url'
+import { fixture } from './helpers/fixture.js'
+import { mockServer } from './helpers/mock-server.js'
+import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest'
 
-const futureDate = 'Fri, 01 Jan 2023 00:00:00 GMT'
+const futureDate = 'Fri, 01 Jan 2123 00:00:00 GMT'
 
 describe('Mechanize/Agent', () => {
   let server, host, domain, baseUrl, agent

@@ -1,8 +1,9 @@
 'use strict'
+import { URL } from 'url'
+import { types } from 'util'
+import { vi } from 'vitest'
 const express = require('express')
-const { URL } = require('url')
 const bodyParser = require('body-parser')
-const { isDate } = require('util').types
 
 const createMockServer = ({ name = 'server', rootPath = '', port, handlers = [] }) => {
   let server
@@ -41,7 +42,7 @@ const createMockServer = ({ name = 'server', rootPath = '', port, handlers = [] 
     } else if (typeof value === 'string') {
       return xml + space(indent) + '<' + name + '>' +
         value + '</' + name + '>'
-    } else if (isDate(value)) {
+    } else if (types.isDate(value)) {
       return xml + space(indent) + '<' + name + ' type="datetime">' +
         value.toISOString().replace(/\.[0-9]{3}Z/, 'Z') + '</' + name + '>'
     } else if (Array.isArray(value)) {
@@ -111,7 +112,7 @@ const createMockServer = ({ name = 'server', rootPath = '', port, handlers = [] 
     },
 
     mockHandler ({ name, method = 'get', path, responseName }) {
-      mockServer[name] = jest.fn()
+      mockServer[name] = vi.fn()
       mockHandlers.push(mockServer[name])
       mockServer.app[method](rootPath + path + '*', (req, res) => {
         const response = mockServer[name]({
@@ -186,6 +187,6 @@ const createMockServer = ({ name = 'server', rootPath = '', port, handlers = [] 
   return mockServer
 }
 
-const mockServer = (handlers = []) => createMockServer({ handlers })
-
-exports.mockServer = mockServer
+export function mockServer (handlers = []) {
+  return createMockServer({ handlers })
+}

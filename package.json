@@ -1,6 +1,6 @@
 {
   "name": "mechanize",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Automate interaction with websites (web scraping)",
   "keywords": [
     "dom",
@@ -44,7 +44,8 @@
     "docs": "jsdoc --configure .jsdocrc.json",
     "lint": "eslint . --ext .js,.json",
     "lint-markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\"",
-    "test": "jest --detectOpenHandles"
+    "test": "jest --detectOpenHandles",
+    "test:unit": "vitest"
   },
   "watch": {
     "lint": {
@@ -72,10 +73,10 @@
     }
   },
   "dependencies": {
-    "jsdom": "^19.0.0",
+    "jsdom": "^24.0.0",
     "mime": "^3.0.0",
     "node-fetch": "^2.6.7",
-    "tough-cookie": "^4.0.0",
+    "tough-cookie": "^4.1.3",
     "unescape": "^1.0.1",
     "windows-1252": "^1.1.0"
   },
@@ -99,11 +100,14 @@
     "jest-html-reporter": "^3.4.2",
     "jsdoc": "^3.6.10",
     "markdownlint-cli2": "^0.4.0",
-    "standard": "^16.0.4"
+    "standard": "^16.0.4",
+    "vitest": "^1.5.1"
   },
+  "type": "module",
   "overrides": {},
   "bundledDependencies": [],
   "engines": {
-    "node": ">= 14.0.0"
-  }
+    "node": ">= 18.0.0"
+  },
+  "bundleDependencies": []
 }

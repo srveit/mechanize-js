@@ -1,9 +1,10 @@
 'use strict'
-const { newAgent } = require('../lib/mechanize/agent')
-const { newPage } = require('../lib/mechanize/page')
-const { newButton } = require('../lib/mechanize/form/button')
-const { fixture } = require('./helpers/fixture.js')
-const { mockServer } = require('./helpers/mock-server.js')
+import { newAgent } from '../lib/mechanize/agent'
+import { newPage } from '../lib/mechanize/page'
+import { newButton } from '../lib/mechanize/form/button'
+import { fixture } from './helpers/fixture.js'
+import { mockServer } from './helpers/mock-server.js'
+import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest'
 
 describe('Mechanize/Form', () => {
   let server, baseUrl, host, agent, form

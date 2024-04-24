@@ -1,6 +1,7 @@
 'use strict'
-const { newLink } = require('../lib/mechanize/page/link')
-const { newPage } = require('../lib/mechanize/page')
+import { newLink } from '../lib/mechanize/page/link'
+import { newPage } from '../lib/mechanize/page'
+import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('Mechanize/Page/Link', () => {
   let link, href, nodeID, page, node

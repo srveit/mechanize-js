@@ -1,5 +1,6 @@
 'use strict'
-const { newHistory } = require('../lib/mechanize/history')
+import { newHistory } from '../lib/mechanize/history'
+import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('Mechanize/History', () => {
   let history
