@@ -1,6 +1,6 @@
 {
   "name": "mechanize",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Automate interaction with websites (web scraping)",
   "keywords": [
     "dom",
@@ -33,7 +33,7 @@
       "name": "Anders Hjelm"
     }
   ],
-  "main": "./lib/mechanize",
+  "main": "./lib/mechanize.js",
   "bin": {},
   "man": [],
   "directories": {
