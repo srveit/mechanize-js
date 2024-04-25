@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated Npm module tough-cookie to 4.1.3
 - Updated Npm module windows-1252 to 3.0.4
 - Development: updated eslint and prettier
+- Development: updated versions of GitHub actions
 
 ## [1.3.0] - 2022-03-11
 
