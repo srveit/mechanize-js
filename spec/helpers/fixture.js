@@ -1,9 +1,6 @@
-'use strict'
+import * as path from 'path'
+import { readFile } from 'fs/promises'
 
-const { readFile } = require('fs/promises')
-const path = require('path')
-
-const fixture = filename =>
-  readFile(path.join(__dirname, '..', 'fixtures/', filename), 'utf8')
-
-exports.fixture = fixture
+export function fixture(filename) {
+  return readFile(path.join(__dirname, '..', 'fixtures/', filename), 'utf8')
+}

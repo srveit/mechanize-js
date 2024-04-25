@@ -1,8 +1,7 @@
-'use strict'
-const { newAgent } = require('../lib/mechanize')
+import { newAgent } from '../lib/mechanize.js'
 const args = process.argv.slice(2)
 
-const submitFormChain = async url => {
+const submitFormChain = async (url) => {
   const agent = newAgent()
   const page = await agent.get({ uri: url })
   // get the first form from the page (index #0)

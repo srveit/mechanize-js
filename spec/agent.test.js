@@ -1,10 +1,10 @@
-'use strict'
-const { newAgent } = require('../lib/mechanize/agent')
-const { URL } = require('url')
-const { fixture } = require('./helpers/fixture.js')
-const { mockServer } = require('./helpers/mock-server.js')
+import { newAgent } from '../lib/mechanize/agent'
+import { URL } from 'url'
+import { fixture } from './helpers/fixture.js'
+import { mockServer } from './helpers/mock-server.js'
+import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest'
 
-const futureDate = 'Fri, 01 Jan 2023 00:00:00 GMT'
+const futureDate = 'Fri, 01 Jan 2123 00:00:00 GMT'
 
 describe('Mechanize/Agent', () => {
   let server, host, domain, baseUrl, agent
@@ -108,8 +108,9 @@ describe('Mechanize/Agent', () => {
       beforeEach(async () => {
         const responseBody = await fixture('login.html')
         const headers = {
-          'set-cookie': 'sessionid=345; path=/; ' +
-          `expires=${futureDate}; secure; HttpOnly`,
+          'set-cookie':
+            'sessionid=345; path=/; ' +
+            `expires=${futureDate}; secure; HttpOnly`,
         }
 
         server.getPage.mockReturnValueOnce({
@@ -141,9 +142,9 @@ describe('Mechanize/Agent', () => {
           headers: {
             'set-cookie': [
               'sessionid=345; path=/; ' +
-            `expires=${futureDate}; secure; HttpOnly`,
+                `expires=${futureDate}; secure; HttpOnly`,
               'name=smith; path=/; ' +
-            `expires=${futureDate}; secure; HttpOnly`,
+                `expires=${futureDate}; secure; HttpOnly`,
             ],
           },
           body: responseBody,
@@ -175,25 +176,27 @@ describe('Mechanize/Agent', () => {
     })
 
     it('should have a form', () => {
-      expect(form).toEqual(expect.objectContaining({
-        action: 'Login.aspx',
-        addButtonToQuery: expect.any(Function),
-        addField: expect.any(Function),
-        buildQuery: expect.any(Function),
-        checkbox: expect.any(Function),
-        deleteField: expect.any(Function),
-        enctype: 'application/x-www-form-urlencoded',
-        field: expect.any(Function),
-        labelFor: expect.any(Function),
-        method: 'post',
-        name: 'MAINFORM',
-        noValidate: false,
-        page: expect.any(Object),
-        requestData: expect.any(Function),
-        setFieldValue: expect.any(Function),
-        submit: expect.any(Function),
-        target: null,
-      }))
+      expect(form).toEqual(
+        expect.objectContaining({
+          action: 'Login.aspx',
+          addButtonToQuery: expect.any(Function),
+          addField: expect.any(Function),
+          buildQuery: expect.any(Function),
+          checkbox: expect.any(Function),
+          deleteField: expect.any(Function),
+          enctype: 'application/x-www-form-urlencoded',
+          field: expect.any(Function),
+          labelFor: expect.any(Function),
+          method: 'post',
+          name: 'MAINFORM',
+          noValidate: false,
+          page: expect.any(Object),
+          requestData: expect.any(Function),
+          setFieldValue: expect.any(Function),
+          submit: expect.any(Function),
+          target: null,
+        })
+      )
     })
 
     describe('then submitting form', () => {
@@ -210,16 +213,17 @@ describe('Mechanize/Agent', () => {
           path: '/Login.aspx',
           headers: {
             'user-agent': expect.stringMatching(
-              /Mechanize\/[.0-9]+ Node.js\/v[.0-9]+ \(http:\/\/github.com\/srveit\/mechanize-js\/\)/),
+              /Mechanize\/[.0-9]+ Node.js\/v[.0-9]+ \(http:\/\/github.com\/srveit\/mechanize-js\/\)/
+            ),
             accept: '*/*',
             'content-type': 'application/x-www-form-urlencoded',
             'content-length': '25',
             referer: baseUrl + '/page.html',
             origin: baseUrl,
-            'accept-encoding': 'gzip,deflate',
+            'accept-encoding': 'gzip, deflate, br',
             cookie: 'sessionid=1234; name=bob',
             host,
-            connection: 'close',
+            connection: 'keep-alive',
           },
           query: {},
           body: {

@@ -5,7 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.4.0] - 2024-04-25
+
+### Changed
+
+- agent.js: set connection header to keep-alive explicitly
+- Updated JavaScipt files to use ES6 modules
+- Use vitest instead of jest
+- Updated Npm module jsdom to 24.0.0
+- Updated Npm module mime to 4.0.2
+- Updated Npm module node-fetch to 3.3.2
+- Updated Npm module tough-cookie to 4.1.3
+- Updated Npm module windows-1252 to 3.0.4
+- Development: updated eslint and prettier
+- Development: updated versions of GitHub actions
+
+## [1.3.0] - 2022-03-11
 
 ### Changed
 
@@ -200,35 +215,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial code
 
 [Unreleased]: https://github.com/srveit/mechanize-js/compare/v1.2.1...HEAD
-
 [1.2.1]: https://github.com/srveit/mechanize-js/compare/v1.2.0...v1.2.1
-
 [1.2.0]: https://github.com/srveit/mechanize-js/compare/v1.1.0...v1.2.0
-
 [1.1.0]: https://github.com/srveit/mechanize-js/compare/v1.0.3...v1.1.0
-
 [1.0.3]: https://github.com/srveit/mechanize-js/compare/v1.0.2...v1.0.3
-
 [1.0.2]: https://github.com/srveit/mechanize-js/compare/v1.0.1...v1.0.2
-
 [1.0.1]: https://github.com/srveit/mechanize-js/compare/v0.4.0...v1.0.1
-
 [0.4.0]: https://github.com/srveit/mechanize-js/compare/v0.3.0...v0.4.0
-
 [0.3.0]: https://github.com/srveit/mechanize-js/compare/v0.2.0...v0.3.0
-
 [0.2.0]: https://github.com/srveit/mechanize-js/compare/v0.1.0...v0.4.0
-
 [0.1.0]: https://github.com/srveit/mechanize-js/compare/v0.0.7...v0.1.0
-
 [0.0.7]: https://github.com/srveit/mechanize-js/compare/v0.0.6...v0.0.7
-
 [0.0.6]: https://github.com/srveit/mechanize-js/compare/v0.0.5...v0.0.6
-
 [0.0.5]: https://github.com/srveit/mechanize-js/compare/v0.0.4...v0.0.5
-
 [0.0.4]: https://github.com/srveit/mechanize-js/compare/v0.0.3...v0.0.4
-
 [0.0.3]: https://github.com/srveit/mechanize-js/compare/v0.0.2...v0.0.3
-
 [0.0.2]: https://github.com/srveit/mechanize-js/releases/tag/v0.0.2

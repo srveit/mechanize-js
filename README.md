@@ -20,7 +20,7 @@ visited as a history.
 
 ## Getting Started
 
-From the root folder, you can run the *get_page* example:
+From the root folder, you can run the _get_page_ example:
 
 `node examples/get_page.js`
 
@@ -33,16 +33,16 @@ of the returned object data.
 
 ### Posting a form
 
-For form posting, you can run the *submit_form* example:
+For form posting, you can run the _submit_form_ example:
 
 `node examples/submit_form.js "http://localhost/"`
 
-The example POSTs a username and password to the */login* path at the
+The example POSTs a username and password to the _/login_ path at the
 specificied URL.
 
 ### Chaining page accesses
 
-For an example of chaining requests, you can run the *submit_form_chain* example:
+For an example of chaining requests, you can run the _submit_form_chain_ example:
 
 `node examples/submit_form_chain.js`
 
@@ -72,9 +72,9 @@ This borrows heavily from Aaron Patterson's
 
 ### Contributors
 
-* 佐藤
-* Dan Rahmel
-* Anders Hjelm
+- 佐藤
+- Dan Rahmel
+- Anders Hjelm
 
 [npm-badge]: https://img.shields.io/npm/v/mechanize.svg
 [npm-url]: https://npmjs.org/package/mechanize

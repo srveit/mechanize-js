@@ -1,9 +1,9 @@
-'use strict'
-const { newAgent } = require('../lib/mechanize/agent')
-const { newPage } = require('../lib/mechanize/page')
-const { newButton } = require('../lib/mechanize/form/button')
-const { fixture } = require('./helpers/fixture.js')
-const { mockServer } = require('./helpers/mock-server.js')
+import { newAgent } from '../lib/mechanize/agent'
+import { newPage } from '../lib/mechanize/page'
+import { newButton } from '../lib/mechanize/form/button'
+import { fixture } from './helpers/fixture.js'
+import { mockServer } from './helpers/mock-server.js'
+import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest'
 
 describe('Mechanize/Form', () => {
   let server, baseUrl, host, agent, form
@@ -29,17 +29,20 @@ describe('Mechanize/Form', () => {
       const uri = 'form.html'
       const body = await fixture('login_no_action.html')
       const page = newPage({
-        uri, body,
+        uri,
+        body,
       })
 
       form = page.form('login')
     })
 
     it('should have field', () => {
-      expect(form.field('login_password')).toEqual(expect.objectContaining({
-        name: 'login_password',
-        fieldType: 'field',
-      }))
+      expect(form.field('login_password')).toEqual(
+        expect.objectContaining({
+          name: 'login_password',
+          fieldType: 'field',
+        })
+      )
     })
 
     it('should have null action', () => {
@@ -52,24 +55,30 @@ describe('Mechanize/Form', () => {
       const uri = baseUrl
       const body = await fixture('login.html')
       const page = newPage({
-        uri, body, agent,
+        uri,
+        body,
+        agent,
       })
 
       form = page.form('MAINFORM')
     })
 
     it('should have field', () => {
-      expect(form.field('street')).toEqual(expect.objectContaining({
-        name: 'street',
-        fieldType: 'hidden',
-      }))
+      expect(form.field('street')).toEqual(
+        expect.objectContaining({
+          name: 'street',
+          fieldType: 'hidden',
+        })
+      )
     })
 
     it('should have button', () => {
-      expect(form.submitButton()).toEqual(expect.objectContaining({
-        name: 'signon',
-        fieldType: 'submit',
-      }))
+      expect(form.submitButton()).toEqual(
+        expect.objectContaining({
+          name: 'signon',
+          fieldType: 'submit',
+        })
+      )
     })
 
     it('should have multipart requestData', async () => {
@@ -93,7 +102,8 @@ describe('Mechanize/Form', () => {
 
     it('should have buildQuery', () => {
       expect(form.buildQuery()).toEqual([
-        ['userID', ''], ['name', ''],
+        ['userID', ''],
+        ['name', ''],
         ['street', 'Main'],
       ])
     })
@@ -140,15 +150,16 @@ describe('Mechanize/Form', () => {
           path: '/Login.aspx',
           headers: {
             'user-agent': expect.stringMatching(
-              /Mechanize\/[.0-9]+ Node.js\/v[.0-9]+ \(http:\/\/github.com\/srveit\/mechanize-js\/\)/),
+              /Mechanize\/[.0-9]+ Node.js\/v[.0-9]+ \(http:\/\/github.com\/srveit\/mechanize-js\/\)/
+            ),
             accept: '*/*',
-            'accept-encoding': 'gzip,deflate',
+            'accept-encoding': 'gzip, deflate, br',
             'content-type': 'application/x-www-form-urlencoded',
             'content-length': '25',
             referer: baseUrl,
             origin: baseUrl,
             host,
-            connection: 'close',
+            connection: 'keep-alive',
           },
           query: {},
           body: {
@@ -191,7 +202,8 @@ describe('Mechanize/Form', () => {
       const uri = null
       const body = await fixture('form_text_plain.html')
       const page = newPage({
-        uri, body,
+        uri,
+        body,
       })
 
       form = page.form('form1')
@@ -199,18 +211,22 @@ describe('Mechanize/Form', () => {
     })
 
     it('should have field', () => {
-      expect(form.field('text')).toEqual(expect.objectContaining({
-        name: 'text',
-        fieldType: 'text',
-      }))
+      expect(form.field('text')).toEqual(
+        expect.objectContaining({
+          name: 'text',
+          fieldType: 'text',
+        })
+      )
     })
 
     it('should have submit button', () => {
-      expect(form.submitButton()).toEqual(expect.objectContaining({
-        name: '',
-        type: 'submit',
-        fieldType: 'submit',
-      }))
+      expect(form.submitButton()).toEqual(
+        expect.objectContaining({
+          name: '',
+          type: 'submit',
+          fieldType: 'submit',
+        })
+      )
     })
 
     it('should have requestData', async () => {

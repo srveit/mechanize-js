@@ -1,19 +1,21 @@
-'use strict'
-const { newLink } = require('../lib/mechanize/page/link')
-const { newPage } = require('../lib/mechanize/page')
+import { newLink } from '../lib/mechanize/page/link'
+import { newPage } from '../lib/mechanize/page'
+import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('Mechanize/Page/Link', () => {
   let link, href, nodeID, page, node
 
   beforeEach(() => {
     const agent = {}
-    const body = '<html><body>' +
+    const body =
+      '<html><body>' +
       '<a id="first" href="http://example.com/first">Example</a>' +
       '<a id="second" href="http://example.com/second">' +
       '<img src="picture.png" alt="picture"/></a>' +
       '</body></html>'
     page = newPage({
-      body, agent,
+      body,
+      agent,
     })
   })
 
@@ -26,9 +28,11 @@ describe('Mechanize/Page/Link', () => {
     })
 
     it('should exist', () => {
-      expect(link).toEqual(expect.objectContaining({
-        text: expect.any(Function),
-      }))
+      expect(link).toEqual(
+        expect.objectContaining({
+          text: expect.any(Function),
+        })
+      )
     })
 
     it('should have href', () => {
@@ -53,9 +57,11 @@ describe('Mechanize/Page/Link', () => {
     })
 
     it('should exist', () => {
-      expect(link).toEqual(expect.objectContaining({
-        text: expect.any(Function),
-      }))
+      expect(link).toEqual(
+        expect.objectContaining({
+          text: expect.any(Function),
+        })
+      )
     })
 
     it('should have href', () => {

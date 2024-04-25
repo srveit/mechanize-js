@@ -6,10 +6,14 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [18.x, 20.x]
     env:
       OS: ${{ matrix.os }}
     steps:
+      - name: Set git to use LF
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
       - name: Checkout
         uses: actions/checkout@master
         with:
@@ -19,20 +23,22 @@ jobs:
         run: >
           git config --global url."https://github.com/".insteadOf
           ssh://git@github.com/
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4.0.2
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
       - run: npm run lint
       - run: npm run lint-markdown
       - run: npm test
+      - run: npm run coverage
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v4.3.0
         with:
-          directory: ./coverage/
-          env_vars: OS
-          fail_ci_if_error: true
-          files: clover.xml
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: clover.xml
           flags: unittests
           name: codecov-mechanize
+          fail_ci_if_error: true
           verbose: true
+          directory: ./coverage/
+          env_vars: OS

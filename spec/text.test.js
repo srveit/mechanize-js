@@ -1,6 +1,6 @@
-'use strict'
-const { newPage } = require('../lib/mechanize/page')
-const { fixture } = require('./helpers/fixture.js')
+import { newPage } from '../lib/mechanize/page'
+import { fixture } from './helpers/fixture.js'
+import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('Mechanize/Form/Text', () => {
   let text, form
@@ -8,7 +8,8 @@ describe('Mechanize/Form/Text', () => {
     const url = 'form.html'
     const body = await fixture('form_elements.html')
     const page = newPage({
-      url, body,
+      url,
+      body,
     })
 
     form = page.form('form1')
