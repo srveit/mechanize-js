@@ -1,4 +1,3 @@
-'use strict'
 import { newPage } from '../lib/mechanize/page'
 import { fixture } from './helpers/fixture.js'
 import { beforeEach, describe, expect, it } from 'vitest'
@@ -20,8 +19,7 @@ describe('Mechanize/Form/Checkbox', () => {
       checkbox = form.checkbox('checkboxChecked')
     })
 
-    it('should be checked', () =>
-      expect(checkbox.isChecked()).toEqual(true))
+    it('should be checked', () => expect(checkbox.isChecked()).toEqual(true))
   })
 
   describe('unchecked check box', () => {
@@ -29,7 +27,6 @@ describe('Mechanize/Form/Checkbox', () => {
       checkbox = form.checkbox('checkboxUnchecked')
     })
 
-    it('should be unchecked', () =>
-      expect(checkbox.isChecked()).toEqual(false))
+    it('should be unchecked', () => expect(checkbox.isChecked()).toEqual(false))
   })
 })

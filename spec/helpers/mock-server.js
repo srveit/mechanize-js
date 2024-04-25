@@ -1,11 +1,15 @@
-'use strict'
 import { URL } from 'url'
 import { types } from 'util'
 import { vi } from 'vitest'
 import { json, urlencoded } from 'body-parser'
 const express = require('express')
 
-const createMockServer = ({ name = 'server', rootPath = '', port, handlers = [] }) => {
+const createMockServer = ({
+  name = 'server',
+  rootPath = '',
+  port,
+  handlers = [],
+}) => {
   let server
   const serverName = name
   const mockHandlers = []
@@ -17,14 +21,17 @@ const createMockServer = ({ name = 'server', rootPath = '', port, handlers = [] 
   }
   const savedEnvironment = {}
 
-  const space = length =>
-    '                                                                 '
-      .substring(0, length)
+  const space = (length) =>
+    '                                                                 '.substring(
+      0,
+      length
+    )
 
-  const camelToDash = str => str
-    .replace(/(^[A-Z])/, ([first]) => first.toLowerCase())
-    .replace(/([A-Z])/g, ([letter]) => `-${letter.toLowerCase()}`)
-    .replace(/([a-z])([0-9])/g, ([letter, number]) => `${letter}-${number}`)
+  const camelToDash = (str) =>
+    str
+      .replace(/(^[A-Z])/, ([first]) => first.toLowerCase())
+      .replace(/([A-Z])/g, ([letter]) => `-${letter.toLowerCase()}`)
+      .replace(/([a-z])([0-9])/g, ([letter, number]) => `${letter}-${number}`)
 
   const toXml = ({ name, value, includeDeclaration = false, indent = 0 }) => {
     const xml = includeDeclaration
@@ -34,43 +41,95 @@ const createMockServer = ({ name = 'server', rootPath = '', port, handlers = [] 
     if (value === null || value === undefined) {
       return xml + space(indent) + '<' + name + ' nil="true"/>'
     } else if (typeof value === 'boolean') {
-      return xml + space(indent) + '<' + name + ' type="boolean">' +
-        value + '</' + name + '>'
+      return (
+        xml +
+        space(indent) +
+        '<' +
+        name +
+        ' type="boolean">' +
+        value +
+        '</' +
+        name +
+        '>'
+      )
     } else if (typeof value === 'number') {
-      return xml + space(indent) + '<' + name + ' type="integer">' +
-        value + '</' + name + '>'
+      return (
+        xml +
+        space(indent) +
+        '<' +
+        name +
+        ' type="integer">' +
+        value +
+        '</' +
+        name +
+        '>'
+      )
     } else if (typeof value === 'string') {
-      return xml + space(indent) + '<' + name + '>' +
-        value + '</' + name + '>'
+      return xml + space(indent) + '<' + name + '>' + value + '</' + name + '>'
     } else if (types.isDate(value)) {
-      return xml + space(indent) + '<' + name + ' type="datetime">' +
-        value.toISOString().replace(/\.[0-9]{3}Z/, 'Z') + '</' + name + '>'
+      return (
+        xml +
+        space(indent) +
+        '<' +
+        name +
+        ' type="datetime">' +
+        value.toISOString().replace(/\.[0-9]{3}Z/, 'Z') +
+        '</' +
+        name +
+        '>'
+      )
     } else if (Array.isArray(value)) {
       if (value.length === 0) {
         return xml + space(indent) + '<' + name + ' type="array"/>'
       }
-      return xml + space(indent) + '<' + name + ' type="array">\n' +
-        value.map(
-          item => toXml({
-            name: name + '-item',
-            value: item,
-            indent: indent + 2,
-          })
-        ).join('\n') + '\n' +
-        space(indent) + '</' + name + '>'
+      return (
+        xml +
+        space(indent) +
+        '<' +
+        name +
+        ' type="array">\n' +
+        value
+          .map((item) =>
+            toXml({
+              name: name + '-item',
+              value: item,
+              indent: indent + 2,
+            })
+          )
+          .join('\n') +
+        '\n' +
+        space(indent) +
+        '</' +
+        name +
+        '>'
+      )
     }
     if (Object.keys(value).length === 0) {
       return xml + space(indent) + '<' + name + '/>'
     }
-    return xml + space(indent) + '<' + name + '>\n' +
-      Object.entries(value).map(([key, item]) => toXml({
-        name: key,
-        value: item,
-        indent: indent + 2,
-      }).join('\n') + '\n' + space(indent) + '</' + name + '>')
+    return (
+      xml +
+      space(indent) +
+      '<' +
+      name +
+      '>\n' +
+      Object.entries(value).map(
+        ([key, item]) =>
+          toXml({
+            name: key,
+            value: item,
+            indent: indent + 2,
+          }).join('\n') +
+          '\n' +
+          space(indent) +
+          '</' +
+          name +
+          '>'
+      )
+    )
   }
 
-  const setEnvironment = mockUrl => {
+  const setEnvironment = (mockUrl) => {
     const urlParsed = new URL(mockUrl)
     Object.entries(environment).forEach(([key, value]) => {
       savedEnvironment[key] = process.env[key]
@@ -88,30 +147,27 @@ const createMockServer = ({ name = 'server', rootPath = '', port, handlers = [] 
     })
   }
 
-  const restoreEnvironment = () => Object.keys(environment)
-    .forEach(key => {
+  const restoreEnvironment = () =>
+    Object.keys(environment).forEach((key) => {
       process.env[key] = savedEnvironment[key]
     })
 
   const mockServer = {
     app: express(),
 
-    addDefaultHandler () {
-      mockServer.app.all(
-        '*',
-        (req, res, next) => {
-          // eslint-disable-next-line no-console
-          console.log('no', serverName, 'handler for', req.method, req.url)
-          next()
-        }
-      )
+    addDefaultHandler() {
+      mockServer.app.all('*', (req, res, next) => {
+        // eslint-disable-next-line no-console
+        console.log('no', serverName, 'handler for', req.method, req.url)
+        next()
+      })
     },
 
-    env () {
+    env() {
       return process.env
     },
 
-    mockHandler ({ name, method = 'get', path, responseName }) {
+    mockHandler({ name, method = 'get', path, responseName }) {
       mockServer[name] = vi.fn()
       mockHandlers.push(mockServer[name])
       mockServer.app[method](rootPath + path + '*', (req, res) => {
@@ -125,11 +181,13 @@ const createMockServer = ({ name = 'server', rootPath = '', port, handlers = [] 
           res.status(response.error.statusCode || 500).send(response.error)
         } else if (req.headers.accept === 'application/xml') {
           res.setHeader('Content-Type', 'application/xml')
-          res.send(toXml({
-            name: responseName || name,
-            includeDeclaration: true,
-            value: response,
-          }))
+          res.send(
+            toXml({
+              name: responseName || name,
+              includeDeclaration: true,
+              value: response,
+            })
+          )
         } else if (req.path.match(/(xml|html?)$/)) {
           if (response && response.headers) {
             res.set(response.headers).send(response.body)
@@ -142,13 +200,13 @@ const createMockServer = ({ name = 'server', rootPath = '', port, handlers = [] 
       })
     },
 
-    clearMocks () {
+    clearMocks() {
       for (const mockHandler of mockHandlers) {
         mockHandler.mockClear()
       }
     },
 
-    start () {
+    start() {
       return new Promise((resolve, reject) => {
         server = mockServer.app.listen(port || 0, (err) => {
           if (err) {
@@ -164,17 +222,19 @@ const createMockServer = ({ name = 'server', rootPath = '', port, handlers = [] 
       })
     },
 
-    stop () {
-      return new Promise(resolve => {
+    stop() {
+      return new Promise((resolve) => {
         restoreEnvironment()
         server.close(() => resolve(true))
       })
     },
   }
 
-  mockServer.app.use(urlencoded({
-    extended: false,
-  }))
+  mockServer.app.use(
+    urlencoded({
+      extended: false,
+    })
+  )
 
   mockServer.app.use(json())
 
@@ -187,6 +247,6 @@ const createMockServer = ({ name = 'server', rootPath = '', port, handlers = [] 
   return mockServer
 }
 
-export function mockServer (handlers = []) {
+export function mockServer(handlers = []) {
   return createMockServer({ handlers })
 }

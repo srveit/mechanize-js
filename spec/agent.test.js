@@ -1,4 +1,3 @@
-'use strict'
 import { newAgent } from '../lib/mechanize/agent'
 import { URL } from 'url'
 import { fixture } from './helpers/fixture.js'
@@ -109,8 +108,9 @@ describe('Mechanize/Agent', () => {
       beforeEach(async () => {
         const responseBody = await fixture('login.html')
         const headers = {
-          'set-cookie': 'sessionid=345; path=/; ' +
-          `expires=${futureDate}; secure; HttpOnly`,
+          'set-cookie':
+            'sessionid=345; path=/; ' +
+            `expires=${futureDate}; secure; HttpOnly`,
         }
 
         server.getPage.mockReturnValueOnce({
@@ -142,9 +142,9 @@ describe('Mechanize/Agent', () => {
           headers: {
             'set-cookie': [
               'sessionid=345; path=/; ' +
-            `expires=${futureDate}; secure; HttpOnly`,
+                `expires=${futureDate}; secure; HttpOnly`,
               'name=smith; path=/; ' +
-            `expires=${futureDate}; secure; HttpOnly`,
+                `expires=${futureDate}; secure; HttpOnly`,
             ],
           },
           body: responseBody,
@@ -176,25 +176,27 @@ describe('Mechanize/Agent', () => {
     })
 
     it('should have a form', () => {
-      expect(form).toEqual(expect.objectContaining({
-        action: 'Login.aspx',
-        addButtonToQuery: expect.any(Function),
-        addField: expect.any(Function),
-        buildQuery: expect.any(Function),
-        checkbox: expect.any(Function),
-        deleteField: expect.any(Function),
-        enctype: 'application/x-www-form-urlencoded',
-        field: expect.any(Function),
-        labelFor: expect.any(Function),
-        method: 'post',
-        name: 'MAINFORM',
-        noValidate: false,
-        page: expect.any(Object),
-        requestData: expect.any(Function),
-        setFieldValue: expect.any(Function),
-        submit: expect.any(Function),
-        target: null,
-      }))
+      expect(form).toEqual(
+        expect.objectContaining({
+          action: 'Login.aspx',
+          addButtonToQuery: expect.any(Function),
+          addField: expect.any(Function),
+          buildQuery: expect.any(Function),
+          checkbox: expect.any(Function),
+          deleteField: expect.any(Function),
+          enctype: 'application/x-www-form-urlencoded',
+          field: expect.any(Function),
+          labelFor: expect.any(Function),
+          method: 'post',
+          name: 'MAINFORM',
+          noValidate: false,
+          page: expect.any(Object),
+          requestData: expect.any(Function),
+          setFieldValue: expect.any(Function),
+          submit: expect.any(Function),
+          target: null,
+        })
+      )
     })
 
     describe('then submitting form', () => {
@@ -211,7 +213,8 @@ describe('Mechanize/Agent', () => {
           path: '/Login.aspx',
           headers: {
             'user-agent': expect.stringMatching(
-              /Mechanize\/[.0-9]+ Node.js\/v[.0-9]+ \(http:\/\/github.com\/srveit\/mechanize-js\/\)/),
+              /Mechanize\/[.0-9]+ Node.js\/v[.0-9]+ \(http:\/\/github.com\/srveit\/mechanize-js\/\)/
+            ),
             accept: '*/*',
             'content-type': 'application/x-www-form-urlencoded',
             'content-length': '25',

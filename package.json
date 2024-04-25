@@ -43,8 +43,8 @@
   "scripts": {
     "coverage": "vitest run --coverage",
     "docs": "jsdoc --configure .jsdocrc.json",
-    "format": "prettier --plugin-search-dir . --write .",
-    "lint": "prettier --plugin-search-dir . --check . && eslint . --ext .js,.json",
+    "format": "prettier --write .",
+    "lint": "prettier --check . && eslint . --ext .js,.json",
     "lint-markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\"",
     "test": "vitest"
   },

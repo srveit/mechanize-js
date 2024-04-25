@@ -1,4 +1,3 @@
-'use strict'
 import { newAgent, newPage } from '../lib/mechanize'
 import { beforeEach, describe, expect, it } from 'vitest'
 

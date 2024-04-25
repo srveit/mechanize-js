@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   root: true,
   extends: ['eslint:recommended', 'plugin:json/recommended', 'prettier'],
   parserOptions: {
@@ -6,8 +6,8 @@ module.exports = {
     ecmaVersion: 'latest',
   },
   env: {
-    browser: true,
-    commonjs: true,
+    node: true,
+    //commonjs: true,
     es2021: true,
   },
   rules: {
@@ -22,5 +22,5 @@ module.exports = {
       },
     ],
   },
-  ignorePatterns: ['!.*.json', '/docs'],
+  ignores: ['docs/**'],
 }
