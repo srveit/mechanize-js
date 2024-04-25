@@ -1,19 +1,27 @@
 import globals from 'globals'
-
-import path from 'path'
-import { fileURLToPath } from 'url'
-import { FlatCompat } from '@eslint/eslintrc'
-import pluginJs from '@eslint/js'
-
-// mimic CommonJS variables -- not needed if using CommonJS
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: pluginJs.configs.recommended,
-})
+import eslintPluginJsonc from 'eslint-plugin-jsonc'
+import stylistic from '@stylistic/eslint-plugin'
 
 export default [
-  { languageOptions: { globals: globals.browser } },
-  ...compat.extends('standard'),
+  {
+    ignores: ['docs/'],
+  },
+  ...eslintPluginJsonc.configs['flat/recommended-with-jsonc'],
+  {
+    files: ['*.json'],
+  },
+  {
+    files: ['*.js'],
+    plugins: {
+      '@stylistic': stylistic,
+    },
+    rules: {
+      '@stylistic/comma-dangle': ['error', 'always-multiline'],
+    },
+  },
+  {
+    languageOptions: {
+      globals: globals.browser,
+    },
+  },
 ]
