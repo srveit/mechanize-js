@@ -181,9 +181,10 @@ const createMockServer = ({
           res.status(response.error.statusCode || 500).send(response.error)
           return
         }
-        if (response && response.headers) {
-          res.setHeaders(new Headers(response.headers))
+        for (const header of response.headers || []) {
+          res.append(...header)
         }
+
         if (req.headers.accept === 'application/xml') {
           res.setHeader('Content-Type', 'application/xml')
           res.send(
