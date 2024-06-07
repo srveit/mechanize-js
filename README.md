@@ -84,20 +84,14 @@ This borrows heavily from Aaron Patterson's
 [node-version-url]: https://nodejs.org/en/download/
 [github-build-badge]: https://img.shields.io/github/workflow/status/srveit/mechanize-js/build-actions
 [github-build-url]: https://github.com/srveit/mechanize-js/actions/workflows/test-actions.yml
-[coveralls-badge]: https://coveralls.io/repos/github/srveit/mechanize-js/badge.svg?branch=master
-[coveralls-url]: https://coveralls.io/github/srveit/mechanize-js?branch=master
 [code-climate-badge]: https://img.shields.io/codeclimate/maintainability/srveit/mechanize-js.svg
 [code-climate-url]: https://codeclimate.com/github/srveit/mechanize-js
 [gitter-badge]: https://img.shields.io/gitter/room/mechanize-js/Lobby.svg
 [gitter-url]: https://gitter.im/mechanize-js/Lobby
-[bithound-badge]: https://www.bithound.io/github/srveit/mechanize-js/badges/score.svg
-[bithound-url]: https://www.bithound.io/github/srveit/mechanize-js
 [codecov-badge]: https://img.shields.io/codecov/c/github/srveit/mechanize-js/master.svg?style=flat
 [codecov-url]: https://codecov.io/github/srveit/mechanize-js
 [license-badge]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [license-url]: http://choosealicense.com/licenses/mit/
-[canonical-badge]: https://img.shields.io/badge/code%20style-canonical-brightgreen.svg?style=flat
-[canonical-url]: https://github.com/gajus/eslint-config-canonical
 [snyk-badge]: https://snyk.io/test/github/srveit/mechanize-js/badge.svg
 [snyk-url]: https://snyk.io/test/github/srveit/mechanize-js
 
@@ -114,7 +108,8 @@ https://sonarcloud.io/dashboard/index/srveit:mechanize
 [![Readme](https://img.shields.io/badge/readme-tested-brightgreen.svg?style=flat)](https://www.npmjs.com/package/reamde)
 [![Doug's Gratipay][gratipay-image-dougwilson]][gratipay-url-dougwilson]
 [![API documented](https://img.shields.io/badge/API-documented-brightgreen.svg)](https://raszi.github.io/node-tmp/)
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/thlorenz/convert-source-map/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/thlorenz/convert-source-map/trend.png)]
+(https://bitdeli.com/free "Bitdeli Badge")
 [![Bountysource](https://www.bountysource.com/badge/tracker?tracker_id=282608)](https://www.bountysource.com/trackers/282608-eslint?utm_source=282608&utm_medium=shield&utm_campaign=TRACKER_BADGE)
 [![Bower version](https://img.shields.io/bower/v/spdx-license-ids.svg)](https://github.com/shinnn/spdx-license-ids/releases)
 [![Codeship Status for ashtuchkin/iconv-lite](https://www.codeship.com/projects/81670840-fa72-0131-4520-4a01a6c01acc/status)](https://www.codeship.com/projects/29053)
