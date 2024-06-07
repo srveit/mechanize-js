@@ -3,7 +3,7 @@ const args = process.argv.slice(2)
 
 const submitFormChain = async (url) => {
   const agent = newAgent()
-  const page = await agent.get({ uri: url })
+  const page = await agent.get(url)
   // get the first form from the page (index #0)
   const form = page.form(0)
 

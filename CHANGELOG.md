@@ -5,11 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2024-06-07
+
+### Changed
+
+- changed options to agent.get
+- use previous retrieved URL as base for partial URLs in fetchPage
+- updated "Mac Safari" agent string
+- removed field.rawValue property
+- change fiel.value from property to function
+- updated to use Node.JS v22
+
+### Added
+
+- handle binary mime types
+- handle redirects in fetchPage
+- debug option to fetchPage and submit
+- agent.getCookies function
+
 ## [1.4.1] - 2024-04-25
 
 ### Changed
 
-- change package main to lib/mechanize.js
+- changed package main to lib/mechanize.js
 
 ## [1.4.0] - 2024-04-25
 
@@ -220,7 +238,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial code
 
-[Unreleased]: https://github.com/srveit/mechanize-js/compare/v1.2.1...HEAD
+[1.5.0]: https://github.com/srveit/mechanize-js/compare/v1.4.1...v1.5.0
+[1.4.1]: https://github.com/srveit/mechanize-js/compare/v1.4.0...v1.4.1
+[1.4.0]: https://github.com/srveit/mechanize-js/compare/v1.3.0...v1.4.0
+[1.3.0]: https://github.com/srveit/mechanize-js/compare/v1.2.1...v1.3.0
 [1.2.1]: https://github.com/srveit/mechanize-js/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/srveit/mechanize-js/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/srveit/mechanize-js/compare/v1.0.3...v1.1.0

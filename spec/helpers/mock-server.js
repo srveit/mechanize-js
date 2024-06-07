@@ -168,7 +168,7 @@ const createMockServer = ({
     },
 
     mockHandler({ name, method = 'get', path, responseName }) {
-      mockServer[name] = vi.fn()
+      mockServer[name] = vi.fn().mockName(name)
       mockHandlers.push(mockServer[name])
       mockServer.app[method](rootPath + path + '*', (req, res) => {
         const response = mockServer[name]({
@@ -179,7 +179,13 @@ const createMockServer = ({
         })
         if (response && response.error) {
           res.status(response.error.statusCode || 500).send(response.error)
-        } else if (req.headers.accept === 'application/xml') {
+          return
+        }
+        for (const header of response.headers || []) {
+          res.append(...header)
+        }
+
+        if (req.headers.accept === 'application/xml') {
           res.setHeader('Content-Type', 'application/xml')
           res.send(
             toXml({
@@ -188,15 +194,13 @@ const createMockServer = ({
               value: response,
             })
           )
-        } else if (req.path.match(/(xml|html?)$/)) {
-          if (response && response.headers) {
-            res.set(response.headers).send(response.body)
-          } else {
-            res.send(response)
-          }
-        } else {
-          res.json(response)
+          return
         }
+        if (req.path.match(/(xml|html?)$/)) {
+          res.send(response)
+          return
+        }
+        res.json(response)
       })
     },
 
