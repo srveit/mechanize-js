@@ -5,11 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.5.0] - 2024-05-13
+## [1.5.0] - 2024-06-07
 
 ### Changed
 
 - changed options to agent.get
+- use previous retrieved URL as base for partial URLs in fetchPage
+- updated "Mac Safari" agent string
+- removed field.rawValue property
+- change fiel.value from property to function
+- updated to use Node.JS v22
+
+### Added
+
+- handle binary mime types
+- handle redirects in fetchPage
+- debug option to fetchPage and submit
+- agent.getCookies function
 
 ## [1.4.1] - 2024-04-25
 
