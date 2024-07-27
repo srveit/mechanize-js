@@ -75,7 +75,7 @@
   },
   "dependencies": {
     "jsdom": "^24.1.0",
-    "mime": "^4.0.3",
+    "mime": "^4.0.4",
     "node-fetch": "^3.3.2",
     "tough-cookie": "^4.1.4",
     "unescape": "^1.0.1",
